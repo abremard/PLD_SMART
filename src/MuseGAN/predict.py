@@ -93,7 +93,7 @@ data = {
 ]
 }
 # result = mailjet.send.create(data=data)
-print(result)
+# print(result)
 
 gan.draw_score(gen_scores, 0)
 
@@ -143,7 +143,7 @@ data = {
 ]
 }
 # result = mailjet.send.create(data=data)
-print(result)
+# print(result)
 
 chords_noise_2 = 5 * np.ones((1, gan.z_dim))
 

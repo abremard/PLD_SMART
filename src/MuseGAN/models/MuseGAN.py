@@ -518,7 +518,7 @@ class MuseGAN():
                     , self.n_pitches
                     ], f)
 
-            self.plot_model(folder)
+            # self.plot_model(folder)
 
     def save_model(self, run_folder):
         self.model.save(os.path.join(run_folder, 'model.h5'))
