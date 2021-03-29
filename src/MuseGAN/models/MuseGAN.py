@@ -193,17 +193,31 @@ class MuseGAN():
     def BarGenerator(self):
 
         input_layer = Input(shape=(self.z_dim * 4,), name='bar_generator_input')
-
+        
         x = Dense(1024)(input_layer)
         x = BatchNormalization(momentum = 0.9)(x)
         x = Activation('relu')(x)
-
         x = Reshape([2,1,512])(x)
         x = self.conv_t(x, f=512, k=(2,1), s=(2,1), a= 'relu',  p = 'same', bn = True)
         x = self.conv_t(x, f=256, k=(2,1), s=(2,1), a= 'relu', p = 'same', bn = True)
         x = self.conv_t(x, f=256, k=(2,1), s=(2,1), a= 'relu', p = 'same', bn = True)
-        x = self.conv_t(x, f=256, k=(1,7), s=(1,7), a= 'relu', p = 'same',bn = True)
-        x = self.conv_t(x, f=1, k=(1,12), s=(1,12), a= 'tanh', p = 'same', bn = False)
+        x = self.conv_t(x, f=256, k=(2,1), s=(2,1), a= 'relu', p = 'same', bn = True)
+        x = self.conv_t(x, f=256, k=(3,1), s=(3,1), a= 'relu', p = 'same', bn = True)
+        x = self.conv_t(x, f=256, k=(1,2), s=(1,2), a= 'relu', p = 'same',bn = True)
+        x = self.conv_t(x, f=256, k=(1,4), s=(1,4), a= 'relu', p = 'same',bn = True)
+        x = self.conv_t(x, f=256, k=(1,4), s=(1,4), a= 'relu', p = 'same',bn = True)
+        x = self.conv_t(x, f=1, k=(1,4), s=(1,4), a= 'tanh', p = 'same', bn = False)
+
+        """
+            Tensor("activation_13/Relu:0", shape=(None, 4, 1, 512), dtype=float32)
+            Tensor("activation_14/Relu:0", shape=(None, 8, 1, 256), dtype=float32)
+            Tensor("activation_15/Relu:0", shape=(None, 16, 1, 256), dtype=float32)
+            Tensor("activation_16/Relu:0", shape=(None, 32, 1, 256), dtype=float32)
+            Tensor("activation_17/Relu:0", shape=(None, 96, 1, 256), dtype=float32)
+            Tensor("activation_18/Relu:0", shape=(None, 96, 2, 256), dtype=float32)
+            Tensor("activation_19/Relu:0", shape=(None, 96, 8, 256), dtype=float32)
+            Tensor("activation_20/Relu:0", shape=(None, 96, 32, 256), dtype=float32)
+        """
 
         output_layer = Reshape([1, self.n_steps_per_bar , self.n_pitches ,1])(x)
 

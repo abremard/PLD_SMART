@@ -111,19 +111,13 @@ if __name__ == "__main__":
     n_pitches = 128
     n_instruments = 5
     
-    preprocess(inputPaths='paths.csv',
-               n_songs=n_songs,
-               n_bars=n_bars,
-               n_steps_per_bar=n_steps_per_bar,
-               n_pitches=n_pitches,
-               n_instruments=n_instruments)
-    
-    multitrack = preprocess
-
-
-
-
-
+    multitrack = preprocess(
+                inputPaths='paths.csv',
+                n_songs=n_songs,
+                n_bars=n_bars,
+                n_steps_per_bar=n_steps_per_bar,
+                n_pitches=n_pitches,
+                n_instruments=n_instruments)
 
 # ******* JSB chorales *******
 
