@@ -51,7 +51,7 @@ print(data_binary.shape)
 # ****** Run with LPD Dataset ******
 
 n_songs = 10
-n_bars = 24
+n_bars = 2
 n_steps_per_bar = 96
 n_pitches = 128
 n_tracks = 5

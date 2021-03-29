@@ -205,6 +205,17 @@ class MuseGAN():
         x = self.conv_t(x, f=256, k=(1,8), s=(1,8), a= 'relu', p = 'same',bn = True)
         x = self.conv_t(x, f=1, k=(1,4), s=(1,4), a= 'tanh', p = 'same', bn = False)
 
+        """
+            Tensor("activation_13/Relu:0", shape=(None, 4, 1, 512), dtype=float32)
+            Tensor("activation_14/Relu:0", shape=(None, 8, 1, 256), dtype=float32)
+            Tensor("activation_15/Relu:0", shape=(None, 16, 1, 256), dtype=float32)
+            Tensor("activation_16/Relu:0", shape=(None, 32, 1, 256), dtype=float32)
+            Tensor("activation_17/Relu:0", shape=(None, 96, 1, 256), dtype=float32)
+            Tensor("activation_18/Relu:0", shape=(None, 96, 2, 256), dtype=float32)
+            Tensor("activation_19/Relu:0", shape=(None, 96, 8, 256), dtype=float32)
+            Tensor("activation_20/Relu:0", shape=(None, 96, 32, 256), dtype=float32)
+        """
+
         output_layer = Reshape([1, self.n_steps_per_bar , self.n_pitches ,1])(x)
 
         return Model(input_layer, output_layer)
