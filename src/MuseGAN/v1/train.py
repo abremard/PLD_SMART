@@ -55,6 +55,7 @@ n_bars = 2
 n_steps_per_bar = 96
 n_pitches = 128
 n_tracks = 5
+bars_offset = 12
 
 mode =  'build' # ' 'load' #
 BATCH_SIZE = 64
@@ -77,7 +78,8 @@ data_binary = prp.preprocess(
                 n_bars=n_bars,
                 n_steps_per_bar=n_steps_per_bar,
                 n_pitches=n_pitches,
-                n_instruments=n_tracks)
+                n_instruments=n_tracks,
+                bars_offset=bars_offset)
 
 print(data_binary.shape)
 

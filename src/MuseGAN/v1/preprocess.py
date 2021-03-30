@@ -40,7 +40,7 @@ def fetchFileNames(root="./data/lpd_5_cleansed", output='paths.csv'):
     pathDF = pd.DataFrame(pathArray)
     pathDF.to_csv(output)
 
-def preprocess(inputPaths, n_songs, n_bars, n_steps_per_bar, n_pitches, n_instruments):
+def preprocess(inputPaths, n_songs, n_bars, n_steps_per_bar, n_pitches, n_instruments, bars_offset):
     """ Preprocess npz file and reshape as numpy 5-dimensional array for training.
         ------ (n_songs, n_bars, n_steps_per_bar, n_pitches, n_instruments) -----
         Each song must contain 24 measures = 96 beats
@@ -82,7 +82,7 @@ def preprocess(inputPaths, n_songs, n_bars, n_steps_per_bar, n_pitches, n_instru
             # reshape
             newpianoroll = pianoroll[:floor].reshape(n_init_bars, n_steps_per_bar, n_pitches)
 
-            slicedpianoroll = newpianoroll[:n_bars, :, :]
+            slicedpianoroll = newpianoroll[bars_offset:n_bars, :, :]
                             
             tmpArray[item] = slicedpianoroll
             
@@ -110,6 +110,7 @@ if __name__ == "__main__":
     n_steps_per_bar = 96
     n_pitches = 128
     n_instruments = 5
+    bars_offset = 12
     
     multitrack = preprocess(
                 inputPaths='paths.csv',
@@ -117,7 +118,8 @@ if __name__ == "__main__":
                 n_bars=n_bars,
                 n_steps_per_bar=n_steps_per_bar,
                 n_pitches=n_pitches,
-                n_instruments=n_instruments)
+                n_instruments=n_instruments,
+                bars_offset=bars_offset)
 
 # ******* JSB chorales *******
 
