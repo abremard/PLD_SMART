@@ -63,14 +63,18 @@ def preprocess(inputPaths, n_songs, n_bars, n_steps_per_bar, n_pitches, n_instru
     for index, row in pathDF.iterrows():
         
         tmpArray = np.zeros((n_instruments, n_bars, n_steps_per_bar, n_pitches))
-        
+
+        # for linux
+        path = row['Path'].replace('\\', '/')
+
         for item in range(n_instruments):
-            
-            track = ppr.load(row['Path']).tracks[item]
+
+            track = ppr.load(path).tracks[item]
             pianoroll = track.pianoroll
             
-            if ppr.load(row['Path']).tracks[item].pianoroll.shape[0] == 0:
-                pianoroll = np.zeros((n_bars*n_steps_per_bar, n_pitches))
+            if ppr.load(path).tracks[item].pianoroll.shape[0] == 0:
+                pianoroll = np.zeros(((n_bars+bars_offset)*n_steps_per_bar, n_pitches))
+
 
             # map velocity to -1 and 1
             pianoroll = np.ceil(pianoroll / 127).astype(int)
@@ -80,9 +84,10 @@ def preprocess(inputPaths, n_songs, n_bars, n_steps_per_bar, n_pitches, n_instru
             # remove remainder
             floor = n_init_bars*n_steps_per_bar
             # reshape
+
             newpianoroll = pianoroll[:floor].reshape(n_init_bars, n_steps_per_bar, n_pitches)
 
-            slicedpianoroll = newpianoroll[bars_offset:n_bars, :, :]
+            slicedpianoroll = newpianoroll[bars_offset:bars_offset+n_bars, :, :]
                             
             tmpArray[item] = slicedpianoroll
             
@@ -112,6 +117,7 @@ if __name__ == "__main__":
     n_instruments = 5
     bars_offset = 12
     
+    """
     multitrack = preprocess(
                 inputPaths='paths.csv',
                 n_songs=n_songs,
@@ -120,6 +126,8 @@ if __name__ == "__main__":
                 n_pitches=n_pitches,
                 n_instruments=n_instruments,
                 bars_offset=bars_offset)
+    """
+    fetchFileNames
 
 # ******* JSB chorales *******
 

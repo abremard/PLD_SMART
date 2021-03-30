@@ -14,29 +14,45 @@ from tensorflow.keras.models import load_model
 import base64
 from mailjet_rest import Client
 
-# run params
+n_songs = 10
+n_bars = 2
+n_steps_per_bar = 96
+n_pitches = 128
+n_tracks = 5
+bars_offset = 12
+
+mode =  'build' # ' 'load' #
+BATCH_SIZE = 64
 SECTION = 'compose'
 RUN_ID = '001'
-DATA_NAME = 'chorales'
-FILENAME = 'Jsb16thSeparated.npz'
+DATA_NAME = 'lpd'
 RUN_FOLDER = 'run/{}/'.format(SECTION)
 RUN_FOLDER += '_'.join([RUN_ID, DATA_NAME])
 
-BATCH_SIZE = 64
-n_bars = 2
-n_steps_per_bar = 16
-n_pitches = 84
-n_tracks = 4
+if not os.path.exists(RUN_FOLDER):
+    os.mkdir(RUN_FOLDER)
+    os.mkdir(os.path.join(RUN_FOLDER, 'viz'))
+    os.mkdir(os.path.join(RUN_FOLDER, 'images'))
+    os.mkdir(os.path.join(RUN_FOLDER, 'weights'))
+    os.mkdir(os.path.join(RUN_FOLDER, 'samples'))
 
-data_binary, data_ints, raw_data = load_music(DATA_NAME, FILENAME, n_bars, n_steps_per_bar)
-# data_binary = np.squeeze(data_binary)
+data_binary = prp.preprocess(
+                inputPaths='paths.csv',
+                n_songs=n_songs,
+                n_bars=n_bars,
+                n_steps_per_bar=n_steps_per_bar,
+                n_pitches=n_pitches,
+                n_instruments=n_tracks,
+                bars_offset=bars_offset)
+
+print(data_binary.shape)
 
 gan = MuseGAN(input_dim = data_binary.shape[1:]
         , critic_learning_rate = 0.001
         , generator_learning_rate = 0.001
         , optimiser = 'adam'
         , grad_weight = 10
-        , z_dim = 32
+        , z_dim = n_bars*n_steps_per_bar
         , batch_size = BATCH_SIZE
         , n_tracks = n_tracks
         , n_bars = n_bars
