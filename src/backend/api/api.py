@@ -10,6 +10,10 @@
 import flask
 from flask import request, jsonify
 
+import __init__
+
+from wrappers import logger
+
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -29,10 +33,12 @@ response_header = [
 
 @app.route('/', methods=['GET'])
 def home():
+    logger.info("GET /") # our own log message (flask already has its own logging system)
     return "<h1>PLD SMART</h1><p>Welcome to PLD SMART API</p>"
 
 @app.route('/api/v1/compose/polyphonic/musegan/v0', methods=['GET'])
 def api_compose_polyphonic_musegan_v0():
+    logger.info("GET /api/v1/compose/polyphonic/musegan/v0")
     return jsonify(response_header)
 
 @app.route('/api/v1/compose/monophonic/lstm/v0', methods=['GET'])
@@ -51,4 +57,6 @@ def api_interpolate_polyphonic_vae_v0():
 def api_styling_polyphonic_vae_v0():
     return jsonify(response_header)
 
-app.run()
+if __name__ == "__main__":
+    logger.log_config("src/backend/log/", "api")
+    app.run()

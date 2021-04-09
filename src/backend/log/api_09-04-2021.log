@@ -1,0 +1,8 @@
+09-Apr-21 15:31:25 - INFO -  * Restarting with stat
+09-Apr-21 15:31:28 - WARNING -  * Debugger is active!
+09-Apr-21 15:31:28 - INFO -  * Debugger PIN: 309-499-568
+09-Apr-21 15:31:28 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+09-Apr-21 15:31:28 - DEBUG - GET / 1617975088.403541
+09-Apr-21 15:31:28 - INFO - 127.0.0.1 - - [09/Apr/2021 15:31:28] "[37mGET / HTTP/1.1[0m" 200 -
+09-Apr-21 15:31:37 - DEBUG - GET /api/v1/compose/polyphonic/musegan/v0 1617975097.8794284
+09-Apr-21 15:31:37 - INFO - 127.0.0.1 - - [09/Apr/2021 15:31:37] "[37mGET /api/v1/compose/polyphonic/musegan/v0 HTTP/1.1[0m" 200 -
