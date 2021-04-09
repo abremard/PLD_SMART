@@ -1,1 +1,0 @@
-Generator using stochastic binary neurons at the output layer

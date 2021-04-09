@@ -1,2 +1,0 @@
-""" Pypianoroll module wrapper
-"""
