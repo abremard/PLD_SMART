@@ -7,7 +7,8 @@ import subprocess
 import datetime
 import logging
 import sys
-import time;
+import time
+import datetime
 
 def debug(logInfo):
     """ DEBUG level log
@@ -15,7 +16,7 @@ def debug(logInfo):
     Args:
         logInfo (str): log message
     """    
-    logging.debug(logInfo+" "+str(time.time()))
+    logging.debug(logInfo+" "+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'))
 
 def info(logInfo):
     """ INFO level log
@@ -23,7 +24,7 @@ def info(logInfo):
     Args:
         logInfo (str): log message
     """    
-    logging.info(logInfo+" "+str(time.time()))
+    logging.info(logInfo+" "+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'))
 
 def error(logInfo):
     """ ERROR level log
@@ -31,7 +32,7 @@ def error(logInfo):
     Args:
         logInfo (str): log message
     """    
-    logging.error(logInfo+" "+str(time.time()))
+    logging.error(logInfo+" "+datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'))
 
 def log_config(directory, filename, level="DEBUG"):
     """ Initial logging configuration for project. 1 file for 1 day. Log message is appended to the file of current day. Retention is set in the powershell script.

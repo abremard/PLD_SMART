@@ -1,0 +1,84 @@
+10-Apr-21 12:51:54 - INFO -  * Restarting with stat
+10-Apr-21 12:52:00 - WARNING -  * Debugger is active!
+10-Apr-21 12:52:00 - INFO -  * Debugger PIN: 309-499-568
+10-Apr-21 12:52:00 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+10-Apr-21 12:52:29 - INFO - GET / 2021-04-10 12:52:29
+10-Apr-21 12:52:29 - INFO - 127.0.0.1 - - [10/Apr/2021 12:52:29] "[37mGET / HTTP/1.1[0m" 200 -
+10-Apr-21 12:52:29 - INFO - 127.0.0.1 - - [10/Apr/2021 12:52:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+10-Apr-21 12:53:10 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:10] "[35m[1mGET /api/v1/compose/monophonic/lstm/v0?style=acdc&length=200 HTTP/1.1[0m" 500 -
+10-Apr-21 12:53:10 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:10] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:10 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:10] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:10 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:10] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:10 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:10] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:11 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:11] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:11 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:11] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:57 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:57] "[35m[1mGET /api/v1/compose/monophonic/lstm/v0?style=acdc&length=200 HTTP/1.1[0m" 500 -
+10-Apr-21 12:53:57 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:57] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:57 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:57] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:57 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:57] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:57 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:57] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:57 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:57] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+10-Apr-21 12:53:57 - INFO - 127.0.0.1 - - [10/Apr/2021 12:53:57] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+10-Apr-21 12:54:32 - INFO -  * Detected change in 'D:\\Documents\\INSA_IF\\SMART\\Github\\PLD_SMART\\src\\algo\\LSTM\\predict.py', reloading
+10-Apr-21 12:54:33 - INFO -  * Restarting with stat
+10-Apr-21 12:54:41 - WARNING -  * Debugger is active!
+10-Apr-21 12:54:41 - INFO -  * Debugger PIN: 309-499-568
+10-Apr-21 12:54:41 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+10-Apr-21 12:54:50 - INFO -  * Detected change in 'D:\\Documents\\INSA_IF\\SMART\\Github\\PLD_SMART\\src\\backend\\api\\api.py', reloading
+10-Apr-21 12:54:50 - INFO -  * Restarting with stat
+10-Apr-21 12:54:56 - WARNING -  * Debugger is active!
+10-Apr-21 12:54:56 - INFO -  * Debugger PIN: 309-499-568
+10-Apr-21 12:54:56 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+10-Apr-21 12:55:01 - INFO - 127.0.0.1 - - [10/Apr/2021 12:55:01] "[35m[1mGET /api/v1/compose/monophonic/lstm/v0?style=acdc&length=200 HTTP/1.1[0m" 500 -
+10-Apr-21 12:55:01 - INFO - 127.0.0.1 - - [10/Apr/2021 12:55:01] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+10-Apr-21 12:55:02 - INFO - 127.0.0.1 - - [10/Apr/2021 12:55:02] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+10-Apr-21 12:55:02 - INFO - 127.0.0.1 - - [10/Apr/2021 12:55:02] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+10-Apr-21 12:55:02 - INFO - 127.0.0.1 - - [10/Apr/2021 12:55:02] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1[0m" 200 -
+10-Apr-21 12:55:02 - INFO - 127.0.0.1 - - [10/Apr/2021 12:55:02] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+10-Apr-21 12:55:02 - INFO - 127.0.0.1 - - [10/Apr/2021 12:55:02] "[37mGET /api/v1/compose/monophonic/lstm/v0?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+10-Apr-21 12:55:34 - INFO -  * Restarting with stat
+10-Apr-21 12:55:41 - WARNING -  * Debugger is active!
+10-Apr-21 12:55:41 - INFO -  * Debugger PIN: 309-499-568
+10-Apr-21 12:55:41 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+10-Apr-21 12:56:14 - INFO -  * Detected change in 'D:\\Documents\\INSA_IF\\SMART\\Github\\PLD_SMART\\src\\backend\\api\\api.py', reloading
+10-Apr-21 12:56:15 - INFO -  * Restarting with stat
+10-Apr-21 12:56:22 - WARNING -  * Debugger is active!
+10-Apr-21 12:56:22 - INFO -  * Debugger PIN: 309-499-568
+10-Apr-21 12:56:22 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+10-Apr-21 12:56:25 - INFO -  * Detected change in 'D:\\Documents\\INSA_IF\\SMART\\Github\\PLD_SMART\\src\\algo\\LSTM\\predict.py', reloading
+10-Apr-21 12:56:25 - INFO -  * Restarting with stat
+10-Apr-21 12:56:38 - INFO -  * Restarting with stat
+10-Apr-21 12:56:45 - WARNING -  * Debugger is active!
+10-Apr-21 12:56:46 - INFO -  * Debugger PIN: 309-499-568
+10-Apr-21 12:56:46 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+10-Apr-21 12:57:29 - INFO - 127.0.0.1 - - [10/Apr/2021 12:57:29] "[37mGET /api/v1/compose/monophonic/lstm/v0?style=acdc&length=200 HTTP/1.1[0m" 200 -
+10-Apr-21 13:05:21 - INFO - GET /api/v1/compose/polyphonic/musegan/v0 2021-04-10 13:05:21
+10-Apr-21 13:05:21 - INFO - 127.0.0.1 - - [10/Apr/2021 13:05:21] "[37mGET /api/v1/compose/polyphonic/musegan/v0?style=cello&length=50 HTTP/1.1[0m" 200 -
+10-Apr-21 13:06:03 - INFO - 127.0.0.1 - - [10/Apr/2021 13:06:03] "[37mGET /api/v1/compose/monophonic/lstm/v0?style=cello&length=50 HTTP/1.1[0m" 200 -
+10-Apr-21 13:07:17 - INFO - GET /api/v1/compose/polyphonic/musegan/v0 2021-04-10 13:07:17
+10-Apr-21 13:07:17 - INFO - 127.0.0.1 - - [10/Apr/2021 13:07:17] "[37mGET /api/v1/compose/polyphonic/musegan/v0?style=decapitated&length=50 HTTP/1.1[0m" 200 -
+10-Apr-21 13:07:49 - INFO - 127.0.0.1 - - [10/Apr/2021 13:07:49] "[37mGET /api/v1/compose/monophonic/lstm/v0?style=decapitated&length=50 HTTP/1.1[0m" 200 -
+10-Apr-21 13:08:56 - INFO -  * Restarting with stat
+10-Apr-21 13:09:03 - WARNING -  * Debugger is active!
+10-Apr-21 13:09:03 - INFO -  * Debugger PIN: 309-499-568
+10-Apr-21 13:09:04 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+10-Apr-21 13:09:04 - INFO - GET /api/v1/compose/polyphonic/musegan/v0 2021-04-10 13:09:04
+10-Apr-21 13:09:04 - INFO - 127.0.0.1 - - [10/Apr/2021 13:09:04] "[37mGET /api/v1/compose/polyphonic/musegan/v0?style=decapitated&length=50 HTTP/1.1[0m" 200 -
+10-Apr-21 13:10:09 - INFO - GET /api/v1/compose/polyphonic/musegan/v0 2021-04-10 13:10:09
+10-Apr-21 13:10:09 - INFO - 127.0.0.1 - - [10/Apr/2021 13:10:09] "[37mGET /api/v1/compose/polyphonic/musegan/v0?style=decapitated&length=200 HTTP/1.1[0m" 200 -
+10-Apr-21 13:10:59 - INFO - 127.0.0.1 - - [10/Apr/2021 13:10:59] "[37mGET /api/v1/compose/monophonic/lstm/v0?style=decapitated&length=200 HTTP/1.1[0m" 200 -
+10-Apr-21 13:13:15 - INFO -  * Restarting with stat
+10-Apr-21 13:13:23 - WARNING -  * Debugger is active!
+10-Apr-21 13:13:23 - INFO -  * Debugger PIN: 309-499-568
+10-Apr-21 13:13:23 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+10-Apr-21 13:14:10 - INFO - 127.0.0.1 - - [10/Apr/2021 13:14:10] "[37mGET /api/v1/compose/monophonic/lstm/v0?style=cello&length=200 HTTP/1.1[0m" 200 -
+10-Apr-21 13:15:20 - INFO - 127.0.0.1 - - [10/Apr/2021 13:15:20] "[37mGET /api/v1/compose/monophonic/lstm/v0?style=cello&length=200 HTTP/1.1[0m" 200 -
+10-Apr-21 13:17:47 - INFO -  * Restarting with stat
+10-Apr-21 13:17:57 - WARNING -  * Debugger is active!
+10-Apr-21 13:17:57 - INFO -  * Debugger PIN: 309-499-568
+10-Apr-21 13:17:57 - INFO -  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+10-Apr-21 13:19:21 - INFO - 127.0.0.1 - - [10/Apr/2021 13:19:21] "[37mGET /api/v1/compose/monophonic/lstm/v0?style=acdc&length=200 HTTP/1.1[0m" 200 -
+10-Apr-21 13:20:20 - INFO - 127.0.0.1 - - [10/Apr/2021 13:20:20] "[37mGET /api/v1/compose/monophonic/lstm/v0?style=cello&length=200 HTTP/1.1[0m" 200 -
+10-Apr-21 13:20:50 - INFO - 127.0.0.1 - - [10/Apr/2021 13:20:50] "[37mGET /api/v1/compose/monophonic/lstm/v0?style=acdc&length=100 HTTP/1.1[0m" 200 -
+10-Apr-21 13:22:07 - INFO - 127.0.0.1 - - [10/Apr/2021 13:22:07] "[37mGET /api/v1/compose/monophonic/lstm/v0?style=cello&length=200 HTTP/1.1[0m" 200 -
+10-Apr-21 13:25:24 - INFO -  * Detected change in 'D:\\Documents\\INSA_IF\\SMART\\Github\\PLD_SMART\\src\\algo\\LSTM\\predict.py', reloading

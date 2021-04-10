@@ -10,15 +10,15 @@ from models.RNNAttention import get_distinct, create_lookups, prepare_sequences,
 
 # run params
 section = 'compose'
-run_id = '0006'
-music_name = 'cello'
+run_id = "001"
+music_name = 'decapitated'
 
-run_folder = 'run/{}/'.format(section)
+run_folder = 'src/algo/LSTM/run/{}/'.format(section)
 run_folder += '_'.join([run_id, music_name])
 
 
 store_folder = os.path.join(run_folder, 'store')
-data_folder = os.path.join('data', music_name)
+data_folder = os.path.join('src/algo/LSTM/data', music_name)
 
 if not os.path.exists(run_folder):
     os.mkdir(run_folder)
@@ -52,16 +52,14 @@ if mode == 'build':
         print(i+1, "Parsing %s" % file)
         original_score = parser.parse(file).chordify()
         
-
         for interval in intervals:
 
             score = original_score.transpose(interval)
-
+            
             notes.extend(['START'] * seq_len)
             durations.extend([0]* seq_len)
 
             for element in score.flat:
-                
                 if isinstance(element, note.Note):
                     if element.isRest:
                         notes.append(str(element.name))
@@ -73,6 +71,8 @@ if mode == 'build':
                 if isinstance(element, chord.Chord):
                     notes.append('.'.join(n.nameWithOctave for n in element.pitches))
                     durations.append(element.duration.quarterLength)
+            print(notes)
+            print(durations)
 
     with open(os.path.join(store_folder, 'notes'), 'wb') as f:
         pickle.dump(notes, f) #['G2', 'D3', 'B3', 'A3', 'B3', 'D3', 'B3', 'D3', 'G2',...]
@@ -83,7 +83,7 @@ else:
         notes = pickle.load(f) #['G2', 'D3', 'B3', 'A3', 'B3', 'D3', 'B3', 'D3', 'G2',...]
     with open(os.path.join(store_folder, 'durations'), 'rb') as f:
         durations = pickle.load(f) 
-        
+
         
 # get the distinct sets of notes and durations
 note_names, n_notes = get_distinct(notes)
