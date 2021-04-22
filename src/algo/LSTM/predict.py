@@ -4,7 +4,7 @@ import os
 import numpy as np
 import sys
 from music21 import instrument, note, stream, chord, duration
-from models.RNNAttention import create_network, sample_with_temp
+from algo.LSTM.models.RNNAttention import create_network, sample_with_temp
 
 import matplotlib.pyplot as plt
 
