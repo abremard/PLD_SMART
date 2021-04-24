@@ -10,8 +10,7 @@ import matplotlib.pyplot as plt
 
 def generate(music_name, max_extra_notes = 100, run_id = "001", show_plots = False):
     # run params
-    section = 'compose'
-    run_folder = '/content/PLD_SMART/src/algo/LSTM/run/{}/'.format(section)
+    run_folder = '/content/drive/My Drive/SMART/LSTM/run/'
     run_folder += '_'.join([run_id, music_name])
 
     # model params
