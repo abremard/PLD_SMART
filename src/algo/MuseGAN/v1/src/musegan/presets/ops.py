@@ -1,5 +1,6 @@
 """Tensorflow ops."""
-import tensorflow as tf
+# import tensorflow as tf
+from tensorflow.compat import v1 as tf
 
 CONV_KERNEL_INITIALIZER = tf.truncated_normal_initializer(stddev=0.05)
 DENSE_KERNEL_INITIALIZER = tf.truncated_normal_initializer(stddev=0.05)

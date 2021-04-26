@@ -1,7 +1,8 @@
 """This file defines the metrics used to evaluate the generated results."""
 import os
 import numpy as np
-import tensorflow as tf
+# import tensorflow as tf
+from tensorflow.compat import v1 as tf
 from musegan.utils import make_sure_path_exists
 
 # --- Utilities ----------------------------------------------------------------
