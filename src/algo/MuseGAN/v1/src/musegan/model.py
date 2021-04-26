@@ -27,7 +27,8 @@ class Model:
     def __init__(self, params, name='Model'):
         self.name = name
 
-        with tf.variable_scope(self.name, reuse=tf.AUTO_REUSE) as scope:
+        # with tf.variable_scope(self.name, reuse=tf.AUTO_REUSE) as scope:
+        with tf.compat.v1.variable_scope(self.name, reuse=tf.AUTO_REUSE) as scope:
 
             # Save the variable scope object
             self.scope = scope
