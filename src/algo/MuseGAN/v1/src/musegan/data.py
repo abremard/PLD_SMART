@@ -16,7 +16,7 @@ def load_data_from_npz(filename):
     """Load and return the training data from a npz file (sparse format)."""
     with np.load(filename) as f:
         # data = np.zeros(f['shape'], np.bool_)
-        data = np.zeros(f['pianoroll_0_csc_shape'], np.bool_)
+        data = np.zeros((1, 4, 48, 84, 1), np.bool_)
         # data[[x for x in f['nonzero']]] = True
         data[[x for x in f['pianoroll_0_csc_data']]] = True
     return data
