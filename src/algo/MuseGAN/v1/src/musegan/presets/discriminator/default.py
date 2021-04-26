@@ -1,5 +1,6 @@
 """This file defines the network architecture for the discriminator."""
-import tensorflow as tf
+# import tensorflow as tf
+from tensorflow.compat import v1 as tf
 from tensorflow.nn import relu, leaky_relu, tanh, sigmoid
 from ..ops import dense, conv3d, get_normalization
 

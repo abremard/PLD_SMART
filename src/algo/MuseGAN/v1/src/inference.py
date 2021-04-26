@@ -5,7 +5,7 @@ import argparse
 from pprint import pformat
 import numpy as np
 import scipy.stats
-import tensorflow as tf
+# import tensorflow as tf
 
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior() 

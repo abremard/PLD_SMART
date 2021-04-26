@@ -1,5 +1,6 @@
 """This file defines common GAN losses."""
-import tensorflow as tf
+# import tensorflow as tf
+from tensorflow.compat import v1 as tf
 
 def get_adv_losses(discriminator_real_outputs, discriminator_fake_outputs,
                    kind):
