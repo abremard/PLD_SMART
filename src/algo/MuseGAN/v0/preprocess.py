@@ -64,8 +64,7 @@ def preprocess(inputPaths, n_songs, n_bars, n_steps_per_bar, n_pitches, n_instru
         
         tmpArray = np.zeros((n_instruments, n_bars, n_steps_per_bar, n_pitches))
 
-        # for linux
-        path = row['Path'].replace('\\', '/')
+        path = row['Path']
 
         for item in range(n_instruments):
 
