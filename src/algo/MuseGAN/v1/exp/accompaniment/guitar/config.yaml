@@ -7,9 +7,9 @@ save_checkpoint_steps: 10000 # set to 0 to disable saving checkpoints
 evaluate_steps: 100 # set to 0 to disable evaluation
 
 # Data
-data_source: 'npz' # 'sa', 'npy', 'npz'
+data_source: 'npy' # 'sa', 'npy', 'npz'
 data_root: ~
-data_filename: PLD_SMART/src/algo/MuseGAN/v1/data/output.npz
+data_filename: PLD_SMART/src/algo/MuseGAN/v1/data/output.npy
 use_random_transpose: false # randomly transpose the piano-rolls at training
 use_train_test_split: false # split the piano-rolls at training
 
