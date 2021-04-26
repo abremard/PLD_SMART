@@ -11,7 +11,7 @@ from models.RNNAttention import get_distinct, create_lookups, prepare_sequences,
 # run params
 section = 'compose'
 run_id = "001"
-music_name = 'decapitated'
+music_name = 'acdc'
 
 run_folder = 'src/algo/LSTM/run/{}/'.format(section)
 run_folder += '_'.join([run_id, music_name])
