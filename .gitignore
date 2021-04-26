@@ -1,1 +1,5 @@
 venv
+.idea
+
+# MUST remain on your computers ONLY (write access to DB!)
+src/database/cred.json
