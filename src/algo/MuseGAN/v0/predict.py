@@ -16,17 +16,6 @@ from tensorflow.keras.models import load_model
 
 import base64
 
-def find_closest(data_binary, score):
-    current_dist = 99999999
-    current_i = -1
-    for i, d in enumerate(data_binary):
-        dist = np.sqrt(np.sum(pow((d - score),2)))
-        if dist < current_dist:
-            current_i = i
-            current_dist = dist
-        
-    return current_i
-
 def generate(run_id = "001"):
 
     n_songs = 10
@@ -86,13 +75,6 @@ def generate(run_id = "001"):
     filename = 'example'
     gan.notes_to_midi(RUN_FOLDER, gen_scores, filename)
     gan.draw_score(gen_scores, 0)
-
-    closest_idx = find_closest(data_binary, gen_scores[0])
-    closest_data = data_binary[[closest_idx]]
-    print(closest_idx)
-
-    filename = 'closest'
-    gan.notes_to_midi(RUN_FOLDER, closest_data,filename)
 
     chords_noise_2 = 5 * np.ones((1, gan.z_dim))
 
