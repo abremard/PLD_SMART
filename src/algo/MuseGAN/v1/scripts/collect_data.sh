@@ -3,5 +3,4 @@
 # for all the files in that directory that end wih ".mid" and converting
 # them to a five-track pianoroll dataset.
 # Usage: ./generate_data.sh [INPUT_DIR] [OUTPUT_FILENAME]
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
-python "$DIR/../src/collect_data.py" -i "$1" -o "$2"
+python "PLD_SMART/src/algo/MuseGAN/v1/src/collect_data.py" -i "/content/drive/My Drive/SMART/MuseGAN/data" -o "/content/drive/My Drive/SMART/MuseGAN/data/output.npz"

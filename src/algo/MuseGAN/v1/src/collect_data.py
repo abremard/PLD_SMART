@@ -109,9 +109,10 @@ def main():
     for filename in filenames:
         print(f"Processing {filename}")
         multitrack = Multitrack(filename)
-        downbeat = multitrack.downbeat
+        downbeat = multitrack.resolution
 
-        num_bar = len(downbeat) // resolution
+        # num_bar = len(downbeat) // resolution
+        num_bar = multitrack.resolution
         hop_iter = 0
 
         song_ok_segments = []
@@ -151,7 +152,7 @@ def main():
 
             hop_iter = np.random.randint(0, 1) + hop_size
             song_ok_segments.append(
-                Multitrack(tracks=best_instr, beat_resolution=12)
+                Multitrack(tracks=best_instr, resolution=12)
             )
 
         count_ok_segment = len(song_ok_segments)
@@ -194,15 +195,15 @@ def main():
 
     result = np.concatenate(compiled_list, axis=0)
     print(f"output shape: {result.shape}")
-    if args.outfile.endswith(".npz"):
+    if args.output_filename.endswith(".npz"):
         np.savez_compressed(
-            args.outfile,
+            args.output_filename,
             nonzero=np.array(result.nonzero()),
             shape=result.shape,
         )
     else:
-        np.save(args.outfile, result)
-    print(f"Successfully saved training data to : {args.outfile}")
+        np.save(args.output_filename, result)
+    print(f"Successfully saved training data to : {args.output_filename}")
 
 
 if __name__ == "__main__":

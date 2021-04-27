@@ -4,6 +4,8 @@ venv
 # MUST remain on your computers ONLY (write access to DB!)
 src/database/firestore/cred.json
 src/database/client_secrets.json
+front/yarn.lock
+front/package-lock.json
 
 # python stuff
 *.pyc
