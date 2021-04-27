@@ -288,10 +288,10 @@ h3 {
   color:white;
   text-align: left;
   margin-top: 15vh;
+  margin-left: 2vw;
 }
 
 .scratch p{
-  margin-left: 1vw;
   font-size: 17px;
   font-family: Regular;
   padding: 0px;
@@ -304,7 +304,6 @@ h3 {
   font-weight: normal;
   font-size: 40px;
   text-align: left;
-  margin-left: 1vw;
   margin-bottom: 0px;
   margin-top: 20px;
   padding: 0px;
@@ -317,10 +316,50 @@ h3 {
   padding: 10px 10px;
   text-decoration: none;
   font-family: Regular;
-  margin-left: 1vw;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 .scratch a:hover {
   background-color: #6EC3F4;
+}
+
+.tile{
+  border: solid white 3px;
+  padding: 20px;
+  margin-top: 5vh;
+  display: block;
+  width: fit-content;
+}
+
+.tile h4{
+  font-family: Regular;
+  font-size: 16px;
+  margin: 0px;
+  margin-bottom: 15px;
+}
+
+.tile h5{
+  font-family: Semibold;
+  font-size: 25px;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
+.tile p{
+  font-family: Regular;
+  font-size: 15px;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.tile a{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.metadata {
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 10vw;
 }
