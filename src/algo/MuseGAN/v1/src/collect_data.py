@@ -152,7 +152,7 @@ def main():
 
             hop_iter = np.random.randint(0, 1) + hop_size
             song_ok_segments.append(
-                Multitrack(tracks=best_instr, resolution=12)
+                Multitrack(tracks=best_instr, resolution=24)
             )
 
         count_ok_segment = len(song_ok_segments)
