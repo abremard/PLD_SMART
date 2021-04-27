@@ -6,6 +6,7 @@ import scratch from '../images/scratch.png'
 import switchimg from '../images/switch.png'
 import match from '../images/match.png'
 import together from '../images/together.png'
+import {Link} from "react-router-dom";
 
 export default function Home() {
 
@@ -29,7 +30,9 @@ export default function Home() {
         }%`;
         let x = `${_depth3}, ${_depth2}, ${_depth1}`;
         console.log(x);
-        elem.style.backgroundPosition = x;
+        if (elem!= null) {
+            elem.style.backgroundPosition = x;
+        }
     })
 
     return(
@@ -40,7 +43,7 @@ export default function Home() {
                     <div className="logo">
                         <img src={logo} width="120px"/>
                     </div>
-                    <a href="">My Studio</a>
+                    <Link to="/studio">My Studio</Link>
                 </div>
                 <div className="title">
                     <h1>Endless Opportunities.</h1>
@@ -98,7 +101,7 @@ export default function Home() {
         </div>
         <div className="ready">
             <h3>Ready?</h3>
-            <a href="">Let's Go!</a>
+            <Link to="/studio">Let's Go!</Link>
         </div>
 
         </body>

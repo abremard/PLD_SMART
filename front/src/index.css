@@ -192,3 +192,135 @@ h3 {
   margin: 0px;
   margin-right: 20px;
 }
+
+.appbar {
+  padding-top: 20px;
+  padding-left: 30px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(30px);
+  position: fixed; /* Set the navbar to fixed position */
+  overflow: hidden;
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+}
+
+.applogo p{
+  color: white;
+  display: inline-block;
+  font-family: Regular;
+  vertical-align: top;
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.applogo {
+  float: left;
+  display: block;
+  vertical-align: middle;
+}
+
+.appbar a {
+  float: right;
+  display: block;
+  color: white;
+  background-color: #6EC3F4;
+  text-align: center;
+  padding: 10px 10px;
+  margin-right: 50px;
+  margin-top: 7px;
+  text-decoration: none;
+  font-family: Regular;
+}
+
+.appbar a:hover {
+  background-color: #7038FF;
+}
+
+.choose{
+  color:white;
+  text-align: left;
+  margin-top: 20vh;
+}
+
+.choose table{
+  border-spacing: 20px;
+}
+
+.choose td{
+  border: 2px solid white;
+  padding: 50px;
+}
+
+.choose img{
+  width: 12vw;
+}
+
+.choose p{
+  margin-top: 20px;
+  font-size: 17px;
+  font-family: Regular;
+}
+
+.choose h4{
+  color: #fff;
+  font-family: Semibold;
+  font-weight: normal;
+  font-size: 40px;
+  text-align: left;
+  margin-left: 1vw;
+}
+
+.choose a {
+  color: white;
+  background-color: #6EC3F4;
+  text-align: center;
+  padding: 10px 10px;
+  margin-top: 20px;
+  text-decoration: none;
+  font-family: Regular;
+}
+
+.choose a:hover {
+  background-color: #7038FF;
+}
+
+.scratch{
+  color:white;
+  text-align: left;
+  margin-top: 15vh;
+}
+
+.scratch p{
+  margin-left: 1vw;
+  font-size: 17px;
+  font-family: Regular;
+  padding: 0px;
+  margin-bottom: 30px;
+}
+
+.scratch h4{
+  color: #fff;
+  font-family: Semibold;
+  font-weight: normal;
+  font-size: 40px;
+  text-align: left;
+  margin-left: 1vw;
+  margin-bottom: 0px;
+  margin-top: 20px;
+  padding: 0px;
+}
+
+.scratch a {
+  color: white;
+  background-color: #7038FF;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+  font-family: Regular;
+  margin-left: 1vw;
+  margin-bottom: 0px;
+}
+
+.scratch a:hover {
+  background-color: #6EC3F4;
+}
