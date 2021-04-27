@@ -8,11 +8,11 @@
 
 from numpy import load
 
-data = load('data/output.npz')
+data = load('train_x_lpd_5_phr.npz')
 lst = data.files
 for item in lst:
     print(item)
-    print(data[item])
+    # print(data[item])
 
 # import numpy as np
 # # from pypianoroll import Multitrack
