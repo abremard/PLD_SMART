@@ -195,14 +195,14 @@ def main():
 
     result = np.concatenate(compiled_list, axis=0)
     print(f"output shape: {result.shape}")
-    if args.output_filename.endswith(".npz"):
-        np.savez_compressed(
-            args.output_filename,
-            nonzero=np.array(result.nonzero()),
-            shape=result.shape,
-        )
-    else:
-        np.save(args.output_filename, result)
+    # if args.outfile.endswith(".npz"):
+    np.savez_compressed(
+        args.output_filename,
+        nonzero=np.array(result.nonzero()),
+        shape=result.shape,
+    )
+    # else:
+        # np.save(args.outfile, result)
     print(f"Successfully saved training data to : {args.output_filename}")
 
 
