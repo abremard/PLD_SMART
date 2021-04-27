@@ -176,8 +176,6 @@ def generate(music_name, max_extra_notes = 100, run_id = "001", show_plots = Fal
             new_note.storedInstrument = instrument.Violoncello()
             midi_stream.append(new_note)
 
-
-
     midi_stream = midi_stream.chordify()
     timestr = time.strftime("%Y%m%d-%H%M%S")
     output_file_path = os.path.join(output_folder, 'output-' + timestr + '.mid')
