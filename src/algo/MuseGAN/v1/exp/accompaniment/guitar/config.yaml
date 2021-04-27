@@ -9,7 +9,7 @@ evaluate_steps: 100 # set to 0 to disable evaluation
 # Data
 data_source: 'npz' # 'sa', 'npy', 'npz'
 data_root: ~
-data_filename: /content/drive/My Drive/SMART/LSTM/data/output.npz
+data_filename: /content/drive/My Drive/SMART/MuseGAN/data/output.npz
 use_random_transpose: false # randomly transpose the piano-rolls at training
 use_train_test_split: false # split the piano-rolls at training
 
