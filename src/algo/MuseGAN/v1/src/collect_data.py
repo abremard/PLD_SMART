@@ -109,9 +109,10 @@ def main():
     for filename in filenames:
         print(f"Processing {filename}")
         multitrack = Multitrack(filename)
-        downbeat = multitrack.downbeat
+        # downbeat = multitrack.downbeat
 
-        num_bar = len(downbeat) // resolution
+        # num_bar = len(downbeat) // resolution
+        num_bar = multitrack.resolution
         hop_iter = 0
 
         song_ok_segments = []
