@@ -109,7 +109,7 @@ def main():
     for filename in filenames:
         print(f"Processing {filename}")
         multitrack = Multitrack(filename)
-        # downbeat = multitrack.downbeat
+        downbeat = multitrack.resolution
 
         # num_bar = len(downbeat) // resolution
         num_bar = multitrack.resolution
@@ -152,7 +152,7 @@ def main():
 
             hop_iter = np.random.randint(0, 1) + hop_size
             song_ok_segments.append(
-                Multitrack(tracks=best_instr, beat_resolution=12)
+                Multitrack(tracks=best_instr, resolution=12)
             )
 
         count_ok_segment = len(song_ok_segments)
