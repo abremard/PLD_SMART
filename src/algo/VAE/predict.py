@@ -8,7 +8,11 @@ import tensorflow.compat.v1 as tf
 
 BASE_DIR = "gs://download.magenta.tensorflow.org/models/music_vae/colab2"
 
-def predict():
+def generate(
+    input_mel_midi_data = [
+        tf.io.gfile.GFile(fn, 'rb').read()
+        for fn in sorted(tf.io.gfile.glob(BASE_DIR + '/midi/mel_2bar*.mid'))]):
+    
     #@title Load the pre-trained model.
     mel_2bar_config = configs.CONFIG_MAP['cat-mel_2bar_big']
     mel_2bar = TrainedModel(mel_2bar_config, batch_size=4, checkpoint_dir_or_path=BASE_DIR + '/checkpoints/mel_2bar_big.ckpt')
