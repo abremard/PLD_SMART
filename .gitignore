@@ -3,3 +3,5 @@ venv
 
 # MUST remain on your computers ONLY (write access to DB!)
 src/database/cred.json
+front/yarn.lock
+front/package-lock.json
