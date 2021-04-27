@@ -14,7 +14,10 @@ export default function Scratch5() {
         backgroundColor: 'black',
         border: 'solid white 1px',
         marginBottom: '20px',
-    }
+    };
+    const generateStyle = {
+        padding: '20px',
+    };
     return(
         <>
             <Navbar></Navbar>
@@ -24,6 +27,7 @@ export default function Scratch5() {
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet, dolor, varius lectus odio libero, leo.</p>
                 <a style={selectedStyle}>5 instruments</a><a>1 instrument</a>
                 <ResultTile isLoading={false} downloadLink={""} fileName={"File 1"} hasResult={true}></ResultTile>
+                <a style={generateStyle}> Generate</a>
             </div>
         </>
     )

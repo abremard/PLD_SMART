@@ -328,6 +328,7 @@ h3 {
   border: solid white 3px;
   padding: 20px;
   margin-top: 5vh;
+  margin-bottom: 5vh;
   display: block;
   width: fit-content;
 }
