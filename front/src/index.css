@@ -283,3 +283,44 @@ h3 {
 .choose a:hover {
   background-color: #7038FF;
 }
+
+.scratch{
+  color:white;
+  text-align: left;
+  margin-top: 15vh;
+}
+
+.scratch p{
+  margin-left: 1vw;
+  font-size: 17px;
+  font-family: Regular;
+  padding: 0px;
+  margin-bottom: 30px;
+}
+
+.scratch h4{
+  color: #fff;
+  font-family: Semibold;
+  font-weight: normal;
+  font-size: 40px;
+  text-align: left;
+  margin-left: 1vw;
+  margin-bottom: 0px;
+  margin-top: 20px;
+  padding: 0px;
+}
+
+.scratch a {
+  color: white;
+  background-color: #7038FF;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+  font-family: Regular;
+  margin-left: 1vw;
+  margin-bottom: 0px;
+}
+
+.scratch a:hover {
+  background-color: #6EC3F4;
+}
