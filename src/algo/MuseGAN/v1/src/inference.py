@@ -161,6 +161,8 @@ def main():
                     use_random_transpose=config['use_random_transpose'])
                 feed_dict_sampler[placeholder_c] = np.expand_dims(
                     sample_x[..., params['condition_track_idx']], -1)
+            print("sampler_op", sampler_op)
+            print("feed_dict_sampler", feed_dict_sampler)
             sess.run(sampler_op, feed_dict=feed_dict_sampler)
 
 if __name__ == "__main__":
