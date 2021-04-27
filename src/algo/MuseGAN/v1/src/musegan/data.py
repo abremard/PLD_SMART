@@ -58,7 +58,7 @@ def set_label_shape(label):
 # --- Sampler ------------------------------------------------------------------
 def get_samples(n_samples, data, labels=None, use_random_transpose=False):
     """Return some random samples of the training data."""
-    indices = np.random.choice(len(data), n_samples, False)
+    indices = np.random.choice(len(data), n_samples, True)
     if np.issubdtype(data.dtype, np.bool_):
         sample_data = data[indices] * 2. - 1.
     else:
