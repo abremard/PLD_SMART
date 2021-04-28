@@ -66,7 +66,7 @@ export default class MatchComp extends Component{
                     <Link to="/studio">back to studio</Link>
                     <h4>Perfect Match</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet, dolor, varius lectus odio libero, leo.</p>
-                    <ResultTile isLoading={false} downloadLink={""} fileName={"File 1"} hasResult={true}></ResultTile>
+                    <ResultTile isLoading={true} downloadLink={""} fileName={"File 1"} hasResult={true}></ResultTile>
                     <h5>Upload your files</h5>
                     <div className="files">
                         {this.state.files.map(item => (
