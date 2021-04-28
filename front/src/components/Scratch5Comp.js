@@ -30,6 +30,7 @@ export default class Scratch5Comp extends Component{
             downloadLink: '',
             fileName: 'New Creation',
         }
+        this.generateFile = this.generateFile.bind(this);
     }
 
     generateFile() {
