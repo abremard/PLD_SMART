@@ -7,6 +7,7 @@ import together from '../images/together.png'
 import Navbar from "../components/navbar";
 import {Link} from "react-router-dom";
 import ResultTile from "../components/ResultTile";
+import Scratch5Comp from "../components/Scratch5Comp";
 
 export default function Scratch5() {
     const selectedStyle = {
@@ -21,14 +22,7 @@ export default function Scratch5() {
     return(
         <>
             <Navbar></Navbar>
-            <div className="scratch">
-                <Link to="/studio">back to studio</Link>
-                <h4>Make from Scratch</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet, dolor, varius lectus odio libero, leo.</p>
-                <a style={selectedStyle}>5 instruments</a><Link to="/scratch1">1 instrument</Link>
-                <ResultTile isLoading={false} downloadLink={""} fileName={"File 1"} hasResult={true}></ResultTile>
-                <a style={generateStyle}> Generate</a>
-            </div>
+            <Scratch5Comp></Scratch5Comp>
         </>
     )
 }
