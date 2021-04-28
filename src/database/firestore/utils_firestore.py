@@ -1,5 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
+import string
+from unidecode import unidecode
 
 # ----------- Initialize Firebase connexion
 # Use a service account
@@ -14,17 +16,46 @@ def add_entry(genre: str, artist: str, file_ref: str):
     the database.
 
     Args:
-        genre: The music's genre in the following format: 'genre_name'
-        artist: The track's artist in the following format: 'artist_name'
+        genre: The string representing the track's genre
+        artist: The track's artist
         file_ref: A string reference to the file in the Drive storage (format
                         to be defined)
 
     Returns: void
 
-    TODO handle nulls and incorrect entries (reformat/replace)
     """
+
+    if file_ref is None:
+        raise TypeError("Must provide a file_ref, provided None")
+
+    # format inputs for database storage
+    genre = "unknown" if genre is None else format_string(genre)
+    artist = "unknown" if artist is None else format_string(artist)
+
     _add_genre_artist(genre, artist, file_ref)
     _add_artist(artist, file_ref)
+
+
+def format_string(input_str: str):
+    """
+    Use this function to format an artist/a genre's string into the internal
+    format used in the database
+
+    Args:
+        input_str: The string to format
+
+    Returns: The formatted string
+
+    """
+
+    valid_chars = frozenset(f"-_ .!{string.ascii_letters}{string.digits}")
+    # replace accents
+    res = unidecode(input_str)
+    # keep only valid characters
+    res = ''.join(c for c in res if c in valid_chars)
+    # and replace spaces with _
+    res = res.replace(" ", "_")
+    return res
 
 
 # --- internal functions - to be called together for db consistency and not by
