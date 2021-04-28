@@ -1,3 +1,7 @@
+"""
+OLD midi upload script: now using google drive as a storage solution
+"""
+
 import firebase_admin
 from firebase_admin import credentials, firestore, storage
 
@@ -19,7 +23,7 @@ if __name__ == "__main__":
     # output file (path & name in Firebase Storage)
     blob = bucket.blob(f'MIDI/{firebase_file_name}')
 
-    local_file_path = './th07_05.mid'       # test
+    local_file_path = '../th07_05.mid'  # test
 
     with open(local_file_path, 'rb') as my_file:
         blob.upload_from_file(my_file)      # maybe add metadata ?

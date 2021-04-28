@@ -152,7 +152,7 @@ def main():
 
             hop_iter = np.random.randint(0, 1) + hop_size
             song_ok_segments.append(
-                Multitrack(tracks=best_instr, resolution=12)
+                Multitrack(tracks=best_instr, resolution=24)
             )
 
         count_ok_segment = len(song_ok_segments)
@@ -195,15 +195,15 @@ def main():
 
     result = np.concatenate(compiled_list, axis=0)
     print(f"output shape: {result.shape}")
-    if args.outfile.endswith(".npz"):
-        np.savez_compressed(
-            args.outfile,
-            nonzero=np.array(result.nonzero()),
-            shape=result.shape,
-        )
-    else:
-        np.save(args.outfile, result)
-    print(f"Successfully saved training data to : {args.outfile}")
+    # if args.outfile.endswith(".npz"):
+    np.savez_compressed(
+        args.output_filename,
+        nonzero=np.array(result.nonzero()),
+        shape=result.shape,
+    )
+    # else:
+        # np.save(args.outfile, result)
+    print(f"Successfully saved training data to : {args.output_filename}")
 
 
 if __name__ == "__main__":
