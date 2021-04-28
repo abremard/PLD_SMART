@@ -19,9 +19,8 @@ import rock from "../images/rock.png"
 import 'react-image-picker/dist/index.css'
 import FileTile from "./FileTile";
 import midi from "../images/midi.png";
-
-
-
+import ProgressButton from "react-progress-button";
+import '../button.css'
 
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
@@ -31,8 +30,14 @@ export default class MatchComp extends Component{
         super(props)
         this.state = {
             files: [],
+            buttonState: '',
+            isLoading: false,
+            hasResult:false,
+            downloadLink: '',
+            fileName: 'New Creation',
         }
         this.onDrop = this.onDrop.bind(this);
+        this.generateFile = this.generateFile.bind(this);
     }
 
     //todo to access contents of file, use API FileReader, see example in Dropzone documentation
@@ -46,6 +51,19 @@ export default class MatchComp extends Component{
         })
     }
 
+    generateFile() {
+        //call code to generate file and get download link
+        //wait until complete
+        //when complete
+        this.setState({
+            isLoading: true,
+            buttonState: 'loading',
+        });
+        //this.generateRandomMusicRequest()
+
+        //if impossible to use download links download file immediately, will remove download button from result tile...
+    }
+
     render() {
         const selectedStyle = {
             color: 'white',
@@ -56,17 +74,13 @@ export default class MatchComp extends Component{
         const generateStyle = {
             padding: '20px',
         };
-
-
-        console.log(this.state.filenames);
-
         return(
             <>
                 <div className="scratch">
                     <Link to="/studio">back to studio</Link>
                     <h4>Perfect Match</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet, dolor, varius lectus odio libero, leo.</p>
-                    <ResultTile isLoading={true} downloadLink={""} fileName={"File 1"} hasResult={true}></ResultTile>
+                    <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <h5>Upload your files</h5>
                     <div className="files">
                         {this.state.files.map(item => (
@@ -79,17 +93,19 @@ export default class MatchComp extends Component{
                                         <h4>Upload File</h4>
                                         <div className="zone">
                                             <input {...getInputProps()} />
-                                            <p>Drag 'n' drop some files here, or click to select files</p>
+                                            <p>Drag & drop some files here, or click to select files</p>
                                         </div>
                                     </div>
                                 </section>
                             )}
                         </Dropzone>
                     </div>
-
                     <h6><br/> </h6>
-                    <a style={generateStyle}> Generate</a>
+                    <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
+                        Generate
+                    </ProgressButton>
                     <h5> </h5>
+
                 </div>
             </>
         )

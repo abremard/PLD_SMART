@@ -79,9 +79,6 @@ export default class Scratch5Comp extends Component{
             border: 'solid white 1px',
             marginBottom: '100px',
         };
-        const generateStyle = {
-            padding: '20px',
-        };
         return(
             <>
                 <div className="toaster"><Toaster/></div>
@@ -94,7 +91,7 @@ export default class Scratch5Comp extends Component{
                     <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <p><br/></p>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
-                        Generate!
+                        Generate
                     </ProgressButton>
                 </div>
             </>

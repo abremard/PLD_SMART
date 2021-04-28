@@ -89,10 +89,6 @@ export default class Scratch1Comp extends Component{
             border: 'solid white 1px',
             marginBottom: '20px',
         };
-        const generateStyle = {
-            padding: '20px',
-        };
-
         return(
             <>
                 <div className="scratch">
@@ -132,7 +128,7 @@ export default class Scratch1Comp extends Component{
                     <input type="number" name="name" />
                     <h6><br/> </h6>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
-                        Generate!
+                        Generate
                     </ProgressButton>
                     <h5> </h5>
                 </div>
