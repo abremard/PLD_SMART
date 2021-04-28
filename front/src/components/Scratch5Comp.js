@@ -35,9 +35,7 @@ export default class Scratch5Comp extends Component{
 
     generateRandomMusicRequest = async (long) => {
         const url ='http://37ce43fd24b2.ngrok.io/api/v1/compose/polyphonic/musegan/v0'
-        this.setState({
-            isLoading: true,
-        });
+        
         fetch(url)
         .then( res => res.blob() )
         .then( blob => saveAs(blob, 'music.mid'))
@@ -52,6 +50,9 @@ export default class Scratch5Comp extends Component{
         //call code to generate file and get download link
         //wait until complete
         //when complete
+        this.setState({
+            isLoading: true,
+        });
         this.generateRandomMusicRequest()
         
         //if impossible to use download links download file immediately, will remove download button from result tile...
@@ -75,7 +76,9 @@ export default class Scratch5Comp extends Component{
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet, dolor, varius lectus odio libero, leo.</p>
                     <a style={selectedStyle}>5 instruments</a><Link to="/scratch1">1 instrument</Link>
                     <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
+                    {this.state.isLoading == false ?
                     <a style={generateStyle} onClick={this.generateFile}> Generate</a>
+     : 'Nothing'}
                 </div>
             </>
         )
