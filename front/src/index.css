@@ -362,6 +362,7 @@ h3 {
   padding: 20px;
   margin-top: 5vh;
   margin-bottom: 5vh;
+  margin-right: 1vw;
   display: block;
   width: fit-content;
 }
@@ -378,6 +379,7 @@ h3 {
   font-size: 25px;
   margin: 0px;
   margin-bottom: 5px;
+  vertical-align: middle;
 }
 
 .tile p{
@@ -385,6 +387,7 @@ h3 {
   font-size: 15px;
   margin: 0;
   margin-bottom: 20px;
+  vertical-align: middle;
 }
 
 .tile a{
@@ -392,8 +395,24 @@ h3 {
   vertical-align: middle;
 }
 
+.tile img{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 25px;
+}
+
 .metadata {
   display: inline-block;
   vertical-align: middle;
   padding-right: 10vw;
+}
+
+.files {
+  display: flex;
+}
+
+.zone {
+  border: white 2px;
+  border-style: dashed;
+  padding: 20px;
 }
