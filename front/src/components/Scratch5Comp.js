@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import ResultTile from "./ResultTile";
 import ImagePicker from "react-image-picker";
 import { Multiselect } from 'multiselect-react-dropdown';
-
+import { saveAs } from 'file-saver';
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
@@ -33,18 +33,27 @@ export default class Scratch5Comp extends Component{
         this.generateFile = this.generateFile.bind(this);
     }
 
-    generateFile() {
+    generateRandomMusicRequest = async (long) => {
+        const url ='http://37ce43fd24b2.ngrok.io/api/v1/compose/polyphonic/musegan/v0'
         this.setState({
             isLoading: true,
-        })
+        });
+        fetch(url)
+        .then( res => res.blob() )
+        .then( blob => saveAs(blob, 'music.mid'))
+        .then(() => {this.setState({
+            isLoading: false,
+            hasResult: true,
+            downloadLink: '' //insert download link...,
+        })})
+    }
+    generateFile() {
+        
         //call code to generate file and get download link
         //wait until complete
         //when complete
-        this.setState({
-            isLoading: false,
-            hasResult: true,
-            downloadLink: '' //insert download link...
-        })
+        this.generateRandomMusicRequest()
+        
         //if impossible to use download links download file immediately, will remove download button from result tile...
     }
 
