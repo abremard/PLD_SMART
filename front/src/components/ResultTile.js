@@ -2,8 +2,16 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import midi from "../images/midi.png"
 import { useLoading, Grid } from '@agney/react-loading';
+import { saveAs } from 'file-saver';
 
 export default function ResultTile({isLoading, hasResult, fileName, downloadLink}) {
+
+    const generateRandomMusicRequest = async (long) => {
+        const url ='http://ebc0deb791a2.ngrok.io/api/v1/compose/polyphonic/musegan/v0'
+        fetch(url)
+        .then( res => res.blob() )
+        .then( blob => saveAs(blob, 'music.mid'));
+    }
 
     const selectedStyle = {
         backgroundColor: '#6EC3F4',
