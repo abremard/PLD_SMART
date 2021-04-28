@@ -3,7 +3,10 @@ import {Link} from 'react-router-dom'
 import midi from "../images/midi.png"
 import { useLoading, Grid } from '@agney/react-loading';
 
+
 export default function ResultTile({isLoading, hasResult, fileName, downloadLink}) {
+
+    
 
     const selectedStyle = {
         backgroundColor: '#6EC3F4',
