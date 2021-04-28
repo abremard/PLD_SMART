@@ -8,12 +8,23 @@
 
 ## Database
 
+### Firestore
 Requirements to use Python scripts to edit the Firestore database (tested on Python 3.8):
  - copy the `cred.json` I sent you into `src/database/firestore/` (:warning: : NEVER commit this file on VCS, it contains credentials giving write access to the DB)
  - install the required modules : (requires pip to work):
  ```shell script
 > pip install firebase_admin unidecode
 ```
+
+### Metadata processing
+Requirements to use Python scripts wih Spotify's API (tested on Python 3.8):
+ - copy the `spotify_credentials.txt` I sent you into `src/database/metadata_processing/` (:warning: : NEVER commit this file on VCS, it contains out unique credentials)
+ - install the required modules : (requires pip to work):
+ ```shell script
+> pip install spotipy python-Levenshtein
+```
+:warning: `python-Levenshtein` requires Microsoft Visual C++ 14.0
+
 
 ## Algo
 
