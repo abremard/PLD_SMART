@@ -401,6 +401,11 @@ h3 {
   margin-right: 25px;
 }
 
+.checkmark {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .metadata {
   display: inline-block;
   vertical-align: middle;

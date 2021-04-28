@@ -5,7 +5,9 @@ import React, {Component} from 'react';
 import ResultTile from "./ResultTile";
 import ImagePicker from "react-image-picker";
 import { Multiselect } from 'multiselect-react-dropdown';
-
+import Tilt from 'react-parallax-tilt';
+import Lottie from 'react-lottie';
+import Dropzone from 'react-dropzone'
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
@@ -17,7 +19,8 @@ import rock from "../images/rock.png"
 import 'react-image-picker/dist/index.css'
 import FileTile from "./FileTile";
 import midi from "../images/midi.png";
-import Dropzone from 'react-dropzone'
+
+
 
 
 
@@ -62,6 +65,7 @@ export default class MatchComp extends Component{
             padding: '20px',
         };
 
+
         console.log(this.state.filenames);
 
         return(
@@ -89,10 +93,8 @@ export default class MatchComp extends Component{
                                 </section>
                             )}
                         </Dropzone>
-
-
-
                     </div>
+
                     <h6><br/> </h6>
                     <a style={generateStyle}> Generate</a>
                     <h5> </h5>

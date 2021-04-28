@@ -2,15 +2,24 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import midi from "../images/midi.png"
 import { useLoading, Grid } from '@agney/react-loading';
+import Tilt from "react-parallax-tilt";
+import Lottie from "react-lottie";
+import animationData from "../images/check.json";
 
 
 export default function ResultTile({isLoading, hasResult, fileName, downloadLink}) {
 
-    
-
     const selectedStyle = {
         backgroundColor: '#6EC3F4',
     }
+    const animationOptions = {
+        loop: false,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
+    };
 
     if (!isLoading) {
         if(hasResult) {
@@ -22,7 +31,16 @@ export default function ResultTile({isLoading, hasResult, fileName, downloadLink
                         <h5>{fileName}</h5>
                         <p>0:15</p>
                     </div>
-                    <a>Download .midi</a>
+                    <div className="checkmark">
+                        <Tilt className="parallax-effect" perspective={2000}>
+                            <Lottie
+                                options={animationOptions}
+                                height={80}
+                                width={80}
+                            />
+                        </Tilt>
+
+                    </div>
                 </div>
             )
         } else {
@@ -40,12 +58,16 @@ export default function ResultTile({isLoading, hasResult, fileName, downloadLink
         //loading animation
         return(
             <div className="tile" style={selectedStyle}>
-            <h4>Result</h4>
-            <div className="metadata">
-                <h5>Generating...</h5>
+                <h4>Result</h4>
+                <div className="metadata">
+                    <h5>Generating...</h5>
+                </div>
+                <div className="checkmark">
+                    <Tilt className="parallax-effect" perspective={2000}>
+                        <Grid width="60"/>
+                    </Tilt>
+                </div>
             </div>
-            <Grid width="60"/>
-        </div>
         )
     }
 }
