@@ -4,8 +4,14 @@ venv
 # MUST remain on your computers ONLY (write access to DB!)
 src/database/firestore/cred.json
 src/database/client_secrets.json
+/src/database/metadata_processing/spotify_credentials.txt
+
 front/yarn.lock
 front/package-lock.json
 
 # python stuff
 *.pyc
+
+# Misc
+/src/database/metadata_processing/.cache
+src/database/metadata_processing/output_spotipy.json
