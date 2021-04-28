@@ -1,5 +1,5 @@
 from database.firestore.utils_firestore import *
 
 # tests
-addGenre("rock", "test")
-addGenre("game_music", "megalovania")
+add_entry("rock", "acdc", "test_entry")
+add_entry("game_music", "toby_fox", "megalovania")

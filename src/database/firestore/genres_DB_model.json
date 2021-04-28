@@ -1,0 +1,21 @@
+{
+  "comment": "----- Data model of the Genres document, files are sorted by genre then artist -----",
+
+  "rock": {
+    "acdc": [
+      "highway_to_hell.mid",
+      "hells_bells.mid"
+    ],
+    "the_beatles": [
+      "hey_jude.mid",
+      "lucy_in_the_sky.mid"
+    ]
+  },
+
+  "symphonic_metal": {
+    "nightwish": [
+      "the_greatest_show_on_earth.mid",
+      "the_islander.mid"
+    ]
+  }
+}

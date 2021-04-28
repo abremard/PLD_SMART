@@ -9,7 +9,7 @@
 ## Database
 
 Requirements to use Python scripts to edit the Firestore database (tested on Python 3.8):
- - copy `cred.json` into `src/database/` (:warning: : NEVER commit this file on VCS, it contains credentials giving write access to the DB)
+ - copy the `cred.json` I sent you into `src/database/firestore/` (:warning: : NEVER commit this file on VCS, it contains credentials giving write access to the DB)
  - install the required modules : (requires pip to work):
  ```shell script
 > pip install firebase_admin
