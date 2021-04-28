@@ -17,6 +17,8 @@ import rock from "../images/rock.png"
 import 'react-image-picker/dist/index.css'
 import Navbar from "./navbar";
 import {toast, Toaster} from "react-hot-toast";
+import ProgressButton from "react-progress-button";
+import '../button.css'
 
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
@@ -30,6 +32,7 @@ export default class Scratch5Comp extends Component{
             hasResult:false,
             downloadLink: '',
             fileName: 'New Creation',
+            buttonState: ''
         }
         this.generateFile = this.generateFile.bind(this);
     }
@@ -42,12 +45,14 @@ export default class Scratch5Comp extends Component{
         .then( blob => saveAs(blob, 'music.mid'))
         .then(() => {this.setState({
             isLoading: false,
+            buttonState: 'success',
             hasResult: true,
             downloadLink: '' //insert download link...,
         })}).catch(() => {
                 toast.error("Something went wrong. Please try again later");
                 this.setState({
                     isLoading: false,
+                    buttonState: 'error',
                     hasResult: false,
                 });
             }
@@ -60,6 +65,7 @@ export default class Scratch5Comp extends Component{
         //when complete
         this.setState({
             isLoading: true,
+            buttonState: 'loading',
         });
         this.generateRandomMusicRequest()
         
@@ -87,12 +93,16 @@ export default class Scratch5Comp extends Component{
                     <p><br/></p>
                     <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <p><br/></p>
-                    {this.state.isLoading == false ?
-                    <a style={generateStyle} onClick={this.generateFile}> Generate</a>
-                    : <p>Please wait... this can take a minute</p>}
+                    <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
+                        Generate!
+                    </ProgressButton>
                 </div>
             </>
         )
 
     }
 }
+
+//{this.state.isLoading == false ?
+//                     <a style={generateStyle} onClick={this.generateFile}> Generate</a>
+//                     : <p>Please wait... this can take a minute</p>}
