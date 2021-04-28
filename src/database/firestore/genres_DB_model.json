@@ -1,5 +1,6 @@
 {
   "comment": "----- Data model of the Genres document, files are sorted by genre then artist -----",
+  "TODO_comment": "TODO: maybe add a selection of a few tracks for each genre",
 
   "rock": {
     "acdc": [
