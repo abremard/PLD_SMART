@@ -5,6 +5,7 @@ import switchimg from '../images/switch.png'
 import match from '../images/match.png'
 import together from '../images/together.png'
 import Navbar from "../components/navbar";
+import {Link} from "react-router-dom";
 
 export default function StudioMenu() {
     return(
@@ -20,7 +21,7 @@ export default function StudioMenu() {
                                     quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat,
                                     cras amet, dolor, varius lectus odio libero, leo. Ultrices tristique ullamcorper
                                     fermentum lacus diam proin sagittis, ac.</p>
-                                <a href="">Let's Go!</a>
+                                <Link to="/scratch5">Let's Go!</Link>
                         </td>
                         <td>
                             <img src={together}/>

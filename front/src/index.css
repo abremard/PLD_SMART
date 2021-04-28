@@ -196,7 +196,8 @@ h3 {
 .appbar {
   padding-top: 20px;
   padding-left: 30px;
-  background: rgba(0, 0, 0, 0.7);
+  padding-bottom: 5px;
+  background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(30px);
   position: fixed; /* Set the navbar to fixed position */
   overflow: hidden;
@@ -316,7 +317,7 @@ h3 {
   font-size: 25px;
   text-align: left;
   margin-bottom: 0px;
-  margin-top: 65px;
+  margin-top: 45px;
   padding: 0px;
 }
 
