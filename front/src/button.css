@@ -64,7 +64,7 @@
 .pb-container.loading .pb-button {
   width: 54px;
   border-radius: 30px;
-  border-width: 6.5px;
+  border-width: 0px;
   border-color: #ddd;
   cursor: wait;
   background-color: transparent;

@@ -16,6 +16,7 @@ import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
 import 'react-image-picker/dist/index.css'
 import FileTile from "./FileTile";
+import ProgressButton from "react-progress-button";
 
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
@@ -29,8 +30,14 @@ export default class Scratch1Comp extends Component{
             selectedArtists: null,
             instrumentOptions: [{name: 'Guitar', id: 1},{name: 'Piano', id: 2},{name: 'Drums', id: 3},{name: 'Keyboard', id: 4}],
             selectedInstruments: null,
+            buttonState: '',
+            isLoading: false,
+            hasResult:false,
+            downloadLink: '',
+            fileName: 'New Creation',
         }
-        this.onPick = this.onPick.bind(this)
+        this.onPick = this.onPick.bind(this);
+        this.generateFile = this.generateFile.bind(this);
     }
 
     onPick(image) {
@@ -61,6 +68,20 @@ export default class Scratch1Comp extends Component{
         })
     }
 
+    generateFile() {
+
+        //call code to generate file and get download link
+        //wait until complete
+        //when complete
+        this.setState({
+            isLoading: true,
+            buttonState: 'loading',
+        });
+        //this.generateRandomMusicRequest()
+
+        //if impossible to use download links download file immediately, will remove download button from result tile...
+    }
+
     render() {
         const selectedStyle = {
             color: 'white',
@@ -79,7 +100,8 @@ export default class Scratch1Comp extends Component{
                     <h4>Make from Scratch</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet, dolor, varius lectus odio libero, leo.</p>
                     <Link to="/scratch5">5 instruments</Link><a style={selectedStyle}>1 instrument</a>
-                    <ResultTile isLoading={false} downloadLink={""} fileName={"File 1"} hasResult={true}></ResultTile>
+                    <p><br/></p>
+                    <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <h5>Options</h5>
                     <h6>Choose your style</h6>
                     <ImagePicker
@@ -109,7 +131,9 @@ export default class Scratch1Comp extends Component{
                     <h6>Maximum Length</h6>
                     <input type="number" name="name" />
                     <h6><br/> </h6>
-                    <a style={generateStyle}> Generate</a>
+                    <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
+                        Generate!
+                    </ProgressButton>
                     <h5> </h5>
                 </div>
             </>
