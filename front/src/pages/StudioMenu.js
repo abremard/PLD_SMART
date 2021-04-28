@@ -37,7 +37,7 @@ export default function StudioMenu() {
                                     quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat,
                                     cras amet, dolor, varius lectus odio libero, leo. Ultrices tristique ullamcorper
                                     fermentum lacus diam proin sagittis, ac.</p>
-                                <a href="">Let's Go!</a>
+                                <Link to="/match">Let's Go!</Link>
                         </td>
                         <td>
                             <img src={switchimg}/>

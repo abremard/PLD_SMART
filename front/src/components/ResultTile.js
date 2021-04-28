@@ -29,7 +29,7 @@ export default function ResultTile({isLoading, hasResult, fileName, downloadLink
                     <h4>Result</h4>
                     <div className="metadata">
                         <h5>{fileName}</h5>
-                        <p>0:15</p>
+                        <p>Your file is downloading now...</p>
                     </div>
                     <div className="checkmark">
                         <Tilt className="parallax-effect" perspective={2000}>

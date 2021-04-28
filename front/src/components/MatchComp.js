@@ -30,7 +30,6 @@ export default class MatchComp extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            filenames: [],
             files: [],
         }
         this.onDrop = this.onDrop.bind(this);
@@ -40,15 +39,8 @@ export default class MatchComp extends Component{
     //new browser privacy settings prevent getting the full file path of the files
     onDrop(acceptedFiles){
         console.log(acceptedFiles);
-        const listName = this.state.filenames;
-        acceptedFiles.forEach(item => {
-            const name = item.name;
-            //todo CHECK TYPE
-            listName.push(name);
-        })
         this.setState(state => {
             return {
-                filenames: listName,
                 files: acceptedFiles,
             };
         })
@@ -77,8 +69,8 @@ export default class MatchComp extends Component{
                     <ResultTile isLoading={false} downloadLink={""} fileName={"File 1"} hasResult={true}></ResultTile>
                     <h5>Upload your files</h5>
                     <div className="files">
-                        {this.state.filenames.map(item => (
-                            <FileTile fileName={item} downloadLink={""}></FileTile>
+                        {this.state.files.map(item => (
+                            <FileTile fileName={item.name} downloadLink={""}></FileTile>
                         ))}
                         <Dropzone onDrop={this.onDrop}>
                             {({getRootProps, getInputProps}) => (
