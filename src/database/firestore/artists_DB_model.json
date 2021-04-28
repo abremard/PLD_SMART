@@ -1,0 +1,19 @@
+{
+  "comment": "----- Data model of the Artists document, files are sorted by artist only -----",
+  "comment_TODO": "TODO: possibly add each artists's genre here?",
+
+  "acdc": [
+    "highway_to_hell.mid",
+    "hells_bells.mid"
+  ],
+
+  "the_beatles": [
+    "hey_jude.mid",
+    "lucy_in_the_sky.mid"
+  ],
+
+  "nightwish": [
+    "the_greatest_show_on_earth.mid",
+    "the_islander.mid"
+  ]
+}

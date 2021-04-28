@@ -1,3 +1,7 @@
+"""
+OLD midi upload script: now using google drive as a storage solution
+"""
+
 import firebase_admin
 from firebase_admin import credentials, firestore, storage
 
