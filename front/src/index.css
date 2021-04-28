@@ -309,6 +309,38 @@ h3 {
   padding: 0px;
 }
 
+.scratch h5{
+  color: #fff;
+  font-family: Semibold;
+  font-weight: normal;
+  font-size: 25px;
+  text-align: left;
+  margin-bottom: 0px;
+  margin-top: 65px;
+  padding: 0px;
+}
+
+.scratch h6{
+  color: #fff;
+  font-family: Semibold;
+  font-weight: normal;
+  font-size: 18px;
+  text-align: left;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  padding: 0px;
+}
+
+.scratch input{
+  background-color: black;
+  font-family: Regular;
+  font-size: 18px;
+  margin-bottom: 0px;
+  border: solid white 2px;
+  height: 35px;
+  color: white;
+}
+
 .scratch a {
   color: white;
   background-color: #7038FF;
