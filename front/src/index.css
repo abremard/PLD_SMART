@@ -360,8 +360,8 @@ h3 {
 .tile{
   border: solid white 3px;
   padding: 20px;
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  margin-top: 2vh;
+  margin-bottom: 0vh;
   margin-right: 1vw;
   display: block;
   width: fit-content;
@@ -409,10 +409,15 @@ h3 {
 
 .files {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .zone {
   border: white 2px;
   border-style: dashed;
   padding: 20px;
+}
+
+.toaster {
+  font-family: Regular;
 }

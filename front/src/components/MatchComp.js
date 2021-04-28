@@ -28,25 +28,25 @@ export default class MatchComp extends Component{
         super(props)
         this.state = {
             filenames: [],
-            filepaths: []
+            files: [],
         }
         this.onDrop = this.onDrop.bind(this);
     }
 
+    //todo to access contents of file, use API FileReader, see example in Dropzone documentation
+    //new browser privacy settings prevent getting the full file path of the files
     onDrop(acceptedFiles){
         console.log(acceptedFiles);
         const listName = this.state.filenames;
-        const listPath = this.state.filepaths;
         acceptedFiles.forEach(item => {
             const name = item.name;
             //todo CHECK TYPE
             listName.push(name);
-            listPath.push(item.path);
         })
         this.setState(state => {
             return {
                 filenames: listName,
-                filepaths: listPath,
+                files: acceptedFiles,
             };
         })
     }
