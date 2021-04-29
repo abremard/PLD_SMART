@@ -94,7 +94,9 @@ export default class Scratch1Comp extends Component{
                 <div className="scratch">
                     <Link to="/studio">back to studio</Link>
                     <h4>Make from Scratch</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet, dolor, varius lectus odio libero, leo.</p>
+                    <p>Create a completely new musical piece with one or multiple instruments. Choose
+                        between multiple musical styles, artists of inspiration, and types of instruments
+                        to make every unique piece your own. Uses the MuseGAN and LSTM algorithms.</p>
                     <Link to="/scratch5">5 instruments</Link><a style={selectedStyle}>1 instrument</a>
                     <p><br/></p>
                     <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>

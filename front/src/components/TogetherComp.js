@@ -103,8 +103,13 @@ export default class TogetherComp extends Component{
                 <div className="scratch">
                     <Link to="/studio">back to studio</Link>
                     <h4>Bring Together</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet, dolor, varius lectus odio libero, leo.</p>
-                    <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
+                    <p>Bring your favorite two musical pieces together. Upload two midi files and our
+                        algorithm will interpolate and create two original mash-ups of your uploaded music. Choose
+                        the length and the balance of your mashup for the perfect result.</p>
+                    <div className="files">
+                        <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={"File 1 into File 2"} hasResult={this.state.hasResult}></ResultTile>
+                        <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={"File 2 into File 1"} hasResult={this.state.hasResult}></ResultTile>
+                    </div>
                     <h5>Upload your files</h5>
                     <div className="files">
                         {this.state.files.map(item => (

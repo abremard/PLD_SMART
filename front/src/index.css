@@ -240,11 +240,12 @@ h3 {
 .choose{
   color:white;
   text-align: left;
-  margin-top: 20vh;
+  margin-top: 15vh;
 }
 
 .choose table{
   border-spacing: 20px;
+  height: 50vh;
 }
 
 .choose td{
@@ -269,6 +270,7 @@ h3 {
   font-size: 40px;
   text-align: left;
   margin-left: 1vw;
+  margin-bottom: 0px;
 }
 
 .choose a {

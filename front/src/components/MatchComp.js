@@ -86,7 +86,9 @@ export default class MatchComp extends Component{
                 <div className="scratch">
                     <Link to="/studio">back to studio</Link>
                     <h4>Perfect Match</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet, dolor, varius lectus odio libero, leo.</p>
+                    <p>Create a completely new musical piece using your own favorite sounds as the inspiration.
+                        Upload up to 10 midi files of your choosing - any style, any artist, any instrument. Ilolio
+                        will create a brand new midi file inspired by your uploads. Uses the LSTM algorithm.</p>
                     <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <h5>Upload your files</h5>
                     <div className="files">
