@@ -21,6 +21,7 @@ import FileTile from "./FileTile";
 import midi from "../images/midi.png";
 import ProgressButton from "react-progress-button";
 import '../button.css'
+import {toast, Toaster} from "react-hot-toast";
 
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
@@ -59,6 +60,19 @@ export default class MatchComp extends Component{
     }
 
     generateFile() {
+        //get files with FileReader API as blobs
+        this.state.files.forEach((file) => {
+            const reader = new FileReader();
+            reader.onabort = () => toast.error("file reading was aborted");
+            reader.onerror = () => toast.error('file reading has failed')
+            reader.onload = () => {
+                // Do whatever you want with the file contents
+                //more on https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+                const binaryStr = reader.result
+                console.log(binaryStr)
+            }
+            reader.readAsArrayBuffer(file)
+        })
         //call code to generate file and get download link
         //wait until complete
         //when complete
@@ -83,6 +97,7 @@ export default class MatchComp extends Component{
         };
         return(
             <>
+                <div className="toaster"><Toaster/></div>
                 <div className="scratch">
                     <Link to="/studio">back to studio</Link>
                     <h4>Perfect Match</h4>
