@@ -23,6 +23,7 @@ import FileTile from "./FileTile";
 import midi from "../images/midi.png";
 import ProgressButton from "react-progress-button";
 import '../button.css'
+import {toast} from "react-hot-toast";
 
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
@@ -37,9 +38,13 @@ export default class TogetherComp extends Component{
             hasResult:false,
             downloadLink: '',
             fileName: 'New Creation',
+            length: 50,
+            balance: 50
         }
         this.onDrop = this.onDrop.bind(this);
         this.generateFile = this.generateFile.bind(this);
+        this.onChangeLength = this.onChangeLength.bind(this);
+        this.onChangeBalance = this.onChangeBalance.bind(this);
     }
 
     //todo to access contents of file, use API FileReader, see example in Dropzone documentation
@@ -61,6 +66,19 @@ export default class TogetherComp extends Component{
     }
 
     generateFile() {
+        //get files
+        this.state.files.forEach((file) => {
+            const reader = new FileReader();
+            reader.onabort = () => toast.error("file reading was aborted");
+            reader.onerror = () => toast.error('file reading has failed')
+            reader.onload = () => {
+                // Do whatever you want with the file contents
+                //more on https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+                const binaryStr = reader.result
+                console.log(binaryStr)
+            }
+            reader.readAsArrayBuffer(file)
+        })
         //call code to generate file and get download link
         //wait until complete
         //when complete
@@ -71,6 +89,17 @@ export default class TogetherComp extends Component{
         //this.generateRandomMusicRequest()
 
         //if impossible to use download links download file immediately, will remove download button from result tile...
+    }
+
+    onChangeLength(value) {
+        this.setState({
+            length: value
+        })
+    }
+    onChangeBalance(value) {
+        this.setState({
+            balance: value
+        })
     }
 
     render() {
@@ -133,9 +162,9 @@ export default class TogetherComp extends Component{
                     </div>
                     <h5>Options</h5>
                     <h6>Length</h6>
-                    <Slider min={0} max={500} defaultValue={50} handle={handle} step={10} />
+                    <Slider min={0} max={500} defaultValue={50} handle={handle} step={10} onChange={this.onChangeLength} />
                     <h6>Balance of Mix</h6>
-                    <Slider min={0} max={100} defaultValue={50} handle={handle} step={10} />
+                    <Slider min={0} max={100} defaultValue={50} handle={handle} step={10} onChange={this.onChangeBalance}/>
                     <h6><br/> </h6>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate
