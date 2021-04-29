@@ -76,10 +76,10 @@ def generate(
 
     # TODO : process input params
 
-    chords_noise = np.random.normal(0, 1, (1, gan.z_dim))
-    style_noise = np.random.normal(0, 1, (1, gan.z_dim))
-    melody_noise = np.random.normal(0, 1, (1, gan.n_tracks, gan.z_dim))
-    groove_noise = np.random.normal(0, 1, (1, gan.n_tracks, gan.z_dim))
+    chords_noise = np.random.normal(0, 10, (1, gan.z_dim))
+    style_noise = np.random.normal(0, 10, (1, gan.z_dim))
+    melody_noise = np.random.normal(0, 10, (1, gan.n_tracks, gan.z_dim))
+    groove_noise = np.random.normal(0, 10, (1, gan.n_tracks, gan.z_dim))
     
     if chords is not None :
         chords_noise = chords * np.ones((1, gan.z_dim))
