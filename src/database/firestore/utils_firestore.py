@@ -53,6 +53,8 @@ def format_string(input_str: str):
     res = unidecode(input_str)
     # keep only valid characters
     res = ''.join(c for c in res if c in valid_chars)
+    # lowercase only
+    res = res.lower()
     # and replace spaces with _
     res = res.replace(" ", "_")
     return res
