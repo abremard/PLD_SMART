@@ -8,6 +8,8 @@ import { Multiselect } from 'multiselect-react-dropdown';
 import Tilt from 'react-parallax-tilt';
 import Lottie from 'react-lottie';
 import Dropzone from 'react-dropzone'
+import Slider, {Handle, SliderTooltip} from 'rc-slider';
+import '../slider.css';
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
@@ -25,7 +27,7 @@ import '../button.css'
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
 
-export default class MatchComp extends Component{
+export default class TogetherComp extends Component{
     constructor(props) {
         super(props)
         this.state = {
@@ -46,7 +48,7 @@ export default class MatchComp extends Component{
         console.log(acceptedFiles);
         var filesTemp = this.state.files;
         acceptedFiles.forEach(item => {
-            if (filesTemp.length<10) {
+            if (filesTemp.length<2) {
                 filesTemp.push(item);
             }
         });
@@ -72,6 +74,21 @@ export default class MatchComp extends Component{
     }
 
     render() {
+        const handle = props => {
+            const { value, dragging, index, ...restProps } = props;
+            return (
+                <SliderTooltip
+                    prefixCls="rc-slider-tooltip"
+                    overlay={`${value}`}
+                    visible={dragging}
+                    placement="top"
+                    key={index}
+                >
+                    <Handle value={value} {...restProps} />
+                </SliderTooltip>
+            );
+        };
+
         const selectedStyle = {
             color: 'white',
             backgroundColor: 'black',
@@ -85,7 +102,7 @@ export default class MatchComp extends Component{
             <>
                 <div className="scratch">
                     <Link to="/studio">back to studio</Link>
-                    <h4>Perfect Match</h4>
+                    <h4>Bring Together</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet, dolor, varius lectus odio libero, leo.</p>
                     <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <h5>Upload your files</h5>
@@ -93,20 +110,27 @@ export default class MatchComp extends Component{
                         {this.state.files.map(item => (
                             <FileTile fileName={item.name} downloadLink={""}></FileTile>
                         ))}
-                        <Dropzone onDrop={this.onDrop}>
-                            {({getRootProps, getInputProps}) => (
-                                <section>
-                                    <div className="tile" {...getRootProps()}>
-                                        <h4>Upload File</h4>
-                                        <div className="zone">
-                                            <input {...getInputProps()} />
-                                            <p>Drag & drop some files here, or click to select files</p>
+                        {this.state.files.length == 2 ?
+                            <p></p>
+                            : <Dropzone onDrop={this.onDrop}>
+                                {({getRootProps, getInputProps}) => (
+                                    <section>
+                                        <div className="tile" {...getRootProps()}>
+                                            <h4>Upload File</h4>
+                                            <div className="zone">
+                                                <input {...getInputProps()} />
+                                                <p>Drag & drop up your 2 files here, or click to select files</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </section>
-                            )}
-                        </Dropzone>
+                                    </section>
+                                )}
+                            </Dropzone>}
                     </div>
+                    <h5>Options</h5>
+                    <h6>Length</h6>
+                    <Slider min={0} max={500} defaultValue={50} handle={handle} step={10} />
+                    <h6>Balance of Mix</h6>
+                    <Slider min={0} max={100} defaultValue={50} handle={handle} step={10} />
                     <h6><br/> </h6>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate

@@ -7,6 +7,7 @@ import StudioMenu from "./pages/StudioMenu";
 import Scratch5 from "./pages/Scratch5";
 import Scratch1 from "./pages/Scratch1";
 import Match from "./pages/Match";
+import Together from "./pages/Together";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/scratch5" component={Scratch5}/>
         <Route exact path="/scratch1" component={Scratch1}/>
         <Route exact path="/match" component={Match}/>
+        <Route exact path="/together" component={Together}/>
       </Switch>
     </>
   );
