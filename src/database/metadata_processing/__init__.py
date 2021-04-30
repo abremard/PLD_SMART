@@ -5,6 +5,7 @@ from database.metadata_processing.sort_functions import *
 def main():
 
     # --- spotify test
+    init_spotify_connexion()
     print(get_artist_genre("the hu"))
 
     # --- chanian's test

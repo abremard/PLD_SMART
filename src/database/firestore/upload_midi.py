@@ -32,14 +32,11 @@ def upload_midi_file(local_file_path: str, firebase_file_name: str, verbose=Fals
 
 if __name__ == "__main__":
 
+    init_firebase_connexion()
     # test
-    test_firebase_file_name = "diao_ye_zong.mid"
+    test_firebase_file_name = "freedom_dive.mid"
 
-    # output file (path & name in Firebase Storage)
-    test_blob = bucket.blob(f'MIDI/{test_firebase_file_name}')
+    dirname = os.path.dirname(__file__)
+    test_local_path = os.path.join(dirname, '../test_data/Freedom Dive.mid')
 
-    test_local_file_path = '../th07_05.mid'  # test
-
-    with open(test_local_file_path, 'rb') as my_file:
-        test_blob.upload_from_file(my_file)      # maybe add metadata ?
-        print(f"file {test_local_file_path} uploaded")
+    upload_midi_file(test_local_path, test_firebase_file_name)
