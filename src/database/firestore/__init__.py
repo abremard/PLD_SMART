@@ -3,9 +3,13 @@ TODO:
     - add a Songs collection to access metadata for a given file
 """
 from database.firestore.utils_firestore import *
+from database.firestore.upload_midi import *
+from database.firestore.db_postprocessing import *
 
 
 def main():
+    init_firebase_connexion()
+
     # ----- tests
     # reset_database()
     # add_entry("Highway_to_Hell.mid", "Rock", "AC/DC", "Guitar")

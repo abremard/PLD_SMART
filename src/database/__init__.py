@@ -35,14 +35,35 @@ def rename_files_in_dir(directory_path: str):
 
 
 def upload_files_from_dir(directory_path: str):
-    rename_files_in_dir(directory_path)
+
+    directory = os.path.dirname(directory_path)
+    # rename files to a correct format
+    print(f"Renaming files in {directory}")
+    # rename_files_in_dir(directory_path)       # todo uncomment when ok
+
+    # file by file, upload its metadata & the file itself
+    for dirpath, subdirs, files in os.walk(directory):
+        for filename in files:
+            file_path = os.path.join(dirpath, filename)
+            print(f"Uploading file from {file_path}")
+            # upload_midi_file(local_file_path=file_path)   # todo uncomment when ok
 
 
 def main():
-    upload_files_from_dir(sys.argv[1])
-    pass
+    # init_firebase_connexion()     # todo uncomment when ready
+
+    if len(sys.argv) > 1:
+        input_path = sys.argv[1]
+        if input_path[-1] != "/":
+            input_path += "/"
+
+        dirname = os.path.dirname(__file__)
+        dir = os.path.join(dirname, input_path)
+        upload_files_from_dir(dir)
+
+    else:
+        raise Exception("No input provided: please provide the path to the directory you wish to process")
 
 
 if __name__ == '__main__':
-    # main()
-    get_formatted_file_path("abc.mid")
+    main()

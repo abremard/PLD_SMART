@@ -16,3 +16,4 @@ front/package-lock.json
 /src/database/metadata_processing/.cache
 src/database/metadata_processing/output_spotipy.json
 front/src/database/firestore/cred.json
+*.mid

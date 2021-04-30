@@ -3,14 +3,22 @@ from firebase_admin import credentials, firestore
 import string
 from unidecode import unidecode
 import os
+import sys
 
-# ----------- Initialize Firebase connexion
-dirname = os.path.dirname(__file__)
-credentials_file = os.path.join(dirname, './cred.json')
 
-cred = credentials.Certificate(credentials_file)
-firebase_admin.initialize_app(cred)
-db = firestore.client()
+def init_firebase_connexion(verbose=True):
+    print("Initializing Firebase connexion...", file=sys.stderr)
+    # ----------- Initialize Firebase connexion
+    dirname = os.path.dirname(__file__)
+    credentials_file = os.path.join(dirname, './cred.json')
+
+    cred = credentials.Certificate(credentials_file)
+    firebase_admin.initialize_app(cred, {
+        'storageBucket': 'ilolio.appspot.com'       # default bucket, maybe change for a custom bucket later
+    })
+    db = firestore.client()
+    if verbose:
+        print("Firebase connexion successfully initiated.", file=sys.stderr)
 
 
 def add_entry(file_ref: str, genre: str, artist: str, *instruments: str):

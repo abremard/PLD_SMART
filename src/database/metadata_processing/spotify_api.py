@@ -4,23 +4,30 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import json
 import os
 
+global sp
+sp = None
 
-dirname = os.path.dirname(__file__)
-spotify_credentials_path = os.path.join(dirname, './spotify_credentials.txt')
 
-with open(spotify_credentials_path, 'r') as credentials_file:
-    # parse credentials from the credentials file
-    client_id = credentials_file.readline().strip()
-    client_secret = credentials_file.readline().strip()
+def init_spotify_connexion(verbose=True):
+    dirname = os.path.dirname(__file__)
+    spotify_credentials_path = os.path.join(dirname, './spotify_credentials.txt')
 
-    # authenticate on Spotify
-    auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
-    sp = spotipy.Spotify(auth_manager=auth_manager)
-    print("Connected to Spotify API endpoint", file=sys.stderr)
+    with open(spotify_credentials_path, 'r') as credentials_file:
+        # parse credentials from the credentials file
+        client_id = credentials_file.readline().strip()
+        client_secret = credentials_file.readline().strip()
+
+        # authenticate on Spotify
+        auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
+        global sp
+        sp = spotipy.Spotify(auth_manager=auth_manager)
+        if verbose:
+            print("Connected to Spotify API endpoint", file=sys.stderr)
 
 
 def get_artist_genre(input_artist: str, verbose=False) -> str:
 
+    global sp
     """
     TODO replace _ with spaces ?
     Args:
@@ -30,6 +37,9 @@ def get_artist_genre(input_artist: str, verbose=False) -> str:
     Returns: The artist's first genre as a string
 
     """
+
+    if sp is None:
+        raise Exception("Spotify connexion not initialized. Please use init_spotify_connexion before caling this function.")
 
     results = sp.search(q='artist:' + input_artist, type='artist')
     artists = results['artists']['items']
