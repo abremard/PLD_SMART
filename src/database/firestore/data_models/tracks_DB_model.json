@@ -1,0 +1,18 @@
+{
+  "freedom_dive.mid" : {
+    "artist": "Xi",
+    "genre": "AAAAA",
+    "instruments": [
+      "piano",
+      "drums"
+    ]
+  },
+  "highway_to_hell.mid": {
+    "artist": "ACDC",
+    "genre": "rock",
+    "instruments": [
+      "guitar",
+      "drums"
+    ]
+  }
+}

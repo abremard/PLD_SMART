@@ -4,7 +4,6 @@ Script for uploading MIDI files in Firebase
 TODO:
     - bulk read a folder, recursively or not, then preprocess metadata & file
     names, then upload them
-    - firestore: maybe add a Songs collection to access metadata for a give file
     - add an upload & transfer limit check, don't upload if there's no more
      credit (or not much)
 """
