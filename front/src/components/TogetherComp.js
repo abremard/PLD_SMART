@@ -98,7 +98,7 @@ export default class TogetherComp extends Component{
     }
     onChangeBalance(value) {
         this.setState({
-            balance: value
+            balance : value
         })
     }
 
