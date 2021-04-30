@@ -1,6 +1,7 @@
 import logo from '../images/logowhite.png'
 import {Link} from 'react-router-dom';
 
+import { database } from 'firebase/firebase';
 import React, {Component} from 'react';
 import ResultTile from "./ResultTile";
 import ImagePicker from "react-image-picker";
@@ -26,6 +27,11 @@ import {toast, Toaster} from "react-hot-toast";
 
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
+const admin = require('firebase-admin');
+const serviceAccount = require('../database/firestore/cred.json');
+
+
+
 
 export default class MatchComp extends Component{
     constructor(props) {
@@ -84,7 +90,29 @@ export default class MatchComp extends Component{
             buttonState: 'loading',
         });
 
-        fetch(`http://ca7860ba1211.ngrok.io/api/v1/compose/monophonic/lstm/v0?length=200&nb_files=${(fileindex)}`, {
+        admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount)
+          });
+          
+        const database = admin.firestore();
+        const docRef = database.collection('ids').doc('serverid');
+        docRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+            const dataretrieved = JSON.stringify(doc.data);
+            console.log("dataretrieved");
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+
+        
+
+
+        fetch(`http://aa41a02e41fb.ngrok.io/api/v1/compose/monophonic/lstm/v0?length=200&nb_files=${(fileindex)}`, {
             // content-type header should not be specified!
             method: 'POST',
             body: formData,
