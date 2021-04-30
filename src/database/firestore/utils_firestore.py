@@ -2,10 +2,13 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 import string
 from unidecode import unidecode
+import os
 
 # ----------- Initialize Firebase connexion
-# Use a service account
-cred = credentials.Certificate("./cred.json")
+dirname = os.path.dirname(__file__)
+credentials_file = os.path.join(dirname, './cred.json')
+
+cred = credentials.Certificate(credentials_file)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 

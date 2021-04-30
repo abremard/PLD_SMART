@@ -2,8 +2,13 @@ import sys
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import json
+import os
 
-with open("./spotify_credentials.txt", 'r') as credentials_file:
+
+dirname = os.path.dirname(__file__)
+spotify_credentials_path = os.path.join(dirname, './spotify_credentials.txt')
+
+with open(spotify_credentials_path, 'r') as credentials_file:
     # parse credentials from the credentials file
     client_id = credentials_file.readline().strip()
     client_secret = credentials_file.readline().strip()
@@ -11,7 +16,7 @@ with open("./spotify_credentials.txt", 'r') as credentials_file:
     # authenticate on Spotify
     auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
     sp = spotipy.Spotify(auth_manager=auth_manager)
-    print("Connected", file=sys.stderr)
+    print("Connected to Spotify API endpoint", file=sys.stderr)
 
 
 def get_artist_genre(input_artist: str, verbose=False) -> str:
