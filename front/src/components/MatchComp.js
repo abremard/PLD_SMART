@@ -8,6 +8,7 @@ import { Multiselect } from 'multiselect-react-dropdown';
 import Tilt from 'react-parallax-tilt';
 import Lottie from 'react-lottie';
 import Dropzone from 'react-dropzone'
+import { saveAs } from 'file-saver';
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
@@ -61,7 +62,11 @@ export default class MatchComp extends Component{
 
     generateFile() {
         //get files with FileReader API as blobs
-        this.state.files.forEach((file) => {
+        var formData = new FormData();
+        var fileindex = 0;  
+        this.state.files.map((file) => {
+            formData.append(`file${fileindex}`, file);
+            fileindex = fileindex +1;
             const reader = new FileReader();
             reader.onabort = () => toast.error("file reading was aborted");
             reader.onerror = () => toast.error('file reading has failed')
@@ -72,14 +77,38 @@ export default class MatchComp extends Component{
                 console.log(binaryStr)
             }
             reader.readAsArrayBuffer(file)
-        })
-        //call code to generate file and get download link
-        //wait until complete
-        //when complete
+        });
+
         this.setState({
             isLoading: true,
             buttonState: 'loading',
         });
+
+        fetch(`http://ca7860ba1211.ngrok.io/api/v1/compose/monophonic/lstm/v0?length=200&nb_files=${(fileindex)}`, {
+            // content-type header should not be specified!
+            method: 'POST',
+            body: formData,
+          })
+            .then(response => response.blob())
+            .then( blob => saveAs(blob, 'music.mid'))
+            .then(success => {this.setState({
+                isLoading: false,
+                buttonState: 'success',
+                hasResult: true,
+                downloadLink: '' //insert download link...,
+            })}).catch((error) => {
+                    toast.error("Something went wrong. Please try again later");
+                    this.setState({
+                        isLoading: false,
+                        buttonState: 'error',
+                        hasResult: false,
+                    });
+                })
+
+        //call code to generate file and get download link
+        //wait until complete
+        //when complete
+        
         //this.generateRandomMusicRequest()
 
         //if impossible to use download links download file immediately, will remove download button from result tile...
