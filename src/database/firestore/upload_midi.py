@@ -11,19 +11,14 @@ TODO:
 import firebase_admin
 from firebase_admin import credentials, firestore, storage
 import sys
-
-# ----------- Initialize Firebase connexion
-# Use a service account
-cred = credentials.Certificate("./cred.json")
-firebase_admin.initialize_app(cred, {
-    'storageBucket': 'ilolio.appspot.com'       # default bucket, maybe change for a custom bucket later
-})
-
-db = firestore.client()
-bucket = storage.bucket()       # ref to Firebase Storage
+import os
+from src.database.firestore.utils_firestore import *    # initializes firebase connexion
 
 
 def upload_midi_file(local_file_path: str, firebase_file_name: str, verbose=False):
+
+    db = firestore.client()
+    bucket = storage.bucket()  # ref to Firebase Storage
 
     # output file (path & name in Firebase Storage)
     blob = bucket.blob(f'MIDI/{firebase_file_name}')
