@@ -38,7 +38,7 @@ export default class Scratch5Comp extends Component{
     }
 
     generateRandomMusicRequest = async (long) => {
-        const url ='http://37ce43fd24b2.ngrok.io/api/v1/compose/polyphonic/musegan/v0'
+        const url ='http://848117ecf059.ngrok.io/api/v1/compose/polyphonic/musegan/v0'
         //todo catch error
         fetch(url)
         .then( res => res.blob() )
