@@ -16,7 +16,20 @@ from tensorflow.keras.models import load_model
 
 import base64
 
-def generate(run_id = "001"):
+def generate(
+    run_id = "001",
+    chords = None,
+    style = None,
+    melody_drum = None,
+    melody_piano = None,
+    melody_guitar = None,
+    melody_bass = None,
+    melody_strings = None,
+    groove_drum = None,
+    groove_piano = None,
+    groove_guitar = None,
+    groove_bass = None,
+    groove_strings = None):
 
     n_songs = 10
     n_bars = 2
@@ -61,10 +74,37 @@ def generate(run_id = "001"):
 
     gan.critic.summary()
 
-    chords_noise = np.random.normal(0, 1, (1, gan.z_dim))
-    style_noise = np.random.normal(0, 1, (1, gan.z_dim))
-    melody_noise = np.random.normal(0, 1, (1, gan.n_tracks, gan.z_dim))
-    groove_noise = np.random.normal(0, 1, (1, gan.n_tracks, gan.z_dim))
+    # TODO : process input params
+
+    chords_noise = np.random.normal(0, 10, (1, gan.z_dim))
+    style_noise = np.random.normal(0, 10, (1, gan.z_dim))
+    melody_noise = np.random.normal(0, 10, (1, gan.n_tracks, gan.z_dim))
+    groove_noise = np.random.normal(0, 10, (1, gan.n_tracks, gan.z_dim))
+    
+    if chords is not None :
+        chords_noise = chords * np.ones((1, gan.z_dim))
+    if style is not None :
+        style_noise = style * np.ones((1, gan.z_dim))
+    if melody_drum is not None:
+        melody_noise[0,0,:] = melody_drum * np.ones(gan.z_dim)
+    if melody_piano is not None:
+        melody_noise[0,1,:] = melody_piano * np.ones(gan.z_dim) 
+    if melody_guitar is not None:
+        melody_noise[0,2,:] = melody_guitar * np.ones(gan.z_dim)
+    if melody_bass is not None:
+        melody_noise[0,3,:] = melody_bass * np.ones(gan.z_dim) 
+    if melody_strings is not None:
+        melody_noise[0,4,:] = melody_strings * np.ones(gan.z_dim) 
+    if groove_drum is not None:
+        groove_noise[0,0,:] = groove_drum * np.ones(gan.z_dim)
+    if groove_piano is not None:
+        groove_noise[0,1,:] = groove_piano * np.ones(gan.z_dim) 
+    if groove_guitar is not None:
+        groove_noise[0,2,:] = groove_guitar * np.ones(gan.z_dim)
+    if groove_bass is not None:
+        groove_noise[0,3,:] = groove_bass * np.ones(gan.z_dim) 
+    if groove_strings is not None:
+        groove_noise[0,4,:] = groove_strings * np.ones(gan.z_dim) 
 
     gen_scores = gan.generator.predict([chords_noise, style_noise, melody_noise, groove_noise])
 
