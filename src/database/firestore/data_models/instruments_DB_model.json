@@ -1,0 +1,17 @@
+{
+  "comment": "----- Data model of the Instruments document, files are sorted by instrument only -----",
+
+  "guitar": [
+    "highway_to_hell.mid",
+    "hells_bells.mid"
+  ],
+
+  "piano": [
+    "prelude_chopin.mid",
+    "freedom_dive.mid"
+  ],
+
+  "drums": [
+    "dance_of_eternity.mid"
+  ]
+}

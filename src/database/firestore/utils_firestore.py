@@ -10,16 +10,19 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
-def add_entry(genre: str, artist: str, file_ref: str):
+def add_entry(file_ref: str, genre: str, artist: str, *instruments: str):
     """
     Use this function to add a new MIDI file's metadata (artist and genre) to
     the database.
 
     Args:
+        file_ref: A string reference to the file in the Firestore storage
         genre: The string representing the track's genre
         artist: The track's artist
-        file_ref: A string reference to the file in the Drive storage (format
-                        to be defined)
+        *instruments: Strings corresponding to instrument(s) present in the
+                        track
+                        
+    Raises TypeError if the file provided is None
 
     Returns: void
 
@@ -34,6 +37,9 @@ def add_entry(genre: str, artist: str, file_ref: str):
 
     _add_genre_artist(genre, artist, file_ref)
     _add_artist(artist, file_ref)
+
+    for instrument in instruments:
+        _add_instrument(instrument, file_ref)
 
 
 def format_string(input_str: str):
@@ -70,3 +76,8 @@ def _add_genre_artist(genre: str, artist: str, file_ref: str):
 def _add_artist(artist: str, file_ref: str):
     artist_doc = db.collection(u"Tags").document(u"Artists")
     artist_doc.update({artist: firestore.ArrayUnion([file_ref])})
+
+
+def _add_instrument(instrument: str, file_ref: str):
+    instruments_doc = db.collection(u"Tags").document(u"Instruments")
+    instruments_doc.update({instrument: firestore.ArrayUnion([file_ref])})
