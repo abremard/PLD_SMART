@@ -428,3 +428,12 @@ h3 {
 .toaster {
   font-family: Regular;
 }
+
+.minislider{
+  width: 200px;
+  margin-right: 20px;
+}
+
+.maxislider{
+  width: 500px;
+}

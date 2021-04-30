@@ -9,7 +9,7 @@ export default class Navbar extends Component {
             <div className="appbar">
                 <div className="applogo">
                     <img src={logo} width="80px"/>
-                        <p>ilolio music studio</p>
+                        <p>ilolio music lab</p>
                 </div>
                 <Link to="/">
                     Home
