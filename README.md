@@ -21,7 +21,7 @@ Requirements to use Python scripts wih Spotify's API (tested on Python 3.8):
  - copy the `spotify_credentials.txt` I sent you into `src/database/metadata_processing/` (:warning: : NEVER commit this file on VCS, it contains out unique credentials)
  - install the required modules : (requires pip to work):
  ```shell script
-> pip install spotipy
+> pip install spotipy mido
 ```
 :warning: `python-Levenshtein` requires Microsoft Visual C++ 14.0
 
