@@ -38,6 +38,10 @@ export default class Scratch1Comp extends Component{
         }
         this.onPick = this.onPick.bind(this);
         this.generateFile = this.generateFile.bind(this);
+        this.onSelectArtist = this.onSelectArtist.bind(this);
+        this.onRemoveArtist = this.onRemoveArtist.bind(this);
+        this.onSelectInstrument = this.onSelectInstrument.bind(this);
+        this.onRemoveInstrument = this.onRemoveInstrument.bind(this);
     }
 
     onPick(image) {
