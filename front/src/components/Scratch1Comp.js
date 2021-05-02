@@ -1,11 +1,11 @@
-import logo from '../images/logowhite.png'
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import React, {Component} from 'react';
-import ResultTile from "./ResultTile";
 import ImagePicker from "react-image-picker";
 import { Multiselect } from 'multiselect-react-dropdown';
+import ProgressButton from "react-progress-button";
 
+import ResultTile from "./ResultTile";
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
@@ -15,9 +15,6 @@ import indie from "../images/indie.png"
 import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
 import 'react-image-picker/dist/index.css'
-import FileTile from "./FileTile";
-import ProgressButton from "react-progress-button";
-
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
 
@@ -69,7 +66,6 @@ export default class Scratch1Comp extends Component{
     }
 
     generateFile() {
-
         //call code to generate file and get download link
         //wait until complete
         //when complete
@@ -78,8 +74,6 @@ export default class Scratch1Comp extends Component{
             buttonState: 'loading',
         });
         //this.generateRandomMusicRequest()
-
-        //if impossible to use download links download file immediately, will remove download button from result tile...
     }
 
     render() {
@@ -109,8 +103,8 @@ export default class Scratch1Comp extends Component{
                     <h6>Choose an artist of inspiration (optional)</h6>
                     <Multiselect
                         options={this.state.artistOptions} // Options to display in the dropdown
-                        onSelect={this.onSelect} // Function will trigger on select event
-                        onRemove={this.onRemove} // Function will trigger on remove event
+                        onSelect={this.onSelectArtist} // Function will trigger on select event
+                        onRemove={this.onRemoveArtist} // Function will trigger on remove event
                         displayValue="name" // Property name to display in the dropdown op
                         closeIcon = "circle" // tions
                         id="css_custom"
@@ -119,8 +113,8 @@ export default class Scratch1Comp extends Component{
                     <h6>Choose an instrument</h6>
                     <Multiselect
                         options={this.state.instrumentOptions} // Options to display in the dropdown
-                        onSelect={this.onSelect} // Function will trigger on select event
-                        onRemove={this.onRemove} // Function will trigger on remove event
+                        onSelect={this.onSelectInstrument} // Function will trigger on select event
+                        onRemove={this.onRemoveInstrument} // Function will trigger on remove event
                         displayValue="name" // Property name to display in the dropdown op
                         singleSelect
                         id="css_custom"
@@ -136,6 +130,5 @@ export default class Scratch1Comp extends Component{
                 </div>
             </>
         )
-
     }
 }

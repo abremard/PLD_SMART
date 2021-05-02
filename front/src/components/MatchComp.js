@@ -1,15 +1,14 @@
-import logo from '../images/logowhite.png'
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import { database } from 'firebase/firebase';
-import React, {Component} from 'react';
-import ResultTile from "./ResultTile";
-import ImagePicker from "react-image-picker";
-import { Multiselect } from 'multiselect-react-dropdown';
-import Tilt from 'react-parallax-tilt';
-import Lottie from 'react-lottie';
 import Dropzone from 'react-dropzone'
 import { saveAs } from 'file-saver';
+import ProgressButton from "react-progress-button";
+import {toast, Toaster} from "react-hot-toast";
+
+import ResultTile from "./ResultTile";
+import FileTile from "./FileTile";
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
@@ -18,19 +17,14 @@ import hiphop from "../images/hip hop.png"
 import indie from "../images/indie.png"
 import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
+
 import 'react-image-picker/dist/index.css'
-import FileTile from "./FileTile";
-import midi from "../images/midi.png";
-import ProgressButton from "react-progress-button";
 import '../button.css'
-import {toast, Toaster} from "react-hot-toast";
 
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
 const admin = require('firebase-admin');
 const serviceAccount = require('../database/firestore/cred.json');
-
-
 
 
 export default class MatchComp extends Component{
@@ -48,8 +42,6 @@ export default class MatchComp extends Component{
         this.generateFile = this.generateFile.bind(this);
     }
 
-    //todo to access contents of file, use API FileReader, see example in Dropzone documentation
-    //new browser privacy settings prevent getting the full file path of the files
     onDrop(acceptedFiles){
         console.log(acceptedFiles);
         var filesTemp = this.state.files;
@@ -93,7 +85,7 @@ export default class MatchComp extends Component{
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount)
           });
-          
+
         const database = admin.firestore();
         const docRef = database.collection('ids').doc('serverid');
         docRef.get().then((doc) => {
@@ -109,9 +101,6 @@ export default class MatchComp extends Component{
             console.log("Error getting document:", error);
         });
 
-        
-
-
         fetch(`http://aa41a02e41fb.ngrok.io/api/v1/compose/monophonic/lstm/v0?length=200&nb_files=${(fileindex)}`, {
             // content-type header should not be specified!
             method: 'POST',
@@ -123,7 +112,8 @@ export default class MatchComp extends Component{
                 isLoading: false,
                 buttonState: 'success',
                 hasResult: true,
-                downloadLink: '' //insert download link...,
+                downloadLink: '', //insert download link...,
+                files: []
             })}).catch((error) => {
                     toast.error("Something went wrong. Please try again later");
                     this.setState({
@@ -132,14 +122,6 @@ export default class MatchComp extends Component{
                         hasResult: false,
                     });
                 })
-
-        //call code to generate file and get download link
-        //wait until complete
-        //when complete
-        
-        //this.generateRandomMusicRequest()
-
-        //if impossible to use download links download file immediately, will remove download button from result tile...
     }
 
     render() {
@@ -186,7 +168,6 @@ export default class MatchComp extends Component{
                         Generate
                     </ProgressButton>
                     <h5> </h5>
-
                 </div>
             </>
         )

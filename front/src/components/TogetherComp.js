@@ -1,15 +1,13 @@
-import logo from '../images/logowhite.png'
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import React, {Component} from 'react';
-import ResultTile from "./ResultTile";
-import ImagePicker from "react-image-picker";
-import { Multiselect } from 'multiselect-react-dropdown';
-import Tilt from 'react-parallax-tilt';
-import Lottie from 'react-lottie';
 import Dropzone from 'react-dropzone'
 import Slider, {Handle, SliderTooltip} from 'rc-slider';
-import '../slider.css';
+import {toast} from "react-hot-toast";
+import ProgressButton from "react-progress-button";
+
+import ResultTile from "./ResultTile";
+import FileTile from "./FileTile";
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
@@ -18,15 +16,10 @@ import hiphop from "../images/hip hop.png"
 import indie from "../images/indie.png"
 import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
+
 import 'react-image-picker/dist/index.css'
-import FileTile from "./FileTile";
-import midi from "../images/midi.png";
-import ProgressButton from "react-progress-button";
 import '../button.css'
-import {toast} from "react-hot-toast";
-
-
-const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
+import '../slider.css';
 
 export default class TogetherComp extends Component{
     constructor(props) {
@@ -47,8 +40,6 @@ export default class TogetherComp extends Component{
         this.onChangeBalance = this.onChangeBalance.bind(this);
     }
 
-    //todo to access contents of file, use API FileReader, see example in Dropzone documentation
-    //new browser privacy settings prevent getting the full file path of the files
     onDrop(acceptedFiles){
         console.log(acceptedFiles);
         var filesTemp = this.state.files;
@@ -57,7 +48,6 @@ export default class TogetherComp extends Component{
                 filesTemp.push(item);
             }
         });
-
         this.setState(state => {
             return {
                 files: filesTemp,
@@ -86,20 +76,7 @@ export default class TogetherComp extends Component{
             isLoading: true,
             buttonState: 'loading',
         });
-        //this.generateRandomMusicRequest()
 
-        //if impossible to use download links download file immediately, will remove download button from result tile...
-    }
-
-    onChangeLength(value) {
-        this.setState({
-            length: value
-        })
-    }
-    onChangeBalance(value) {
-        this.setState({
-            balance : value
-        })
     }
 
     render() {
@@ -162,9 +139,9 @@ export default class TogetherComp extends Component{
                     </div>
                     <h5>Options</h5>
                     <h6>Length</h6>
-                    <Slider min={0} max={500} defaultValue={50} handle={handle} step={10} onChange={this.onChangeLength} />
+                    <Slider min={0} max={500} defaultValue={50} handle={handle} step={10} onChange={value => {this.setState({length: value})}} />
                     <h6>Balance of Mix</h6>
-                    <Slider min={0} max={100} defaultValue={50} handle={handle} step={10} onChange={this.onChangeBalance}/>
+                    <Slider min={0} max={100} defaultValue={50} handle={handle} step={10} onChange={value => {this.setState({balance : value})}}/>
                     <h6><br/> </h6>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate
