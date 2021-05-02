@@ -14,7 +14,9 @@ import hiphop from "../images/hip hop.png"
 import indie from "../images/indie.png"
 import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
-import 'react-image-picker/dist/index.css'
+
+//import 'react-image-picker/dist/index.css'
+import '../imagepicker.css'
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
 
