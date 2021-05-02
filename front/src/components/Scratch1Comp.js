@@ -32,6 +32,7 @@ export default class Scratch1Comp extends Component{
             hasResult:false,
             downloadLink: '',
             fileName: 'New Creation',
+            length: null
         }
         this.onPick = this.onPick.bind(this);
         this.generateFile = this.generateFile.bind(this);
@@ -121,7 +122,7 @@ export default class Scratch1Comp extends Component{
                         style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
                     />
                     <h6>Maximum Length</h6>
-                    <input type="number" name="name" />
+                    <input type="number" name="name" onChange={value=>{this.setState({length: value})}} />
                     <h6><br/> </h6>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate
