@@ -9,14 +9,6 @@ import ProgressButton from "react-progress-button";
 import ResultTile from "./ResultTile";
 import FileTile from "./FileTile";
 
-import alternative from "../images/alternative.png"
-import disco from "../images/disco.png"
-import electronic from "../images/electronic.png"
-import hiphop from "../images/hip hop.png"
-import indie from "../images/indie.png"
-import jazz from "../images/jazz.png"
-import rock from "../images/rock.png"
-
 import 'react-image-picker/dist/index.css'
 import '../button.css'
 import '../slider.css';
@@ -36,8 +28,6 @@ export default class TogetherComp extends Component{
         }
         this.onDrop = this.onDrop.bind(this);
         this.generateFile = this.generateFile.bind(this);
-        this.onChangeLength = this.onChangeLength.bind(this);
-        this.onChangeBalance = this.onChangeBalance.bind(this);
     }
 
     onDrop(acceptedFiles){
@@ -138,10 +128,14 @@ export default class TogetherComp extends Component{
                             </Dropzone>}
                     </div>
                     <h5>Options</h5>
-                    <h6>Length</h6>
-                    <Slider min={0} max={500} defaultValue={50} handle={handle} step={10} onChange={value => {this.setState({length: value})}} />
-                    <h6>Balance of Mix</h6>
-                    <Slider min={0} max={100} defaultValue={50} handle={handle} step={10} onChange={value => {this.setState({balance : value})}}/>
+                    <div className="maxislider">
+                        <h6>Length</h6>
+                        <Slider min={0} max={500} defaultValue={50} handle={handle} step={10} onChange={value => {this.setState({length: value})}}/>
+                    </div>
+                    <div className="maxislider">
+                        <h6>Balance of Mix</h6>
+                        <Slider min={0} max={100} defaultValue={50} handle={handle} step={10} onChange={value => {this.setState({balance : value})}}/>
+                    </div>
                     <h6><br/> </h6>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate
