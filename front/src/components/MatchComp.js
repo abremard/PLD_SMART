@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-
-import React, {Component} from 'react';
 import ResultTile from "./ResultTile";
 import ImagePicker from "react-image-picker";
 import { Multiselect } from 'multiselect-react-dropdown';
