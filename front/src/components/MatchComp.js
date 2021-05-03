@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ResultTile from "./ResultTile";
+import FileTile from "./FileTile";
 import ImagePicker from "react-image-picker";
 import { Multiselect } from 'multiselect-react-dropdown';
 import Tilt from 'react-parallax-tilt';
@@ -9,8 +10,6 @@ import { saveAs } from 'file-saver';
 import ProgressButton from "react-progress-button";
 import {toast, Toaster} from "react-hot-toast";
 
-import ResultTile from "./ResultTile";
-import FileTile from "./FileTile";
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
