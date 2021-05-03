@@ -18,3 +18,4 @@ src/database/.cache
 src/database/metadata_processing/output_spotipy.json
 front/src/database/firestore/cred.json
 *.mid
+.vscode/settings.json
