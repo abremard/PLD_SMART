@@ -1,4 +1,4 @@
-import logo from '../images/logowhite.png'
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import React, {Component} from 'react';
@@ -9,6 +9,11 @@ import Tilt from 'react-parallax-tilt';
 import Lottie from 'react-lottie';
 import Dropzone from 'react-dropzone'
 import { saveAs } from 'file-saver';
+import ProgressButton from "react-progress-button";
+import {toast, Toaster} from "react-hot-toast";
+
+import ResultTile from "./ResultTile";
+import FileTile from "./FileTile";
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
@@ -17,12 +22,9 @@ import hiphop from "../images/hip hop.png"
 import indie from "../images/indie.png"
 import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
+
 import 'react-image-picker/dist/index.css'
-import FileTile from "./FileTile";
-import midi from "../images/midi.png";
-import ProgressButton from "react-progress-button";
 import '../button.css'
-import {toast, Toaster} from "react-hot-toast";
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
 const superagent = require('superagent');
@@ -43,8 +45,6 @@ export default class MatchComp extends Component{
         this.getaservernameandpost = this.getaservernameandpost.bind(this);
     }
 
-    //todo to access contents of file, use API FileReader, see example in Dropzone documentation
-    //new browser privacy settings prevent getting the full file path of the files
     onDrop(acceptedFiles){
         console.log(acceptedFiles);
         var filesTemp = this.state.files;
@@ -179,7 +179,6 @@ export default class MatchComp extends Component{
                         Generate
                     </ProgressButton>
                     <h5> </h5>
-
                 </div>
             </>
         )

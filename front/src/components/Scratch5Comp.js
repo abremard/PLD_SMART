@@ -1,11 +1,12 @@
-import logo from '../images/logowhite.png'
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import React, {Component} from 'react';
-import ResultTile from "./ResultTile";
-import ImagePicker from "react-image-picker";
-import { Multiselect } from 'multiselect-react-dropdown';
 import { saveAs } from 'file-saver';
+import {toast, Toaster} from "react-hot-toast";
+import ProgressButton from "react-progress-button";
+import Slider, {Handle, SliderTooltip} from "rc-slider";
+
+import ResultTile from "./ResultTile";
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
@@ -14,13 +15,9 @@ import hiphop from "../images/hip hop.png"
 import indie from "../images/indie.png"
 import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
-import 'react-image-picker/dist/index.css'
-import Navbar from "./navbar";
-import {toast, Toaster} from "react-hot-toast";
-import ProgressButton from "react-progress-button";
-import '../button.css'
-import Slider, {Handle, SliderTooltip} from "rc-slider";
 
+import 'react-image-picker/dist/index.css'
+import '../button.css'
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
 
@@ -72,17 +69,11 @@ export default class Scratch5Comp extends Component{
         )
     }
     generateFile() {
-        
-        //call code to generate file and get download link
-        //wait until complete
-        //when complete
         this.setState({
             isLoading: true,
             buttonState: 'loading',
         });
         this.generateRandomMusicRequest()
-        
-        //if impossible to use download links download file immediately, will remove download button from result tile...
     }
 
     render() {
@@ -100,7 +91,6 @@ export default class Scratch5Comp extends Component{
                 </SliderTooltip>
             );
         };
-
         const selectedStyle = {
             color: 'white',
             backgroundColor: 'black',
@@ -181,10 +171,5 @@ export default class Scratch5Comp extends Component{
                 </div>
             </>
         )
-
     }
 }
-
-//{this.state.isLoading == false ?
-//                     <a style={generateStyle} onClick={this.generateFile}> Generate</a>
-//                     : <p>Please wait... this can take a minute</p>}

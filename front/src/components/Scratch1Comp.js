@@ -1,11 +1,11 @@
-import logo from '../images/logowhite.png'
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import React, {Component} from 'react';
-import ResultTile from "./ResultTile";
 import ImagePicker from "react-image-picker";
 import { Multiselect } from 'multiselect-react-dropdown';
+import ProgressButton from "react-progress-button";
 
+import ResultTile from "./ResultTile";
 
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
@@ -14,10 +14,9 @@ import hiphop from "../images/hip hop.png"
 import indie from "../images/indie.png"
 import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
-import 'react-image-picker/dist/index.css'
-import FileTile from "./FileTile";
-import ProgressButton from "react-progress-button";
 
+//import 'react-image-picker/dist/index.css'
+import '../imagepicker.css'
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
 
@@ -35,9 +34,14 @@ export default class Scratch1Comp extends Component{
             hasResult:false,
             downloadLink: '',
             fileName: 'New Creation',
+            length: null
         }
         this.onPick = this.onPick.bind(this);
         this.generateFile = this.generateFile.bind(this);
+        this.onSelectArtist = this.onSelectArtist.bind(this);
+        this.onRemoveArtist = this.onRemoveArtist.bind(this);
+        this.onSelectInstrument = this.onSelectInstrument.bind(this);
+        this.onRemoveInstrument = this.onRemoveInstrument.bind(this);
     }
 
     onPick(image) {
@@ -69,7 +73,6 @@ export default class Scratch1Comp extends Component{
     }
 
     generateFile() {
-
         //call code to generate file and get download link
         //wait until complete
         //when complete
@@ -78,8 +81,6 @@ export default class Scratch1Comp extends Component{
             buttonState: 'loading',
         });
         //this.generateRandomMusicRequest()
-
-        //if impossible to use download links download file immediately, will remove download button from result tile...
     }
 
     render() {
@@ -109,8 +110,8 @@ export default class Scratch1Comp extends Component{
                     <h6>Choose an artist of inspiration (optional)</h6>
                     <Multiselect
                         options={this.state.artistOptions} // Options to display in the dropdown
-                        onSelect={this.onSelect} // Function will trigger on select event
-                        onRemove={this.onRemove} // Function will trigger on remove event
+                        onSelect={this.onSelectArtist} // Function will trigger on select event
+                        onRemove={this.onRemoveArtist} // Function will trigger on remove event
                         displayValue="name" // Property name to display in the dropdown op
                         closeIcon = "circle" // tions
                         id="css_custom"
@@ -119,15 +120,15 @@ export default class Scratch1Comp extends Component{
                     <h6>Choose an instrument</h6>
                     <Multiselect
                         options={this.state.instrumentOptions} // Options to display in the dropdown
-                        onSelect={this.onSelect} // Function will trigger on select event
-                        onRemove={this.onRemove} // Function will trigger on remove event
+                        onSelect={this.onSelectInstrument} // Function will trigger on select event
+                        onRemove={this.onRemoveInstrument} // Function will trigger on remove event
                         displayValue="name" // Property name to display in the dropdown op
                         singleSelect
                         id="css_custom"
                         style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
                     />
                     <h6>Maximum Length</h6>
-                    <input type="number" name="name" />
+                    <input type="number" name="name" onChange={value=>{this.setState({length: value})}} defaultValue={50} />
                     <h6><br/> </h6>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate
@@ -136,6 +137,5 @@ export default class Scratch1Comp extends Component{
                 </div>
             </>
         )
-
     }
 }
