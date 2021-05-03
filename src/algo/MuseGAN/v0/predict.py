@@ -82,31 +82,29 @@ def generate(
     groove_noise = np.random.normal(0, 1, (1, gan.n_tracks, gan.z_dim))
     
     if chords is not None :
-        print(float(chords))
-        print(chords)
-        chords_noise = float(chords) * np.ones((1, gan.z_dim))
+        chords_noise = chords * np.ones((1, gan.z_dim))
     if style is not None :
-        style_noise = float(style) * np.ones((1, gan.z_dim))
+        style_noise = style * np.ones((1, gan.z_dim))
     if melody_drum is not None:
-        melody_noise[0,0,:] = float(melody_drum) * np.ones(gan.z_dim)
+        melody_noise[0,0,:] = melody_drum * np.ones(gan.z_dim)
     if melody_piano is not None:
-        melody_noise[0,1,:] = float(melody_piano) * np.ones(gan.z_dim) 
+        melody_noise[0,1,:] = melody_piano * np.ones(gan.z_dim) 
     if melody_guitar is not None:
-        melody_noise[0,2,:] = float(melody_guitar) * np.ones(gan.z_dim)
+        melody_noise[0,2,:] = melody_guitar * np.ones(gan.z_dim)
     if melody_bass is not None:
-        melody_noise[0,3,:] = float(melody_bass) * np.ones(gan.z_dim) 
+        melody_noise[0,3,:] = melody_bass * np.ones(gan.z_dim) 
     if melody_strings is not None:
-        melody_noise[0,4,:] = float(melody_strings) * np.ones(gan.z_dim) 
+        melody_noise[0,4,:] = melody_strings * np.ones(gan.z_dim) 
     if groove_drum is not None:
-        groove_noise[0,0,:] = float(groove_drum) * np.ones(gan.z_dim)
+        groove_noise[0,0,:] = groove_drum * np.ones(gan.z_dim)
     if groove_piano is not None:
-        groove_noise[0,1,:] = float(groove_piano) * np.ones(gan.z_dim) 
+        groove_noise[0,1,:] = groove_piano * np.ones(gan.z_dim) 
     if groove_guitar is not None:
-        groove_noise[0,2,:] = float(groove_guitar) * np.ones(gan.z_dim)
+        groove_noise[0,2,:] = groove_guitar * np.ones(gan.z_dim)
     if groove_bass is not None:
-        groove_noise[0,3,:] = float(groove_bass) * np.ones(gan.z_dim) 
+        groove_noise[0,3,:] = groove_bass * np.ones(gan.z_dim) 
     if groove_strings is not None:
-        groove_noise[0,4,:] = float(groove_strings) * np.ones(gan.z_dim) 
+        groove_noise[0,4,:] = groove_strings * np.ones(gan.z_dim) 
 
     gen_scores = gan.generator.predict([chords_noise, style_noise, melody_noise, groove_noise])
 
