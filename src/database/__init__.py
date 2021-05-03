@@ -5,6 +5,23 @@ import os
 import sys
 from database.metadata_processing import *
 from database.firestore import *
+import re
+
+
+def format_file_name(file_name: str) -> str:
+    file_name = file_name[:-4]  # remove extension first -> todo check if there are .midi files instead of .mid
+
+    print(f"--- file name: {file_name}")
+    if len(re.findall('\\.', file_name)) > 1:
+        print(f"WARNING: using format_string on a file name containing dots! ({file_name})", file=sys.stderr)
+        formatted_name = re.sub(".mid", "", file_name)
+        print(f"file name before . subs: {formatted_name}")
+        formatted_name = re.sub("\\.", "_", formatted_name)
+        print(f"file name after . subs: {formatted_name}")
+        formatted_name = format_string(formatted_name)
+    else:
+        formatted_name = format_string(str(file_name).split('.')[0])
+    return f"{formatted_name}.mid"
 
 
 def get_formatted_file_path(file_path: str) -> str:
@@ -17,35 +34,39 @@ def get_formatted_file_path(file_path: str) -> str:
 
     """
 
-    split_path = file_path.split("/")
-    path_to_file = "" if len(split_path) == 1 else "/".join(split_path[:-1])
-    file_name = split_path[-1].split(".")[0]
-    formatted_name = format_string(file_name)
-    return f"{path_to_file}/{formatted_name}.{file_path.split('.')[-1]}"
+    # print(f"input path: {file_path}")
+    path_to_file_dir = os.path.abspath(os.path.dirname(file_path))
+    file_name = os.path.basename(file_path)
+
+    formatted_name = format_file_name(file_name)
+    return os.path.join(path_to_file_dir, formatted_name)
 
 
 def rename_files_in_dir(directory_path: str):
     directory = os.path.dirname(directory_path)
-    for subdir, dirs, files in os.walk(directory):
+
+    for dirpath, subdirs, files in os.walk(directory):
         for filename in files:
-            subdir_path = os.path.relpath(subdir, directory)  # get the path to the subdirectory
-            file_path = os.path.join(subdir_path, filename)  # get the path to the file
+            file_path = os.path.normpath(os.path.join(dirpath, filename))
             new_file_path = get_formatted_file_path(file_path)
-            os.rename(file_path, new_file_path)  # rename your file
+            print(f">> renaming {file_path} --->>> {new_file_path}")
+            os.rename(file_path, new_file_path)  # rename your file   # todo uncomment when ok
 
 
-def upload_files_from_dir(directory_path: str):
+def process_files_from_dir(directory_path: str):
 
-    directory = os.path.dirname(directory_path)
+    directory = os.path.abspath(os.path.dirname(directory_path))
     # rename files to a correct format
-    print(f"Renaming files in {directory}")
-    # rename_files_in_dir(directory_path)       # todo uncomment when ok
+    print(f">>> Renaming files in {directory}")
+    # rename_files_in_dir(directory_path)
 
     # file by file, upload its metadata & the file itself
     for dirpath, subdirs, files in os.walk(directory):
         for filename in files:
+            print(f"> Current file name: {filename}")
             file_path = os.path.join(dirpath, filename)
-            print(f"Uploading file from {file_path}")
+            # print(f"Uploading file from {file_path}")
+            # todo upload the file in its artist's folder
             # upload_midi_file(local_file_path=file_path)   # todo uncomment when ok
 
 
@@ -59,7 +80,7 @@ def main():
 
         dirname = os.path.dirname(__file__)
         dir = os.path.join(dirname, input_path)
-        upload_files_from_dir(dir)
+        process_files_from_dir(dir)
 
     else:
         raise Exception("No input provided: please provide the path to the directory you wish to process")

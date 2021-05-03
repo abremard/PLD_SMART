@@ -45,7 +45,9 @@ def get_artist_genre(input_artist: str, verbose=False) -> str:
     artists = results['artists']['items']
 
     if len(artists) > 0:
-        with open("./output_spotipy.json", 'w') as out_file:
+        cur_dir = os.path.dirname(__file__)
+        output_path = os.path.join(cur_dir, "./output_spotipy.json")
+        with open(output_path, 'w') as out_file:
             out_file.write(json.dumps(artists, indent=4))
             out_file.close()
 
