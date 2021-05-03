@@ -82,6 +82,8 @@ def generate(
     groove_noise = np.random.normal(0, 1, (1, gan.n_tracks, gan.z_dim))
     
     if chords is not None :
+        print(float(chords))
+        print(chords)
         chords_noise = float(chords) * np.ones((1, gan.z_dim))
     if style is not None :
         style_noise = float(style) * np.ones((1, gan.z_dim))
