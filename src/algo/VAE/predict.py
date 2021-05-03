@@ -28,9 +28,6 @@ def generate(
             mel_2bar_config.data_converter.from_tensors(
                 mel_2bar_config.data_converter.to_tensors(ns)[1]))
     print(extracted_mels)
-    for i, ns in enumerate(extracted_mels):
-        print("Melody", i)
-        play(ns)
         
     start_mel = extracted_mels[start_melody]
     end_mel = extracted_mels[end_melody]
