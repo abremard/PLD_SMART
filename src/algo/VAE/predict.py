@@ -21,14 +21,13 @@ def generate(
 
     # Extract melodies from MIDI files. This will extract all unique 2-bar melodies using a sliding window with a stride of 1 bar.
     mel_input_seqs = [mm.midi_to_sequence_proto(m) for m in input_mel_midi_data]
+    print(mel_input_seqs)
     extracted_mels = []
     for ns in mel_input_seqs:
         extracted_mels.extend(
             mel_2bar_config.data_converter.from_tensors(
                 mel_2bar_config.data_converter.to_tensors(ns)[1]))
-    for i, ns in enumerate(extracted_mels):
-        print("Melody", i)
-        play(ns)
+    print(extracted_mels)
         
     start_mel = extracted_mels[start_melody]
     end_mel = extracted_mels[end_melody]

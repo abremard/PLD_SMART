@@ -1,22 +1,29 @@
 {
   "comment": "----- Data model of the Genres document, files are sorted by genre then artist -----",
   "TODO_comment": "TODO: maybe add a selection of a few tracks for each genre",
-
   "rock": {
-    "acdc": [
-      "highway_to_hell.mid",
-      "hells_bells.mid"
-    ],
-    "the_beatles": [
-      "hey_jude.mid",
-      "lucy_in_the_sky.mid"
-    ]
+    "acdc": {
+      "tracks": [
+        "highway_to_hell.mid",
+        "hells_bells.mid"
+      ],
+      "name": "AC/DC"
+    },
+    "the_beatles": {
+      "tracks": [
+        "hey_jude.mid",
+        "lucy_in_the_sky.mid"
+      ],
+      "name": "The Beatles"
+    }
   },
-
   "symphonic_metal": {
-    "nightwish": [
-      "the_greatest_show_on_earth.mid",
-      "the_islander.mid"
-    ]
+    "nightwish": {
+      "tracks": [
+        "the_greatest_show_on_earth.mid",
+        "the_islander.mid"
+      ],
+      "name": "Nightwish"
+    }
   }
 }
