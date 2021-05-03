@@ -35,7 +35,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 def play(note_sequence):
   mm.play_sequence(note_sequence, synth=mm.fluidsynth)
 
-def interpolate(model, start_seq, end_seq, num_steps, max_length=32,
+def interpolate(model, start_seq, end_seq, num_steps, filename, max_length=32,
                 assert_same_length=True, temperature=0.5,
                 individual_duration=4.0):
   """Interpolates between a start and end sequence."""
@@ -55,10 +55,11 @@ def interpolate(model, start_seq, end_seq, num_steps, max_length=32,
       note_sequences, [individual_duration] * len(note_sequences))
   play(interp_seq)
   mm.plot_sequence(interp_seq)
+  download(interp_seq, filename)
   return interp_seq if num_steps > 3 else note_sequences[num_steps // 2]
 
 def download(note_sequence, filename):
   mm.sequence_proto_to_midi_file(note_sequence, filename)
-  files.download(filename)
+  # files.download(filename)
 
 print('Done')

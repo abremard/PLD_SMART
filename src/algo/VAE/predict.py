@@ -7,13 +7,13 @@ from algo.VAE.models.VAE import play, interpolate, download
 import tensorflow.compat.v1 as tf
 
 def generate(
-    input_mel_midi_data = [
-        tf.io.gfile.GFile(fn, 'rb').read()
-        for fn in sorted(tf.io.gfile.glob('gs://download.magenta.tensorflow.org/models/music_vae/colab2/midi/mel_2bar*.mid'))],
+    input_mel_midi_data,
+    filename,
     temperature = 0.5,
     num_steps=15,
     start_melody=0,
-    end_melody=1):
+    end_melody=1,
+    ):
     
     # Load the pre-trained model.
     mel_2bar_config = configs.CONFIG_MAP['cat-mel_2bar_big']
@@ -30,6 +30,5 @@ def generate(
     start_mel = extracted_mels[start_melody]
     end_mel = extracted_mels[end_melody]
 
-    mel_2bar_interp = interpolate(mel_2bar, start_mel, end_mel, num_steps=num_steps, temperature=temperature)
+    mel_2bar_interp = interpolate(mel_2bar, start_mel, end_mel, filename=filename, num_steps=num_steps, temperature=temperature)
     
-    return mel_2bar_interp
