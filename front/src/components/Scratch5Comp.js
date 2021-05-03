@@ -20,7 +20,7 @@ import 'react-image-picker/dist/index.css'
 import '../button.css'
 
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
-
+const superagent = require('superagent');
 export default class Scratch5Comp extends Component{
 
     constructor(props) {
@@ -48,7 +48,10 @@ export default class Scratch5Comp extends Component{
     }
 
     generateRandomMusicRequest = async (long) => {
-        const url ='http://848117ecf059.ngrok.io/api/v1/compose/polyphonic/musegan/v0'
+        var servername;
+        const response = await superagent.get('http://127.0.0.1:5000/')
+        servername = JSON.parse(response.text).idd
+        const url =`${(servername)}/api/v1/compose/polyphonic/musegan/v0/dev-tmp?chords=${(this.state.chords)}&style=${(this.state.style)}&melody_drum=${(this.state.melodyDrums)}&melody_piano=${(this.state.melodyPiano)}&melody_guitar=${(this.state.melodyGuitar)}&melody_bass=${(this.state.melodyBass)}&melody_strings=${(this.state.melodyStrings)}&groove_drum=${(this.state.grooveDrums)}&groove_piano=${(this.state.groovePiano)}&groove_guitar=${(this.state.grooveGuitar)}&groove_bass=${(this.state.grooveBass)}&groove_strings=${(this.state.grooveStrings)}`
         //todo catch error
         fetch(url)
         .then( res => res.blob() )
