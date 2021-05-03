@@ -1,7 +1,6 @@
 import logo from '../images/logowhite.png'
 import {Link} from 'react-router-dom';
 
-import { database } from 'firebase/firebase';
 import React, {Component} from 'react';
 import ResultTile from "./ResultTile";
 import ImagePicker from "react-image-picker";
@@ -25,13 +24,8 @@ import ProgressButton from "react-progress-button";
 import '../button.css'
 import {toast, Toaster} from "react-hot-toast";
 
-
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
-const admin = require('firebase-admin');
-const serviceAccount = require('../database/firestore/cred.json');
-
-
-
+const superagent = require('superagent');
 
 export default class MatchComp extends Component{
     constructor(props) {
@@ -46,6 +40,7 @@ export default class MatchComp extends Component{
         }
         this.onDrop = this.onDrop.bind(this);
         this.generateFile = this.generateFile.bind(this);
+        this.getaservernameandpost = this.getaservernameandpost.bind(this);
     }
 
     //todo to access contents of file, use API FileReader, see example in Dropzone documentation
@@ -65,6 +60,34 @@ export default class MatchComp extends Component{
             };
         })
     }
+
+    async getaservernameandpost(fileindex, formData){
+        var servername;
+        const response = await superagent.get('http://127.0.0.1:5000/')
+        servername = JSON.parse(response.text).idd
+        console.log(response.text)
+        console.log(servername)
+        fetch(`${(servername)}/api/v1/compose/monophonic/lstm/v0?length=200&nb_files=${(fileindex)}`, {
+            // content-type header should not be specified!
+            method: 'POST',
+            body: formData,
+          })
+            .then(response => response.blob())
+            .then( blob => saveAs(blob, 'music.mid'))
+            .then(success => {this.setState({
+                isLoading: false,
+                buttonState: 'success',
+                hasResult: true,
+                downloadLink: '' //insert download link...,
+            })}).catch((error) => {
+                    toast.error("Something went wrong. Please try again later");
+                    this.setState({
+                        //isLoading: false,
+                        buttonState: 'error',
+                        hasResult: false,
+                    });
+                })
+        }
 
     generateFile() {
         //get files with FileReader API as blobs
@@ -90,48 +113,18 @@ export default class MatchComp extends Component{
             buttonState: 'loading',
         });
 
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount)
-          });
-          
-        const database = admin.firestore();
-        const docRef = database.collection('ids').doc('serverid');
-        docRef.get().then((doc) => {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-            const dataretrieved = JSON.stringify(doc.data);
-            console.log("dataretrieved");
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
-
+        this.getaservernameandpost( fileindex, formData);
+    }
+        
+        
+    
+        //todo catch error
+       
+       
         
 
 
-        fetch(`http://aa41a02e41fb.ngrok.io/api/v1/compose/monophonic/lstm/v0?length=200&nb_files=${(fileindex)}`, {
-            // content-type header should not be specified!
-            method: 'POST',
-            body: formData,
-          })
-            .then(response => response.blob())
-            .then( blob => saveAs(blob, 'music.mid'))
-            .then(success => {this.setState({
-                isLoading: false,
-                buttonState: 'success',
-                hasResult: true,
-                downloadLink: '' //insert download link...,
-            })}).catch((error) => {
-                    toast.error("Something went wrong. Please try again later");
-                    this.setState({
-                        isLoading: false,
-                        buttonState: 'error',
-                        hasResult: false,
-                    });
-                })
+        
 
         //call code to generate file and get download link
         //wait until complete
@@ -140,7 +133,7 @@ export default class MatchComp extends Component{
         //this.generateRandomMusicRequest()
 
         //if impossible to use download links download file immediately, will remove download button from result tile...
-    }
+
 
     render() {
         const selectedStyle = {
