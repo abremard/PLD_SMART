@@ -2,18 +2,27 @@
   "comment": "----- Data model of the Artists document, files are sorted by artist only -----",
   "comment_TODO": "TODO: possibly add each artists's genre here?",
 
-  "acdc": [
-    "highway_to_hell.mid",
-    "hells_bells.mid"
-  ],
+  "acdc": {
+    "tracks": [
+      "highway_to_hell.mid",
+      "hells_bells.mid"
+    ],
+    "name": "AC/DC"
+  },
 
-  "the_beatles": [
-    "hey_jude.mid",
-    "lucy_in_the_sky.mid"
-  ],
+  "the_beatles": {
+    "tracks": [
+      "hey_jude.mid",
+      "lucy_in_the_sky.mid"
+    ],
+    "name": "The Beatles"
+  },
 
-  "nightwish": [
-    "the_greatest_show_on_earth.mid",
-    "the_islander.mid"
-  ]
+  "nightwish": {
+    "tracks": [
+      "the_greatest_show_on_earth.mid",
+      "the_islander.mid"
+    ],
+    "name": "Nightwish"
+  }
 }

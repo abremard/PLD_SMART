@@ -15,13 +15,13 @@ import os
 from src.database.firestore.utils_firestore import *    # initializes firebase connexion
 
 
-def upload_midi_file(local_file_path: str, firebase_file_name: str, verbose=False):
+def upload_midi_file(local_file_path: str, firebase_file_path_from_midi_dir: str, verbose=False):
 
     db = firestore.client()
     bucket = storage.bucket()  # ref to Firebase Storage
 
     # output file (path & name in Firebase Storage)
-    blob = bucket.blob(f'MIDI/{firebase_file_name}')
+    blob = bucket.blob(f'MIDI/{firebase_file_path_from_midi_dir}')
 
     with open(local_file_path, 'rb') as local_file:
         blob.upload_from_file(local_file)
@@ -34,9 +34,10 @@ if __name__ == "__main__":
 
     init_firebase_connexion()
     # test
-    test_firebase_file_name = "freedom_dive.mid"
+    test_firebase_file_name = "Gipsy_kings/DELETE_ME.mid"
+    local_path = '../test_data/Gipsy Kings/Baila Me.mid_drums.mid'
 
     dirname = os.path.dirname(__file__)
-    test_local_path = os.path.join(dirname, '../test_data/Freedom Dive.mid')
+    test_local_path = os.path.join(dirname, local_path)
 
     upload_midi_file(test_local_path, test_firebase_file_name)

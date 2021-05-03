@@ -6,8 +6,12 @@ import os
 import sys
 
 
+db = None
+
+
 def init_firebase_connexion(verbose=True):
-    print("Initializing Firebase connexion...", file=sys.stderr)
+    if verbose:
+        print("Initializing Firebase connexion...", file=sys.stderr)
     # ----------- Initialize Firebase connexion
     dirname = os.path.dirname(__file__)
     credentials_file = os.path.join(dirname, './cred.json')
@@ -16,6 +20,7 @@ def init_firebase_connexion(verbose=True):
     firebase_admin.initialize_app(cred, {
         'storageBucket': 'ilolio.appspot.com'       # default bucket, maybe change for a custom bucket later
     })
+    global db
     db = firestore.client()
     if verbose:
         print("Firebase connexion successfully initiated.", file=sys.stderr)
@@ -39,6 +44,9 @@ def add_entry(file_ref: str, genre: str, artist: str, *instruments: str):
 
     """
 
+    if db is None:
+        raise Exception("Firebase connexion not initialized. Please use init_firebase_connexion before caling this function.")
+
     if file_ref is None:
         raise TypeError("Must provide a file_ref, provided None")
 
@@ -50,18 +58,22 @@ def add_entry(file_ref: str, genre: str, artist: str, *instruments: str):
         # todo maybe remove formatting if already done before this step
         formatted_instruments.append("unknown" if instrument is None else format_string(instrument))
 
-    print(f"formatted values: {formatted_artist}, {formatted_genre}, {formatted_instruments}")
+    # print(f"formatted values: {formatted_artist}, {formatted_genre}, {formatted_instruments}")
 
-    _add_genre_artist(formatted_genre, formatted_artist, file_ref)
-    _add_artist(formatted_artist, file_ref)
+    _add_genre_artist(formatted_genre, formatted_artist, artist, file_ref)
+    _add_artist(formatted_artist, artist, file_ref)
 
     for instrument in formatted_instruments:
         _add_instrument(instrument, file_ref)
 
-    _add_track(file_ref, formatted_genre, formatted_artist, *formatted_instruments)
+    _add_track(file_ref, formatted_genre, formatted_artist, artist, *formatted_instruments)
 
 
 def reset_database(confirm=True):
+
+    if db is None:
+        raise Exception("Firebase connexion not initialized. Please use init_firebase_connexion before caling this function.")
+
     if confirm:
         user_confirm = input("WARNING: Reset database content? (Y/N): ")
         if user_confirm not in ('y', 'Y'):
@@ -102,14 +114,16 @@ def format_string(input_str: str):
 
 # --- internal functions - to be called together for db consistency and not by
 #           the script's end user directly
-def _add_genre_artist(genre: str, artist: str, file_ref: str):
+def _add_genre_artist(genre: str, formatted_artist: str, artist_name:str, file_ref: str):
     genre_doc = db.collection(u"Tags").document(u"Genres")
-    genre_doc.update({f"{genre}.{artist}": firestore.ArrayUnion([file_ref])})
+    genre_doc.update({f"{genre}.{formatted_artist}.tracks": firestore.ArrayUnion([file_ref])})
+    genre_doc.update({f"{genre}.{formatted_artist}.name": artist_name})
 
 
-def _add_artist(artist: str, file_ref: str):
+def _add_artist(formatted_artist: str, artist_name: str, file_ref: str):
     artist_doc = db.collection(u"Tags").document(u"Artists")
-    artist_doc.update({artist: firestore.ArrayUnion([file_ref])})
+    artist_doc.update({f"{formatted_artist}.tracks": firestore.ArrayUnion([file_ref])})
+    artist_doc.update({f"{formatted_artist}.name": artist_name})
 
 
 def _add_instrument(instrument: str, file_ref: str):
@@ -117,8 +131,8 @@ def _add_instrument(instrument: str, file_ref: str):
     instruments_doc.update({instrument: firestore.ArrayUnion([file_ref])})
 
 
-def _add_track(file_ref: str, genre: str, artist: str, *instruments: str):
-    file_ref = file_ref.split('.')[0]
+def _add_track(file_ref: str, genre: str, artist: str, artist_name: str, *instruments: str):
+    file_ref = file_ref.split('.')[0].split('/')[-1]
     tracks_doc = db.collection(u"Tags").document(u"Tracks")
-    tracks_doc.update({f"{file_ref}.artist": artist, f"{file_ref}.genre": genre})
+    tracks_doc.update({f"{file_ref}.artist": artist, f"{file_ref}.genre": genre, f"{file_ref}.artist_name": artist_name})
     tracks_doc.update({f"{file_ref}.instruments": firestore.ArrayUnion([ins for ins in instruments])})
