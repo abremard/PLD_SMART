@@ -5,13 +5,14 @@ import Dropzone from 'react-dropzone'
 import Slider, {Handle, SliderTooltip} from 'rc-slider';
 import {toast} from "react-hot-toast";
 import ProgressButton from "react-progress-button";
-
+import { saveAs } from 'file-saver';
 import ResultTile from "./ResultTile";
 import FileTile from "./FileTile";
 
 import 'react-image-picker/dist/index.css'
 import '../button.css'
 import '../slider.css';
+const superagent = require('superagent');
 
 export default class TogetherComp extends Component{
     constructor(props) {
@@ -29,8 +30,38 @@ export default class TogetherComp extends Component{
         }
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
-        this.generateFile = this.generateFile.bind(this);
+        this.generateFiles = this.generateFiles.bind(this);
+        this.getaservernameandpost = this.getaservernameandpost.bind(this)
     }
+
+    async getaservernameandpost(formData){
+        var servername;
+        const response = await superagent.get('http://127.0.0.1:5000/')
+        servername = JSON.parse(response.text).idd
+        console.log(response.text)
+        console.log(servername)
+        fetch(`${(servername)}/api/v1/interpolate/monophonic/vae/v0?balance=${(this.state.balance)/10}&length=${(this.state.length)}`, {
+            // content-type header should not be specified!
+            method: 'POST',
+            body: formData,
+          })
+            .then(response => response.blob())
+            .then( blob => saveAs(blob, 'music.mid'))
+            .then(success => {this.setState({
+                isLoading: false,
+                buttonState: 'success',
+                hasResult: true,
+                downloadLink: '' //insert download link...,
+            })}).catch((error) => {
+                    toast.error("Something went wrong. Please try again later");
+                    this.setState({
+                        //isLoading: false,
+                        buttonState: 'error',
+                        hasResult: false,
+                    });
+                })
+        }
+
 
     onDrop1(acceptedFiles){
         console.log(acceptedFiles);
@@ -61,20 +92,14 @@ export default class TogetherComp extends Component{
         })
     }
 
-    generateFile() {
+    generateFiles() {
         //get files
-        this.state.files.forEach((file) => {
-            const reader = new FileReader();
-            reader.onabort = () => toast.error("file reading was aborted");
-            reader.onerror = () => toast.error('file reading has failed')
-            reader.onload = () => {
-                // Do whatever you want with the file contents
-                //more on https://developer.mozilla.org/en-US/docs/Web/API/FileReader
-                const binaryStr = reader.result
-                console.log(binaryStr)
-            }
-            reader.readAsArrayBuffer(file)
-        })
+        var formData = new FormData();
+        formData.append('file0', this.state.file1[0]);
+        console.log(this.state.file1)
+        formData.append('file1', this.state.file2[0]);
+        
+
         //call code to generate file and get download link
         //wait until complete
         //when complete
@@ -82,6 +107,8 @@ export default class TogetherComp extends Component{
             isLoading: true,
             buttonState: 'loading',
         });
+
+        this.getaservernameandpost(formData);
 
     }
 
@@ -165,7 +192,7 @@ export default class TogetherComp extends Component{
                         <Slider min={0} max={100} defaultValue={50} handle={handle} step={10} onChange={value => {this.setState({balance : value})}}/>
                     </div>
                     <h6><br/> </h6>
-                    <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
+                    <ProgressButton onClick={this.generateFiles} state={this.state.buttonState}>
                         Generate
                     </ProgressButton>
                     <h5> </h5>

@@ -46,6 +46,7 @@ export default class Scratch5Comp extends Component{
         }
         this.generateFile = this.generateFile.bind(this);
     }
+    
 
     generateRandomMusicRequest = async (long) => {
         var servername;
