@@ -17,7 +17,8 @@ export default class TogetherComp extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            files: [],
+            file1: [],
+            file2: [],
             buttonState: '',
             isLoading: false,
             hasResult:false,
@@ -26,21 +27,36 @@ export default class TogetherComp extends Component{
             length: 50,
             balance: 50
         }
-        this.onDrop = this.onDrop.bind(this);
+        this.onDrop1 = this.onDrop1.bind(this);
+        this.onDrop2 = this.onDrop2.bind(this);
         this.generateFile = this.generateFile.bind(this);
     }
 
-    onDrop(acceptedFiles){
+    onDrop1(acceptedFiles){
         console.log(acceptedFiles);
-        var filesTemp = this.state.files;
+        var filesTemp = this.state.file1;
         acceptedFiles.forEach(item => {
-            if (filesTemp.length<2) {
+            if (filesTemp.length<1) {
                 filesTemp.push(item);
             }
         });
         this.setState(state => {
             return {
-                files: filesTemp,
+                file1: filesTemp,
+            };
+        })
+    }
+    onDrop2(acceptedFiles){
+        console.log(acceptedFiles);
+        var filesTemp = this.state.file2;
+        acceptedFiles.forEach(item => {
+            if (filesTemp.length<1) {
+                filesTemp.push(item);
+            }
+        });
+        this.setState(state => {
+            return {
+                file2: filesTemp,
             };
         })
     }
@@ -104,23 +120,35 @@ export default class TogetherComp extends Component{
                         the length and the balance of your mashup for the perfect result.</p>
                     <div className="files">
                         <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={"File 1 into File 2"} hasResult={this.state.hasResult}></ResultTile>
-                        <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={"File 2 into File 1"} hasResult={this.state.hasResult}></ResultTile>
                     </div>
-                    <h5>Upload your files</h5>
+                    <h5>Upload your files in order</h5>
                     <div className="files">
-                        {this.state.files.map(item => (
-                            <FileTile fileName={item.name} downloadLink={""}></FileTile>
-                        ))}
-                        {this.state.files.length == 2 ?
-                            <p></p>
-                            : <Dropzone onDrop={this.onDrop}>
+                        {this.state.file1.length == 1 ?
+                            <FileTile fileName={this.state.file1[0].name} downloadLink={""}></FileTile>
+                            : <Dropzone onDrop={this.onDrop1} maxFiles={1}>
                                 {({getRootProps, getInputProps}) => (
                                     <section>
                                         <div className="tile" {...getRootProps()}>
                                             <h4>Upload File</h4>
                                             <div className="zone">
                                                 <input {...getInputProps()} />
-                                                <p>Drag & drop up your 2 files here, or click to select files</p>
+                                                <p>Drag & drop up your file here, or click to select a file</p>
+                                            </div>
+                                        </div>
+                                    </section>
+                                )}
+                            </Dropzone>}
+
+                        {this.state.file2.length == 1 ?
+                            <FileTile fileName={this.state.file2[0].name} downloadLink={""}></FileTile>
+                            : <Dropzone onDrop={this.onDrop2} maxFiles={1}>
+                                {({getRootProps, getInputProps}) => (
+                                    <section>
+                                        <div className="tile" {...getRootProps()}>
+                                            <h4>Upload File</h4>
+                                            <div className="zone">
+                                                <input {...getInputProps()} />
+                                                <p>Drag & drop up your file here, or click to select a file</p>
                                             </div>
                                         </div>
                                     </section>
