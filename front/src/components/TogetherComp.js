@@ -165,7 +165,6 @@ export default class TogetherComp extends Component{
                                     </section>
                                 )}
                             </Dropzone>}
-
                         {this.state.file2.length == 1 ?
                             <FileTile fileName={this.state.file2[0].name} downloadLink={""}></FileTile>
                             : <Dropzone onDrop={this.onDrop2} maxFiles={1}>

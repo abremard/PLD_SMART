@@ -3,7 +3,7 @@ import React from 'react'
 import logo from '../images/logowhitetext.png'
 import illustration from '../images/illustration.png'
 import scratch from '../images/scratch.png'
-import switchimg from '../images/switch.png'
+import jam from '../images/jam.png'
 import match from '../images/match.png'
 import together from '../images/together.png'
 import {Link} from "react-router-dom";
@@ -88,10 +88,9 @@ export default function Home() {
                                 will create a brand new midi file inspired by your uploads. Uses the LSTM algorithm.</p>
                     </td>
                     <td>
-                        <img src={switchimg}/>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam
-                                faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet,
-                                dolor, varius lectus odio libero, leo. Ultrices tristique.</p>
+                        <img src={jam}/>
+                            <p>Write your own notes, upload your unfinished piece and get rid of the inspiration block.
+                                Be creative and make any musical piece your own by tweaking the settings. Uses the ImprovRNN algorithm.</p>
                     </td>
                 </tr>
             </table>

@@ -6,6 +6,10 @@ import os
 import sys
 
 
+"""
+TODO add genre in artists document
+"""
+
 db = None
 
 
@@ -100,7 +104,7 @@ def format_string(input_str: str):
 
     """
 
-    valid_chars = frozenset(f"-_ !{string.ascii_letters}{string.digits}")
+    valid_chars = frozenset(f"-_ {string.ascii_letters}{string.digits}")
     # replace accents
     res = unidecode(input_str)
     # keep only valid characters
@@ -116,14 +120,13 @@ def format_string(input_str: str):
 #           the script's end user directly
 def _add_genre_artist(genre: str, formatted_artist: str, artist_name:str, file_ref: str):
     genre_doc = db.collection(u"Tags").document(u"Genres")
-    genre_doc.update({f"{genre}.{formatted_artist}.tracks": firestore.ArrayUnion([file_ref])})
-    genre_doc.update({f"{genre}.{formatted_artist}.name": artist_name})
+    genre_doc.update({f"{genre}.{formatted_artist}.tracks": firestore.ArrayUnion([file_ref]),
+                      f"{genre}.{formatted_artist}.name": artist_name})
 
 
 def _add_artist(formatted_artist: str, artist_name: str, file_ref: str):
     artist_doc = db.collection(u"Tags").document(u"Artists")
-    artist_doc.update({f"{formatted_artist}.tracks": firestore.ArrayUnion([file_ref])})
-    artist_doc.update({f"{formatted_artist}.name": artist_name})
+    artist_doc.update({f"{formatted_artist}.tracks": firestore.ArrayUnion([file_ref]), f"{formatted_artist}.name": artist_name})
 
 
 def _add_instrument(instrument: str, file_ref: str):
@@ -133,6 +136,7 @@ def _add_instrument(instrument: str, file_ref: str):
 
 def _add_track(file_ref: str, genre: str, artist: str, artist_name: str, *instruments: str):
     file_ref = file_ref.split('.')[0].split('/')[-1]
+    # print(f"file ref: {file_ref}")
     tracks_doc = db.collection(u"Tags").document(u"Tracks")
-    tracks_doc.update({f"{file_ref}.artist": artist, f"{file_ref}.genre": genre, f"{file_ref}.artist_name": artist_name})
-    tracks_doc.update({f"{file_ref}.instruments": firestore.ArrayUnion([ins for ins in instruments])})
+    tracks_doc.update({f"{file_ref}.artist": artist, f"{file_ref}.genre": genre, f"{file_ref}.artist_name": artist_name,
+                       f"{file_ref}.instruments": firestore.ArrayUnion([ins for ins in instruments])})
