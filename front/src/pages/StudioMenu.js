@@ -39,10 +39,8 @@ export default function StudioMenu() {
                         </td>
                         <td>
                             <img src={jam}/>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie
-                                    quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat,
-                                    cras amet, dolor, varius lectus odio libero, leo. Ultrices tristique ullamcorper
-                                    fermentum lacus diam proin sagittis, ac.</p>
+                                <p>Write your own notes, upload your unfinished piece and get rid of the inspiration block.
+                                    Be creative and make any musical piece your own by tweaking the settings. Uses the ImprovRNN algorithm.</p>
                                 <Link to="/jam">Let's Go!</Link>
                         </td>
                     </tr>

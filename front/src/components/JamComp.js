@@ -111,9 +111,9 @@ export default class JamComp extends Component{
                 <div className="scratch">
                     <Link to="/studio">back to studio</Link>
                     <h4>Jam Session</h4>
-                    <p>Bring your favorite two musical pieces together. Upload two midi files and our
-                        algorithm will interpolate and create two original mash-ups of your uploaded music. Choose
-                        the length and the balance of your mashup for the perfect result.</p>
+                    <p>Write your own notes, upload your unfinished piece and get rid of the inspiration block.
+                        Be creative and make any musical piece your own by tweaking the settings.
+                    </p>
                     <div className="files">
                         <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={"File 1 into File 2"} hasResult={this.state.hasResult}></ResultTile>
                     </div>
@@ -162,7 +162,7 @@ export default class JamComp extends Component{
                             }}
                         />
                         {this.state.selectedChords.map(item => (
-                            <div className="chip" onClick={() => this.treatClick(item)}>
+                            <div className="chip" >
                                 <p>{item}</p>
                             </div>
                         ))}
