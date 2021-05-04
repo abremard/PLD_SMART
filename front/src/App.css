@@ -36,3 +36,79 @@
     transform: rotate(360deg);
   }
 }
+
+#rotatedDiv {
+  transform-origin:top left;
+  transform: rotate(90deg);
+  margin-left: 61vw;
+  overflow: hidden;
+  position : relative; bottom:0;
+}
+
+/* Custom player style */
+#section3 midi-player {
+  display: block;
+  width: inherit;
+  border: 2px;
+  margin: 4px;
+  margin-bottom: 0;
+  margin-top: 5%;
+  width: 1055px;
+}
+#section3 midi-player::part(control-panel) {
+  background: #ffffff;
+  border: 2px solid #000;
+  border-radius: 10px 10px 0 0;
+}
+#section3 midi-player::part(play-button) {
+  color: white;
+  border: 2px solid currentColor;
+  background-color: rgb(52, 182, 233);
+  border-radius: 20px;
+  transition: all 0.2s;
+  content: 'hello';
+}
+#section3 midi-player::part(play-button):hover {
+  color: white;
+  background-color: rgb(30, 119, 146);
+  border-radius: 10px;
+}
+#section3 midi-player::part(time) {
+  font-family: monospace;
+}
+
+/* Custom visualizer style */
+#section3 midi-visualizer .waterfall-visualizer {
+  transform: scaleX(-1);
+  background: white;
+  border: 2px solid black;
+  border-top: none;
+  padding-top: 0px;
+  border-radius: 0 0 10px 10px;
+  margin: 4px;
+  margin-top:1%;
+  overflow: visible;
+  width: 60vw;
+  height: 60vw;
+  
+}
+#section3 midi-visualizer svg rect.note {
+  opacity: 0.9;
+  stroke-width: 2;
+}
+#section3 midi-visualizer svg rect.note[data-instrument="0"]{
+  fill: rgb(245, 0, 0);
+  stroke: rgb(70, 7, 7);
+}
+#section3 midi-visualizer svg rect.note[data-instrument="2"]{
+  fill: rgb(86, 217, 250);
+  stroke: rgb(22, 73, 73);
+}
+#section3 midi-visualizer svg rect.note[data-is-drum="true"]{
+  fill: #888;
+  stroke: #888;
+}
+#section3 midi-visualizer svg rect.note.active {
+  opacity: 0.9;
+  stroke: #000;
+}

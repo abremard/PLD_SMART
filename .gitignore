@@ -5,6 +5,8 @@ venv
 src/database/firestore/cred.json
 src/database/client_secrets.json
 /src/database/metadata_processing/spotify_credentials.txt
+/node_modules
+/newv
 
 front/yarn.lock
 front/package-lock.json
