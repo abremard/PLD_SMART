@@ -12,3 +12,6 @@ def rename_genre(old_name: str, new_name: str):
     # TODO maintain consistency between different documents (genres, artists & maybe songs)
     pass
 
+def move_artist_to_new_genre(todo):
+    # todo
+    pass
