@@ -445,15 +445,22 @@ h3 {
 }
 
 .chip{
+  display: flex;
   margin-right: 10px;
   padding: 5px 10px;
   background-color: #6EC3F4;
   color: white;
   height: 20px;
-  border-radius: 20px;
+  border-radius: 11px;
 }
 
 .chip p{
   color:white;
   margin: 0;
+}
+
+.chip img{
+  width: 17px;
+  height: 17px;
+  margin-left: 4px;
 }

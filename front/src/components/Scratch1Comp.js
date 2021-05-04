@@ -14,6 +14,7 @@ import hiphop from "../images/hip hop.png"
 import indie from "../images/indie.png"
 import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
+import xmark from "../images/xmark.png"
 
 //import 'react-image-picker/dist/index.css'
 import '../imagepicker.css'
@@ -39,6 +40,8 @@ export default class Scratch1Comp extends Component{
             songs: ['hello', 'hey', 'hello'],
             selectedSongs: [],
             value: '',
+            styleOptions: [{name: 'Pop', id: 1},{name: 'Rock', id: 2},{name: 'Hip Hop', id: 3},{name: 'EDM', id: 4}],
+            selectedStyles: null
         }
         this.onPick = this.onPick.bind(this);
         this.generateFile = this.generateFile.bind(this);
@@ -46,6 +49,8 @@ export default class Scratch1Comp extends Component{
         this.onRemoveArtist = this.onRemoveArtist.bind(this);
         this.onSelectInstrument = this.onSelectInstrument.bind(this);
         this.onRemoveInstrument = this.onRemoveInstrument.bind(this);
+        this.onSelectStyle = this.onSelectStyle.bind(this);
+        this.onRemoveStyle = this.onRemoveStyle.bind(this);
         this.handleClickChip = this.handleClickChip.bind(this);
     }
 
@@ -76,6 +81,18 @@ export default class Scratch1Comp extends Component{
     onRemoveInstrument(selectedList, removedItem) {
         this.setState({
             selectedInstruments: selectedList
+        })
+    }
+
+    onSelectStyle(selectedList, selectedItem) {
+        this.setState({
+            selectedStyles: selectedList
+        })
+    }
+
+    onRemoveStyle(selectedList, removedItem) {
+        this.setState({
+            selectedStyles: selectedList
         })
     }
 
@@ -130,13 +147,18 @@ export default class Scratch1Comp extends Component{
                             style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
                         />
                     </div>
-                    <h6>Choose your style</h6>
-                    <ImagePicker
-                        images ={styleList.map((image, i) => ({src: image, value: i}))}
-                        onPick ={this.onPick}
-                    />
-                    <h6>Choose an artist of inspiration (optional)</h6>
                     <div className="scratch1">
+                        <h6>Choose your style</h6>
+                        <Multiselect
+                            options={this.state.styleOptions} // Options to display in the dropdown
+                            onSelect={this.onSelectStyle} // Function will trigger on select event
+                            onRemove={this.onRemoveStyle} // Function will trigger on remove event
+                            displayValue="name" // Property name to display in the dropdown op
+                            singleSelect
+                            id="css_custom"
+                            style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
+                        />
+                        <h6>Choose an artist of inspiration (optional)</h6>
                         <Multiselect
                             options={this.state.artistOptions} // Options to display in the dropdown
                             onSelect={this.onSelectArtist} // Function will trigger on select event
@@ -188,7 +210,8 @@ export default class Scratch1Comp extends Component{
                         />
                         {this.state.selectedSongs.map(item => (
                             <div className="chip" onClick={this.handleClickChip.bind(this, item)}>
-                                <p>x {item}</p>
+                                <p>{item}</p>
+                                <img src={xmark}/>
                             </div>
                         ))}
                     </div>
@@ -202,3 +225,9 @@ export default class Scratch1Comp extends Component{
         )
     }
 }
+
+//FOR LATER
+//<ImagePicker
+//    images ={styleList.map((image, i) => ({src: image, value: i}))}
+//    onPick ={this.onPick}
+///>
