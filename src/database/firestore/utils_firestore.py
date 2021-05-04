@@ -6,6 +6,10 @@ import os
 import sys
 
 
+"""
+TODO add genre in artists document
+"""
+
 db = None
 
 
@@ -132,7 +136,7 @@ def _add_instrument(instrument: str, file_ref: str):
 
 def _add_track(file_ref: str, genre: str, artist: str, artist_name: str, *instruments: str):
     file_ref = file_ref.split('.')[0].split('/')[-1]
+    # print(f"file ref: {file_ref}")
     tracks_doc = db.collection(u"Tags").document(u"Tracks")
     tracks_doc.update({f"{file_ref}.artist": artist, f"{file_ref}.genre": genre, f"{file_ref}.artist_name": artist_name,
                        f"{file_ref}.instruments": firestore.ArrayUnion([ins for ins in instruments])})
-    # tracks_doc.update({})

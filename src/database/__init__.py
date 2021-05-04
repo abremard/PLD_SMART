@@ -23,6 +23,8 @@ def format_file_name(file_name: str) -> str:
         # print(f"after formatting: {formatted_name}")
     else:
         formatted_name = format_string(str(file_name).split('.')[0])
+
+    formatted_name = re.sub("-", "_", formatted_name)
     return f"{formatted_name}.mid"
 
 
@@ -69,7 +71,7 @@ def process_files_from_dir(directory_path: str):
     init_firebase_connexion()       # todo uncomment
     init_spotify_connexion()        # todo uncomment
 
-    reset_database()  # todo comment when updating
+    # reset_database()  # todo comment when updating
 
     directory = os.path.abspath(os.path.dirname(directory_path))
 
@@ -89,7 +91,7 @@ def process_files_from_dir(directory_path: str):
         for filename in files:
             # get track instrument
             instrument = get_track_instrument(filename)
-            # print(f"> Current file: {filename}, instrument: {instrument}")
+            print(f"> Current file: {filename}, instrument: {instrument}")
 
             # -- upload midi to firebase
             file_path = os.path.join(dirpath, filename)
