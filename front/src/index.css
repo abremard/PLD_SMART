@@ -345,6 +345,10 @@ h3 {
   color: white;
 }
 
+.scratch1 input{
+  margin: 0px;
+}
+
 .scratch a {
   color: white;
   background-color: #7038FF;

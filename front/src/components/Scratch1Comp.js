@@ -112,27 +112,29 @@ export default class Scratch1Comp extends Component{
                         onPick ={this.onPick}
                     />
                     <h6>Choose an artist of inspiration (optional)</h6>
-                    <Multiselect
-                        options={this.state.artistOptions} // Options to display in the dropdown
-                        onSelect={this.onSelectArtist} // Function will trigger on select event
-                        onRemove={this.onRemoveArtist} // Function will trigger on remove event
-                        displayValue="name" // Property name to display in the dropdown op
-                        closeIcon = "circle" // tions
-                        id="css_custom"
-                        style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
-                    />
-                    <h6>Choose an instrument</h6>
-                    <Multiselect
-                        options={this.state.instrumentOptions} // Options to display in the dropdown
-                        onSelect={this.onSelectInstrument} // Function will trigger on select event
-                        onRemove={this.onRemoveInstrument} // Function will trigger on remove event
-                        displayValue="name" // Property name to display in the dropdown op
-                        singleSelect
-                        id="css_custom"
-                        style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
-                    />
-                    <h6>Maximum Length</h6>
-                    <input type="number" name="name" onChange={value=>{this.setState({length: value})}} defaultValue={50} />
+                    <div className="scratch1">
+                        <Multiselect
+                            options={this.state.artistOptions} // Options to display in the dropdown
+                            onSelect={this.onSelectArtist} // Function will trigger on select event
+                            onRemove={this.onRemoveArtist} // Function will trigger on remove event
+                            displayValue="name" // Property name to display in the dropdown op
+                            closeIcon = "circle" // tions
+                            id="css_custom"
+                            style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
+                        />
+                        <h6>Choose an instrument</h6>
+                        <Multiselect
+                            options={this.state.instrumentOptions} // Options to display in the dropdown
+                            onSelect={this.onSelectInstrument} // Function will trigger on select event
+                            onRemove={this.onRemoveInstrument} // Function will trigger on remove event
+                            displayValue="name" // Property name to display in the dropdown op
+                            singleSelect
+                            id="css_custom"
+                            style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
+                        />
+                        <h6>Maximum Length</h6>
+                        <input type="number" name="name" onChange={value=>{this.setState({length: value})}} defaultValue={50} />
+                    </div>
                     <h6><br/> </h6>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate
