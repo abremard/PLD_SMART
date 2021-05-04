@@ -104,7 +104,7 @@ def format_string(input_str: str):
 
     """
 
-    valid_chars = frozenset(f"-_ !{string.ascii_letters}{string.digits}")
+    valid_chars = frozenset(f"-_ {string.ascii_letters}{string.digits}")
     # replace accents
     res = unidecode(input_str)
     # keep only valid characters

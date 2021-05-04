@@ -67,9 +67,11 @@ def get_track_instrument(filename: str) -> str:
 
 
 # main method linking all the important processing stuff
-def process_files_from_dir(directory_path: str):
+def process_files_from_dir(directory_path: str, input_genre: str = None):
     init_firebase_connexion()       # todo uncomment
-    init_spotify_connexion()        # todo uncomment
+
+    if input_genre is None:
+        init_spotify_connexion()        # todo uncomment
 
     # reset_database()  # todo comment when updating
 
@@ -85,7 +87,10 @@ def process_files_from_dir(directory_path: str):
         # get metadata about the file
         artist = os.path.basename(dirpath)
         formatted_artist = format_string(artist)
-        genre = get_artist_genre(artist)
+        if input_genre is None:
+            genre = get_artist_genre(artist)
+        else:
+            genre = input_genre
         print(f"----- Current dir: artist {artist} and genre {genre}, {len(files)} files to process.")
 
         for filename in files:
@@ -113,7 +118,10 @@ def main():
         dirname = os.path.dirname(__file__)
         dir = os.path.join(dirname, input_path)
 
-        process_files_from_dir(dir)
+        if len(sys.argv) > 2:
+            process_files_from_dir(dir, input_genre=sys.argv[2])
+        else:
+            process_files_from_dir(dir)
 
     else:
         raise Exception("No input provided: please provide the path to the directory you wish to process")
