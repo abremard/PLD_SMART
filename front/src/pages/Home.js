@@ -3,7 +3,7 @@ import React from 'react'
 import logo from '../images/logowhitetext.png'
 import illustration from '../images/illustration.png'
 import scratch from '../images/scratch.png'
-import switchimg from '../images/switch.png'
+import jam from '../images/jam.png'
 import match from '../images/match.png'
 import together from '../images/together.png'
 import {Link} from "react-router-dom";
@@ -88,7 +88,7 @@ export default function Home() {
                                 will create a brand new midi file inspired by your uploads. Uses the LSTM algorithm.</p>
                     </td>
                     <td>
-                        <img src={switchimg}/>
+                        <img src={jam}/>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie quam
                                 faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat, cras amet,
                                 dolor, varius lectus odio libero, leo. Ultrices tristique.</p>

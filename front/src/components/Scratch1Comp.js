@@ -25,7 +25,7 @@ export default class Scratch1Comp extends Component{
         super(props)
         this.state = {
             image: null,
-            artistOptions: [{name: 'Beyonce', id: 1},{name: 'Jay-Z', id: 2},{name: 'Lady Gaga', id: 3},{name: 'Dominic Fike', id: 4}],
+            artistOptions: [{name: 'Beyonce', id: 1},{name: 'Jay-Z', id: 2},{name: 'Lady Gaga', id: 3},{name: 'Dominic Fike', id: 4}, {name: 'Beyonce', id: 5}, {name: 'Beyonce', id: 6}],
             selectedArtists: null,
             instrumentOptions: [{name: 'Guitar', id: 1},{name: 'Piano', id: 2},{name: 'Drums', id: 3},{name: 'Keyboard', id: 4}],
             selectedInstruments: null,
@@ -42,13 +42,17 @@ export default class Scratch1Comp extends Component{
         this.onRemoveArtist = this.onRemoveArtist.bind(this);
         this.onSelectInstrument = this.onSelectInstrument.bind(this);
         this.onRemoveInstrument = this.onRemoveInstrument.bind(this);
+
+
     }
+
 
     onPick(image) {
         this.setState({image})
     }
 
     onSelectArtist(selectedList, selectedItem) {
+
         this.setState({
             selectedArtists: selectedList
         });
@@ -133,6 +137,7 @@ export default class Scratch1Comp extends Component{
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate
                     </ProgressButton>
+
                     <h5> </h5>
                 </div>
             </>

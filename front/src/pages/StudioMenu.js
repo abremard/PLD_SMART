@@ -1,7 +1,7 @@
 import React from 'react'
 
 import scratch from '../images/scratch.png'
-import switchimg from '../images/switch.png'
+import jam from '../images/jam.png'
 import match from '../images/match.png'
 import together from '../images/together.png'
 import Navbar from "../components/navbar";
@@ -38,12 +38,12 @@ export default function StudioMenu() {
                                 <Link to="/match">Let's Go!</Link>
                         </td>
                         <td>
-                            <img src={switchimg}/>
+                            <img src={jam}/>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat viverra molestie
                                     quam faucibus viverra nisl. Vitae eget risus, auctor viverra pharetra. Consequat,
                                     cras amet, dolor, varius lectus odio libero, leo. Ultrices tristique ullamcorper
                                     fermentum lacus diam proin sagittis, ac.</p>
-                                <a href="">Let's Go!</a>
+                                <Link to="/jam">Let's Go!</Link>
                         </td>
                     </tr>
                 </table>
