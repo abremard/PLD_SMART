@@ -25,7 +25,7 @@ export default class Scratch1Comp extends Component{
         super(props)
         this.state = {
             image: null,
-            artistOptions: [{name: 'Beyonce', id: 1},{name: 'Jay-Z', id: 2},{name: 'Lady Gaga', id: 3},{name: 'Dominic Fike', id: 4}],
+            artistOptions: [{name: 'Beyonce', id: 1},{name: 'Jay-Z', id: 2},{name: 'Lady Gaga', id: 3},{name: 'Dominic Fike', id: 4}, {name: 'Beyonce', id: 5}, {name: 'Beyonce', id: 6}],
             selectedArtists: null,
             instrumentOptions: [{name: 'Guitar', id: 1},{name: 'Piano', id: 2},{name: 'Drums', id: 3},{name: 'Keyboard', id: 4}],
             selectedInstruments: null,
@@ -42,13 +42,17 @@ export default class Scratch1Comp extends Component{
         this.onRemoveArtist = this.onRemoveArtist.bind(this);
         this.onSelectInstrument = this.onSelectInstrument.bind(this);
         this.onRemoveInstrument = this.onRemoveInstrument.bind(this);
+
+
     }
+
 
     onPick(image) {
         this.setState({image})
     }
 
     onSelectArtist(selectedList, selectedItem) {
+
         this.setState({
             selectedArtists: selectedList
         });
@@ -108,31 +112,34 @@ export default class Scratch1Comp extends Component{
                         onPick ={this.onPick}
                     />
                     <h6>Choose an artist of inspiration (optional)</h6>
-                    <Multiselect
-                        options={this.state.artistOptions} // Options to display in the dropdown
-                        onSelect={this.onSelectArtist} // Function will trigger on select event
-                        onRemove={this.onRemoveArtist} // Function will trigger on remove event
-                        displayValue="name" // Property name to display in the dropdown op
-                        closeIcon = "circle" // tions
-                        id="css_custom"
-                        style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
-                    />
-                    <h6>Choose an instrument</h6>
-                    <Multiselect
-                        options={this.state.instrumentOptions} // Options to display in the dropdown
-                        onSelect={this.onSelectInstrument} // Function will trigger on select event
-                        onRemove={this.onRemoveInstrument} // Function will trigger on remove event
-                        displayValue="name" // Property name to display in the dropdown op
-                        singleSelect
-                        id="css_custom"
-                        style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
-                    />
-                    <h6>Maximum Length</h6>
-                    <input type="number" name="name" onChange={value=>{this.setState({length: value})}} defaultValue={50} />
+                    <div className="scratch1">
+                        <Multiselect
+                            options={this.state.artistOptions} // Options to display in the dropdown
+                            onSelect={this.onSelectArtist} // Function will trigger on select event
+                            onRemove={this.onRemoveArtist} // Function will trigger on remove event
+                            displayValue="name" // Property name to display in the dropdown op
+                            closeIcon = "circle" // tions
+                            id="css_custom"
+                            style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
+                        />
+                        <h6>Choose an instrument</h6>
+                        <Multiselect
+                            options={this.state.instrumentOptions} // Options to display in the dropdown
+                            onSelect={this.onSelectInstrument} // Function will trigger on select event
+                            onRemove={this.onRemoveInstrument} // Function will trigger on remove event
+                            displayValue="name" // Property name to display in the dropdown op
+                            singleSelect
+                            id="css_custom"
+                            style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
+                        />
+                        <h6>Maximum Length</h6>
+                        <input type="number" name="name" onChange={value=>{this.setState({length: value})}} defaultValue={50} />
+                    </div>
                     <h6><br/> </h6>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate
                     </ProgressButton>
+
                     <h5> </h5>
                 </div>
             </>

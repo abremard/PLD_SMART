@@ -338,10 +338,15 @@ h3 {
   background-color: black;
   font-family: Regular;
   font-size: 18px;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
+  margin-right: 20px;
   border: solid white 2px;
   height: 35px;
   color: white;
+}
+
+.scratch1 input{
+  margin: 0px;
 }
 
 .scratch a {
@@ -436,4 +441,18 @@ h3 {
 
 .maxislider{
   width: 500px;
+}
+
+.chip{
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #6EC3F4;
+  color: white;
+  height: 20px;
+  border-radius: 20px;
+}
+
+.chip p{
+  color:white;
+  margin: 0;
 }
