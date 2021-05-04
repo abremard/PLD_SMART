@@ -79,8 +79,7 @@
 
 /* Custom visualizer style */
 #section3 midi-visualizer .waterfall-visualizer {
-  transform: scaleX(-1);
-  background: white;
+  background: black;
   border: 2px solid black;
   border-top: none;
   padding-top: 0px;

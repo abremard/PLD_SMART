@@ -9,6 +9,7 @@ import Scratch1 from "./pages/Scratch1";
 import Match from "./pages/Match";
 import Together from "./pages/Together";
 import Jam from "./pages/Jam";
+import MidiDemo from "./pages/MidiDemo";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/match" component={Match}/>
         <Route exact path="/together" component={Together}/>
         <Route exact path="/jam" component={Jam}/>
+        <Route exact path="/demo" component={MidiDemo}/>
       </Switch>
     </>
   );

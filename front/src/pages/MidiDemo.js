@@ -12,7 +12,7 @@ export default function MidiDemo() {
     return(
        <div>
             <Navbar/>
-            <Player/>
+            <Player url="https://cdn.jsdelivr.net/gh/cifkao/html-midi-player@2b12128/jazz.mid"/>
             <ProgressButton >
                         download
             </ProgressButton>
