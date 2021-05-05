@@ -15,11 +15,17 @@ import hiphop from "../images/hip hop.png"
 import indie from "../images/indie.png"
 import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
+import pop from "../images/pop.png"
+import hardrock from "../images/hardrock.png"
+import metal from "../images/metal.png"
+import flamenco from "../images/flamenco.png"
+import classical from "../images/classical.png"
 import xmark from "../images/xmark.png"
 
 //import 'react-image-picker/dist/index.css'
 import '../imagepicker.css'
 import ReactAutocomplete from "react-autocomplete";
+import Slider, {Handle, SliderTooltip} from "rc-slider";
 const superagent = require('superagent');
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
 
@@ -28,9 +34,9 @@ export default class Scratch1Comp extends Component{
         super(props)
         this.state = {
             image: null,
-            artistOptions: [{name: 'Beyonce', id: 1},{name: 'Jay-Z', id: 2},{name: 'Lady Gaga', id: 3},{name: 'Dominic Fike', id: 4}, {name: 'Beyonce', id: 5}, {name: 'Beyonce', id: 6}],
+            artistOptions: [{name: 'Loading...', id: 1},{name: 'Make sure you have selected a style', id: 2},],
             selectedArtists: null,
-            instrumentOptions: [{name: 'guitar', id: 1},{name: 'piano', id: 2},{name: 'Drums', id: 3},{name: 'Keyboard', id: 4}],
+            instrumentOptions: [{name: 'guitar', id: 1},{name: 'piano', id: 2},{name: 'drums', id: 3},{name: 'bass', id: 4}, {name: 'strings', id: 4}],
             selectedInstruments: null,
             buttonState: '',
             isLoading: false,
@@ -38,10 +44,10 @@ export default class Scratch1Comp extends Component{
             downloadLink: '',
             fileName: 'New Creation',
             length: 50,
-            songs: ['hello', 'hey', 'hello'],
+            songs: ['Loading...', 'Make sure the previous fields are filles',],
             selectedSongs: [],
             value: '',
-            styleOptions: [{name: 'Pop', id: 1},{name: 'Rock', id: 2},{name: 'Hip Hop', id: 3},{name: 'EDM', id: 4}],
+            styleOptions: [{name: 'Loading...', id: 1},{name: 'Make sure you have selected an instrument', id: 2},],
             selectedStyles: null
         }
         this.onPick = this.onPick.bind(this);
@@ -249,6 +255,20 @@ export default class Scratch1Comp extends Component{
     }
 
     render() {
+        const handle = props => {
+            const { value, dragging, index, ...restProps } = props;
+            return (
+                <SliderTooltip
+                    prefixCls="rc-slider-tooltip"
+                    overlay={`${value}`}
+                    visible={dragging}
+                    placement="top"
+                    key={index}
+                >
+                    <Handle value={value} {...restProps} />
+                </SliderTooltip>
+            );
+        };
         const selectedStyle = {
             color: 'white',
             backgroundColor: 'black',
@@ -268,6 +288,10 @@ export default class Scratch1Comp extends Component{
                     <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <h5>Options</h5>
                     <div className="scratch1">
+                        <h6>Maximum Length</h6>
+                        <div className="maxislider">
+                            <Slider min={0} max={500} defaultValue={100} handle={handle} step={1} onChange={value => {this.setState({length: value})}} />
+                        </div>
                         <h6>Choose an instrument</h6>
                         <Multiselect
                             options={this.state.instrumentOptions} // Options to display in the dropdown
@@ -290,7 +314,7 @@ export default class Scratch1Comp extends Component{
                             id="css_custom"
                             style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
                         />
-                        <h6>Choose an artist of inspiration (optional)</h6>
+                        <h6>Choose an artist of inspiration</h6>
                         <Multiselect
                             options={this.state.artistOptions} // Options to display in the dropdown
                             onSelect={this.onSelectArtist} // Function will trigger on select event
@@ -300,8 +324,6 @@ export default class Scratch1Comp extends Component{
                             id="css_custom"
                             style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
                         />
-                        <h6>Maximum Length</h6>
-                        <input type="number" name="name" onChange={event=>{this.setState({length: event.target.value}); console.log(this.state.length)}} defaultValue={50} />
                     </div>
                     <h6>Choose songs</h6>
                     <div className="files">

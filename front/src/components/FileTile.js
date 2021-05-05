@@ -16,7 +16,6 @@ export default function FileTile({fileName, downloadLink}) {
             <img src={midi} width={'50px'}/>
             <div className="metadata">
                 <h5>{fileName}</h5>
-                <p>0:15</p>
             </div>
         </div>
     )
