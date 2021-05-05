@@ -8,10 +8,32 @@
 
 ## Database
 
-Useful scripts (@Alexandre):
+Scripts and stuff for pre-processing MIDI files, uploading them & their metadata to the Firebase database/storage and for editing the database content.
+
+*Warning: to use these scripts, you need write access to our Firebase database. If you don't know where to find the `creds.json` file mentioned below, 
+then either you forgot to read the pinned messages and should head to our Discord server, or you are not supposed to have write access to our database.
+If in the second case, you can skip this section as it won't be of any use for you.*
+
+### Firestore
+Requirements to use Python scripts to edit the Firestore database (tested on Python 3.8):
+ - copy the `cred.json` I sent you into `src/database/firestore/` (:warning: : NEVER commit this file on VCS, it contains credentials giving write access to the DB)
+ - install the required modules : (requires pip to work):
+ ```shell script
+> pip install firebase_admin unidecode
+```
+
+### Metadata processing
+Requirements to use Python scripts wih Spotify's API (tested on Python 3.8):
+ - copy the `spotify_credentials.txt` I sent you into `src/database/metadata_processing/` (:warning: : NEVER commit this file on VCS, it contains our unique API credentials)
+ - install the required modules : (requires pip to work):
+ ```shell script
+> pip install spotipy mido
+```
+
+### Useful scripts
  - **upload MIDI files** to Firebase: 
  ```shell script
-python src/database/__init__.py <path/to/MIDI/root> [genre_of_midi_files]
+> python src/database/__init__.py <path/to/MIDI/root> [genre_of_midi_files]
 ```
 **Input requirements**: 
  - `path/to/MIDI/folders/root` should only contain MIDI files in subdirectories named as the files' artist. 
@@ -37,25 +59,10 @@ upload_from_here/
 
  - **renaming a genre** (typically if you didn't provide a genre for your MIDI files and Spotify returned you a weird genre):
 ```shell script
-python src/database/firestore/db_postprocessing.py <genre_to_rename> <new_genre_name>
+> python src/database/firestore/db_postprocessing.py <genre_to_rename> <new_genre_name>
 ```
 -> Renames the first genre provided as the second
 
-### Firestore
-Requirements to use Python scripts to edit the Firestore database (tested on Python 3.8):
- - copy the `cred.json` I sent you into `src/database/firestore/` (:warning: : NEVER commit this file on VCS, it contains credentials giving write access to the DB)
- - install the required modules : (requires pip to work):
- ```shell script
-> pip install firebase_admin unidecode
-```
-
-### Metadata processing
-Requirements to use Python scripts wih Spotify's API (tested on Python 3.8):
- - copy the `spotify_credentials.txt` I sent you into `src/database/metadata_processing/` (:warning: : NEVER commit this file on VCS, it contains out unique credentials)
- - install the required modules : (requires pip to work):
- ```shell script
-> pip install spotipy mido
-```
 
 ## Algo
 

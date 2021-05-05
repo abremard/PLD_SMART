@@ -20,7 +20,19 @@ from typing import Dict
 
 
 def fuse_genres(*genres: str, new_name: str):
-    # TODO maintain consistency between different documents (genres, artists & maybe songs)
+    """
+    Renames all provided genres to new_name in the database.
+    Use this if you are not happy with genres provided by Spotify's API after
+    uploading MIDI files without specifying a genre.
+
+    Args:
+        *genres: The exact names of the genres to rename as they appear in Firebase
+        new_name: The exact name that the provided genres should be renamed to in Firebase
+
+    Returns: void
+
+    """
+
     print(f"Fusing genres {genres} to {new_name}")
 
     for genre in genres:
@@ -29,7 +41,19 @@ def fuse_genres(*genres: str, new_name: str):
 
 
 def rename_genre(old_name: str, new_name: str):
-    # TODO maintain consistency between different documents (genres, artists & maybe songs)
+    """
+    Renames the genre old_name to new_name in the database.
+    Use this if you are not happy with the genre provided by Spotify's API after
+    uploading MIDI files without specifying a genre.
+
+    Args:
+        old_name: The exact name of the genre to rename as it appears in Firebase
+        new_name: The exact name that the provided genre should be renamed to in Firebase
+
+    Returns: void
+
+    """
+
     print(f"Renaming genre {old_name} to {new_name}")
 
     db = firestore.client()
@@ -71,19 +95,18 @@ def rename_genre(old_name: str, new_name: str):
 
             # delete old field
             print("Deleting old field")
-            genres_ref.update({old_name: firestore.DELETE_FIELD})     # todo uncomment this
+            genres_ref.update({old_name: firestore.DELETE_FIELD})  # todo uncomment this
 
-        else:   # genre not found
+        else:  # genre not found
             raise Exception(f"Error: Genre {old_name} does not exist.")
 
-    else:       # should not happen
+    else:  # should not happen
         raise Exception("Error: collection Genres does not exist.")
 
 
-
-def move_artist_to_new_genre(todo):
-    # todo
-    pass
+# def move_artist_to_new_genre(todo):
+#     # todo
+#     pass
 
 
 if __name__ == '__main__':
