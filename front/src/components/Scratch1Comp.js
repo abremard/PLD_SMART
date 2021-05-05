@@ -15,22 +15,29 @@ import hiphop from "../images/hip hop.png"
 import indie from "../images/indie.png"
 import jazz from "../images/jazz.png"
 import rock from "../images/rock.png"
+import pop from "../images/pop.png"
+import hardrock from "../images/hardrock.png"
+import metal from "../images/metal.png"
+import flamenco from "../images/flamenco.png"
+import classical from "../images/classical.png"
 import xmark from "../images/xmark.png"
 
 //import 'react-image-picker/dist/index.css'
 import '../imagepicker.css'
 import ReactAutocomplete from "react-autocomplete";
+import Slider, {Handle, SliderTooltip} from "rc-slider";
+import {toast, Toaster} from "react-hot-toast";
 const superagent = require('superagent');
-const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
+const styleList = [disco, electronic, hiphop, indie, jazz, rock, pop, hardrock, metal, flamenco, classical];
 
 export default class Scratch1Comp extends Component{
     constructor(props) {
         super(props)
         this.state = {
             image: null,
-            artistOptions: [{name: 'Beyonce', id: 1},{name: 'Jay-Z', id: 2},{name: 'Lady Gaga', id: 3},{name: 'Dominic Fike', id: 4}, {name: 'Beyonce', id: 5}, {name: 'Beyonce', id: 6}],
+            artistOptions: [{name: 'Loading...', id: 1},{name: 'Make sure you have selected a style', id: 2},],
             selectedArtists: null,
-            instrumentOptions: [{name: 'guitar', id: 1},{name: 'piano', id: 2},{name: 'Drums', id: 3},{name: 'Keyboard', id: 4}],
+            instrumentOptions: [{name: 'guitar', id: 1},{name: 'piano', id: 2},{name: 'drums', id: 3},{name: 'bass', id: 4}, {name: 'strings', id: 4}],
             selectedInstruments: null,
             buttonState: '',
             isLoading: false,
@@ -38,10 +45,10 @@ export default class Scratch1Comp extends Component{
             downloadLink: '',
             fileName: 'New Creation',
             length: 50,
-            songs: ['hello', 'hey', 'hello'],
+            songs: ['Loading...', 'Make sure the previous fields are filles',],
             selectedSongs: [],
             value: '',
-            styleOptions: [{name: 'Pop', id: 1},{name: 'Rock', id: 2},{name: 'Hip Hop', id: 3},{name: 'EDM', id: 4}],
+            styleOptions: [{name: 'Loading...', id: 1},{name: 'Make sure you have selected an instrument', id: 2},],
             selectedStyles: null
         }
         this.onPick = this.onPick.bind(this);
@@ -53,6 +60,7 @@ export default class Scratch1Comp extends Component{
         this.onSelectStyle = this.onSelectStyle.bind(this);
         this.onRemoveStyle = this.onRemoveStyle.bind(this);
         this.handleClickChip = this.handleClickChip.bind(this);
+        this.startGeneration = this.startGeneration.bind(this);
     }
 
 
@@ -217,38 +225,52 @@ export default class Scratch1Comp extends Component{
 
 
     async generateFile() {
-        //call code to generate file and get download link
-        //wait until complete
-        //when complete
-        console.log("startofGeneration");
-        var mySongs = {midi:this.state.selectedSongs}
-        console.log(JSON.stringify(mySongs))
+            var mySongs = {midi:this.state.selectedSongs}
+            var servername = await this.getServername()
+            const url = `${(servername)}/api/v1/compose/monophonic/lstm/firebase/v0?length=${(this.state.length)}`
+            var responseSongsList = await fetch(url,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(mySongs),
+                }).then(response => response.blob())
+                .then(
+                    blob => {saveAs(blob, 'musici.mid')
+                        console.log(blob)})
+                .then(success => {
+                    this.setState({
+                        isLoading: true,
+                        buttonState: 'loading',
+                    })})
+    }
 
-        var servername = await this.getServername()
-        //var myList = await this.getList()
-        //console.log("+++");
-        //console.log(myList);
-        console.log("9999999999999999")
-        //console.log(data)
-        const url = `${(servername)}/api/v1/compose/monophonic/lstm/firebase/v0?length=${(this.state.length)}`
-        var responseSongsList = await fetch(url, 
-            {
-                method: 'POST',
-                body: JSON.stringify(mySongs),
-            }).then(response => response.blob())
-            .then(
-                blob => {saveAs(blob, 'musici.mid')
-                console.log(blob)})
-            .then(success => {
+    startGeneration() {
+        if (this.state.selectedSongs == null || this.state.selectedArtists == null || this.state.selectedInstruments == null || this.state.selectedStyles == null ){
+            toast.error("Please fill the necessary fields")
             this.setState({
-            isLoading: true,
-            buttonState: 'loading',
-        })})
-
-        //this.generateRandomMusicRequest()
+                buttonState:'error'
+            })
+        } else if (this.state.selectedSongs.isEmpty || this.state.selectedArtists.isEmpty || this.state.selectedInstruments.isEmpty || this.state.selectedStyles.isEmpty ){
+            toast.error("Please fill the necessary fields")
+        } else {
+            this.generateFile();
+        }
     }
 
     render() {
+        const handle = props => {
+            const { value, dragging, index, ...restProps } = props;
+            return (
+                <SliderTooltip
+                    prefixCls="rc-slider-tooltip"
+                    overlay={`${value}`}
+                    visible={dragging}
+                    placement="top"
+                    key={index}
+                >
+                    <Handle value={value} {...restProps} />
+                </SliderTooltip>
+            );
+        };
         const selectedStyle = {
             color: 'white',
             backgroundColor: 'black',
@@ -257,6 +279,7 @@ export default class Scratch1Comp extends Component{
         };
         return(
             <>
+                <div className="toaster"><Toaster/></div>
                 <div className="scratch">
                     <Link to="/studio">back to studio</Link>
                     <h4>Make from Scratch</h4>
@@ -268,6 +291,10 @@ export default class Scratch1Comp extends Component{
                     <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <h5>Options</h5>
                     <div className="scratch1">
+                        <h6>Maximum Length</h6>
+                        <div className="maxislider">
+                            <Slider min={0} max={500} defaultValue={100} handle={handle} step={1} onChange={value => {this.setState({length: value})}} />
+                        </div>
                         <h6>Choose an instrument</h6>
                         <Multiselect
                             options={this.state.instrumentOptions} // Options to display in the dropdown
@@ -290,7 +317,7 @@ export default class Scratch1Comp extends Component{
                             id="css_custom"
                             style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
                         />
-                        <h6>Choose an artist of inspiration (optional)</h6>
+                        <h6>Choose an artist of inspiration</h6>
                         <Multiselect
                             options={this.state.artistOptions} // Options to display in the dropdown
                             onSelect={this.onSelectArtist} // Function will trigger on select event
@@ -300,8 +327,6 @@ export default class Scratch1Comp extends Component{
                             id="css_custom"
                             style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
                         />
-                        <h6>Maximum Length</h6>
-                        <input type="number" name="name" onChange={event=>{this.setState({length: event.target.value}); console.log(this.state.length)}} defaultValue={50} />
                     </div>
                     <h6>Choose songs</h6>
                     <div className="files">
@@ -348,7 +373,7 @@ export default class Scratch1Comp extends Component{
                         ))}
                     </div>
                     <h6><br/> </h6>
-                    <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
+                    <ProgressButton onClick={this.startGeneration} state={this.state.buttonState}>
                         Generate
                     </ProgressButton>
                     <h5> </h5>
