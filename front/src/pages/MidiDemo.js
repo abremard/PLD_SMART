@@ -20,6 +20,3 @@ export default function MidiDemo() {
        </div>
     )
 }
-
-//https://storage.googleapis.com/ilolio.appspot.com/Generated/output-20210505-125450.mid
-f0ac6a2d63b246875d77f95f24d96357af78
