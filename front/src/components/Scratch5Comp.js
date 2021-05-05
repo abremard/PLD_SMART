@@ -43,19 +43,25 @@ export default class Scratch5Comp extends Component{
             grooveBass: 0,
             grooveGuitar: 0,
             grooveStrings: 0,
+            midiUrl: 'test',
         }
         this.generateFile = this.generateFile.bind(this);
     }
     
 
     generateRandomMusicRequest = async (long) => {
+        this.setState({midiUrl:''})
         var servername;
         const response = await superagent.get('http://127.0.0.1:5000/')
         servername = JSON.parse(response.text).idd
         const url =`${(servername)}/api/v1/compose/polyphonic/musegan/v0/dev-tmp?chords=${(this.state.chords)}&style=${(this.state.style)}&melody_drum=${(this.state.melodyDrums)}&melody_piano=${(this.state.melodyPiano)}&melody_guitar=${(this.state.melodyGuitar)}&melody_bass=${(this.state.melodyBass)}&melody_strings=${(this.state.melodyStrings)}&groove_drum=${(this.state.grooveDrums)}&groove_piano=${(this.state.groovePiano)}&groove_guitar=${(this.state.grooveGuitar)}&groove_bass=${(this.state.grooveBass)}&groove_strings=${(this.state.grooveStrings)}`
         //todo catch error
         fetch(url)
-        .then( res => res.blob() )
+        .then( res => {
+            console.log("URL " + res.headers.get('url'));
+            this.setState({midiUrl:res.headers.get('url').replaceAll('/','_') })
+            console.log("MIDI URL " + this.state.midiUrl)
+            return res.blob() } )
         .then( blob => saveAs(blob, 'music.mid'))
         .then(() => {this.setState({
             isLoading: false,
@@ -171,6 +177,10 @@ export default class Scratch5Comp extends Component{
                     <p><br/></p>
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate
+                    </ProgressButton>
+                    <h5> </h5>
+                    <ProgressButton >
+                        <Link to={`/demo/${(this.state.midiUrl)}/`}>Sequencer</Link>
                     </ProgressButton>
                     <br/><br/>
                 </div>

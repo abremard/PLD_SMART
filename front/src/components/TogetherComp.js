@@ -26,7 +26,8 @@ export default class TogetherComp extends Component{
             downloadLink: '',
             fileName: 'New Creation',
             length: 50,
-            balance: 50
+            balance: 50,
+            midiUrl:'test',
         }
         this.onDrop1 = this.onDrop1.bind(this);
         this.onDrop2 = this.onDrop2.bind(this);
@@ -45,7 +46,11 @@ export default class TogetherComp extends Component{
             method: 'POST',
             body: formData,
           })
-            .then(response => response.blob())
+            .then(response => {
+                console.log("URL " + response.headers.get('url'));
+                this.setState({midiUrl:response.headers.get('url').replaceAll('/','_') })
+                console.log("MIDI URL " + this.state.midiUrl)
+                return response.blob() })
             .then( blob => saveAs(blob, 'music.mid'))
             .then(success => {this.setState({
                 isLoading: false,
@@ -197,7 +202,9 @@ export default class TogetherComp extends Component{
                         Generate
                     </ProgressButton>
                     <h5> </h5>
-
+                    <ProgressButton >
+                        <Link to={`/demo/${(this.state.midiUrl)}/`}>Sequencer</Link>
+                    </ProgressButton>
                 </div>
             </>
         )

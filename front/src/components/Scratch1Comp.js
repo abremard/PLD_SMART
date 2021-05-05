@@ -49,7 +49,8 @@ export default class Scratch1Comp extends Component{
             selectedSongs: [],
             value: '',
             styleOptions: [{name: 'Loading...', id: 1},{name: 'Make sure you have selected an instrument', id: 2},],
-            selectedStyles: null
+            selectedStyles: null,
+            midiUrl:'test',
         }
         this.onPick = this.onPick.bind(this);
         this.generateFile = this.generateFile.bind(this);
@@ -232,9 +233,13 @@ export default class Scratch1Comp extends Component{
                 {
                     method: 'POST',
                     body: JSON.stringify(mySongs),
-                }).then(response => response.blob())
+                }).then(response => {
+                    console.log("URL " + response.headers.get('url'));
+                    this.setState({midiUrl:response.headers.get('url').replaceAll('/','_') })
+                    console.log("MIDI URL " + this.state.midiUrl)
+                    return response.blob() })
                 .then(
-                    blob => {saveAs(blob, 'musici.mid')
+                    blob => {saveAs(blob, 'music.mid')
                         console.log(blob)})
                 .then(success => {
                     this.setState({
@@ -377,6 +382,9 @@ export default class Scratch1Comp extends Component{
                         Generate
                     </ProgressButton>
                     <h5> </h5>
+                    <ProgressButton >
+                        <Link to={`/demo/${(this.state.midiUrl)}/`}>Sequencer</Link>
+                    </ProgressButton>
                 </div>
             </>
         )
