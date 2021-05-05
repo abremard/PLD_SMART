@@ -2,6 +2,52 @@
 
 ## Description
 
+## Requirements
+
+### Frontend
+
+The projects requires Node.js, which you can download from https://nodejs.org/en/download/ .
+It was developped with Node.js 14.16.1, other versions have not been tested.
+
+### Backend and Algo
+
+The whole project runs on python 3.6.5, so make sure you have the correct version installed, or use anaconda to create a virtual environment with the proper python version.
+
+Requirements files are contained in the `requirements/{venv name}/requirements.txt file`
+
+The default virtual environment should be `pld-smart`
+> Notes: `musegan` virtual environment is a sandbox for musegan v1, only use this when developping musegan v1
+
+In development mode, use virtual environment. To setup one, simply run the
+```
+python -m venv {venv name}
+```
+
+To install requirements, first activate your virtual environment:
+
+For Linux/Mac, run
+```
+venv/{venv name}/Scripts/activate
+```
+
+For Windows, run
+```
+venv/{venv name}/Scripts/Activate.ps1
+```
+
+Then install the requirements given in the requirements.txt file
+```
+pip install -r requirements/{venv name}/requirements.txt
+```
+
+
+## Running the app
+
+There are two scripts to automatize running the app :
+- [init_app.bat] sets the project up, by installing required python and npm packages. It only needs to be run once, or if there are new commits.
+- [run_app.bat] starts npm and flask, and opens the app in the default browser. It can be opened from any browser at [localhost:3000].
+
+
 ## Frontend
 
 ## Backend
@@ -65,38 +111,3 @@ upload_from_here/
 
 
 ## Algo
-
-## Requirements
-
-### Frontend
-
-### Backend and Algo
-
-The whole project runs on python 3.6.5, so make sure you have the correct version installed, or use anaconda to create a virtual environment with the proper python version.
-
-Requirements files are contained in the `requirements/{venv name}/requirements.txt file`
-
-The default virtual environment should be `pld-smart`
-> Notes: `musegan` virtual environment is a sandbox for musegan v1, only use this when developping musegan v1
-
-In development mode, use virtual environment. To setup one, simply run the
-```
-python -m venv {venv name}
-```
-
-To install requirements, first activate your virtual environment:
-
-For Linux/Mac, run
-```
-venv/{venv name}/Scripts/activate
-```
-
-For Windows, run
-```
-venv/{venv name}/Scripts/Activate.ps1
-```
-
-Then install the requirements given in the requirements.txt file
-```
-pip install -r requirements/{venv name}/requirements.txt
-```
