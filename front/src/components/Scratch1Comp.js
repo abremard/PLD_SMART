@@ -26,8 +26,9 @@ import xmark from "../images/xmark.png"
 import '../imagepicker.css'
 import ReactAutocomplete from "react-autocomplete";
 import Slider, {Handle, SliderTooltip} from "rc-slider";
+import {toast, Toaster} from "react-hot-toast";
 const superagent = require('superagent');
-const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
+const styleList = [disco, electronic, hiphop, indie, jazz, rock, pop, hardrock, metal, flamenco, classical];
 
 export default class Scratch1Comp extends Component{
     constructor(props) {
@@ -59,6 +60,7 @@ export default class Scratch1Comp extends Component{
         this.onSelectStyle = this.onSelectStyle.bind(this);
         this.onRemoveStyle = this.onRemoveStyle.bind(this);
         this.handleClickChip = this.handleClickChip.bind(this);
+        this.startGeneration = this.startGeneration.bind(this);
     }
 
 
@@ -223,35 +225,35 @@ export default class Scratch1Comp extends Component{
 
 
     async generateFile() {
-        //call code to generate file and get download link
-        //wait until complete
-        //when complete
-        console.log("startofGeneration");
-        var mySongs = {midi:this.state.selectedSongs}
-        console.log(JSON.stringify(mySongs))
+            var mySongs = {midi:this.state.selectedSongs}
+            var servername = await this.getServername()
+            const url = `${(servername)}/api/v1/compose/monophonic/lstm/firebase/v0?length=${(this.state.length)}`
+            var responseSongsList = await fetch(url,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(mySongs),
+                }).then(response => response.blob())
+                .then(
+                    blob => {saveAs(blob, 'musici.mid')
+                        console.log(blob)})
+                .then(success => {
+                    this.setState({
+                        isLoading: true,
+                        buttonState: 'loading',
+                    })})
+    }
 
-        var servername = await this.getServername()
-        //var myList = await this.getList()
-        //console.log("+++");
-        //console.log(myList);
-        console.log("9999999999999999")
-        //console.log(data)
-        const url = `${(servername)}/api/v1/compose/monophonic/lstm/firebase/v0?length=${(this.state.length)}`
-        var responseSongsList = await fetch(url, 
-            {
-                method: 'POST',
-                body: JSON.stringify(mySongs),
-            }).then(response => response.blob())
-            .then(
-                blob => {saveAs(blob, 'musici.mid')
-                console.log(blob)})
-            .then(success => {
+    startGeneration() {
+        if (this.state.selectedSongs == null || this.state.selectedArtists == null || this.state.selectedInstruments == null || this.state.selectedStyles == null ){
+            toast.error("Please fill the necessary fields")
             this.setState({
-            isLoading: true,
-            buttonState: 'loading',
-        })})
-
-        //this.generateRandomMusicRequest()
+                buttonState:'error'
+            })
+        } else if (this.state.selectedSongs.isEmpty || this.state.selectedArtists.isEmpty || this.state.selectedInstruments.isEmpty || this.state.selectedStyles.isEmpty ){
+            toast.error("Please fill the necessary fields")
+        } else {
+            this.generateFile();
+        }
     }
 
     render() {
@@ -277,6 +279,7 @@ export default class Scratch1Comp extends Component{
         };
         return(
             <>
+                <div className="toaster"><Toaster/></div>
                 <div className="scratch">
                     <Link to="/studio">back to studio</Link>
                     <h4>Make from Scratch</h4>
@@ -370,7 +373,7 @@ export default class Scratch1Comp extends Component{
                         ))}
                     </div>
                     <h6><br/> </h6>
-                    <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
+                    <ProgressButton onClick={this.startGeneration} state={this.state.buttonState}>
                         Generate
                     </ProgressButton>
                     <h5> </h5>
