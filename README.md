@@ -8,6 +8,39 @@
 
 ## Database
 
+Useful scripts (@Alexandre):
+ - **upload MIDI files** to Firebase: 
+ ```shell script
+python src/database/__init__.py <path/to/MIDI/root> [genre_of_midi_files]
+```
+**Input requirements**: 
+ - `path/to/MIDI/folders/root` should only contain MIDI files in subdirectories named as the files' artist. 
+Each artist folder will result in an artist entry in the database (new data will be appended to the existing data if the artist alraedy exists).
+ - MIDI file names should contain an instrument name in `("guitar", "drums", "piano", "bass", "strings")` (if it is not already the case, see `src/database/metadata_processing/sort_functions.py`)
+
+Example hierarchy:
+```
+upload_from_here/
+    | -- ACDC/
+        | -- hells_bells_guitar.mid    
+        | -- hells_bells_drums.mid
+    | -- Dream Theater/
+        | -- dance_of_eternity_piano.mid
+        | -- dance_of_eternity_drums.mid
+        | -- the_count_of_tuscany_strings.mid
+```
+
+-> If not provided, the script will fetch a genre for each artist folder using Spotify API (chooses the first genre provided, usually not the best)
+-> It is recommended to upload files of the same genre in the same run and specify the genre to avoid Spotify API randomness...
+:warning: Uploading files takes some time, dont upload too many files at once (limit yourself to a few hundred files a run)
+
+
+ - **renaming a genre** (typically if you didn't provide a genre for your MIDI files and Spotify returned you a weird genre):
+```shell script
+python src/database/firestore/db_postprocessing.py <genre_to_rename> <new_genre_name>
+```
+-> Renames the first genre provided as the second
+
 ### Firestore
 Requirements to use Python scripts to edit the Firestore database (tested on Python 3.8):
  - copy the `cred.json` I sent you into `src/database/firestore/` (:warning: : NEVER commit this file on VCS, it contains credentials giving write access to the DB)
@@ -23,8 +56,6 @@ Requirements to use Python scripts wih Spotify's API (tested on Python 3.8):
  ```shell script
 > pip install spotipy mido
 ```
-:warning: `python-Levenshtein` requires Microsoft Visual C++ 14.0
-
 
 ## Algo
 
