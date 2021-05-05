@@ -301,7 +301,7 @@ export default class Scratch1Comp extends Component{
                             style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
                         />
                         <h6>Maximum Length</h6>
-                        <input type="number" name="name" onChange={value=>{this.setState({length: value})}} defaultValue={50} />
+                        <input type="number" name="name" onChange={event=>{this.setState({length: event.target.value}); console.log(this.state.length)}} defaultValue={50} />
                     </div>
                     <h6>Choose songs</h6>
                     <div className="files">
