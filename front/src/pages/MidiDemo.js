@@ -5,20 +5,19 @@ import ProgressButton from "react-progress-button";
 import { useParams } from "react-router";
 import {Link} from 'react-router-dom';
 
-// jazz.mid
+
+import 'focus-visible';
 
 // add navbar etc here but for the moment player overlaps everything
-export default function MidiDemo(props) {
+export default function MidiDemo() {
 
-    let {url} = useParams();
-    url = 'https://cdn.jsdelivr.net/gh/cifkao/html-midi-player@2b12128/' + url;
-    console.log(url)
-
-    return( 
+    return(
        <div>
             <Navbar/>
-            <Link to="/studio">back to studio</Link>
-            <Player url={url}/>
+            <Player url="https://cdn.jsdelivr.net/gh/cifkao/html-midi-player@2b12128/jazz.mid"/>
+            <ProgressButton >
+                        download
+            </ProgressButton>
        </div>
     )
 }
