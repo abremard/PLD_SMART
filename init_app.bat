@@ -8,4 +8,5 @@ npm install --save react
 npm install --save react-dom
 npm install --save dangerously-set-html-content
 npm install --save @magenta/music
+npm install --save seedrandom
 pip install firebase_admin
