@@ -7,6 +7,7 @@ import ProgressButton from "react-progress-button";
 
 import ResultTile from "./ResultTile";
 
+import { saveAs } from 'file-saver';
 import alternative from "../images/alternative.png"
 import disco from "../images/disco.png"
 import electronic from "../images/electronic.png"
@@ -19,7 +20,7 @@ import xmark from "../images/xmark.png"
 //import 'react-image-picker/dist/index.css'
 import '../imagepicker.css'
 import ReactAutocomplete from "react-autocomplete";
-
+const superagent = require('superagent');
 const styleList = [alternative, disco, electronic, hiphop, indie, jazz, rock];
 
 export default class Scratch1Comp extends Component{
@@ -29,14 +30,14 @@ export default class Scratch1Comp extends Component{
             image: null,
             artistOptions: [{name: 'Beyonce', id: 1},{name: 'Jay-Z', id: 2},{name: 'Lady Gaga', id: 3},{name: 'Dominic Fike', id: 4}, {name: 'Beyonce', id: 5}, {name: 'Beyonce', id: 6}],
             selectedArtists: null,
-            instrumentOptions: [{name: 'Guitar', id: 1},{name: 'Piano', id: 2},{name: 'Drums', id: 3},{name: 'Keyboard', id: 4}],
+            instrumentOptions: [{name: 'guitar', id: 1},{name: 'piano', id: 2},{name: 'Drums', id: 3},{name: 'Keyboard', id: 4}],
             selectedInstruments: null,
             buttonState: '',
             isLoading: false,
             hasResult:false,
             downloadLink: '',
             fileName: 'New Creation',
-            length: null,
+            length: 50,
             songs: ['hello', 'hey', 'hello'],
             selectedSongs: [],
             value: '',
@@ -59,11 +60,41 @@ export default class Scratch1Comp extends Component{
         this.setState({image})
     }
 
-    onSelectArtist(selectedList, selectedItem) {
-
+    async onSelectArtist(selectedList, selectedItem) {
         this.setState({
             selectedArtists: selectedList
         });
+        var songsList;
+        var servername = await this.getServername()
+        //var myList = await this.getList()
+        //console.log("+++");
+        //console.log(myList);
+        console.log("98984")
+        console.log(this.state.selectedInstruments)
+        const url = `${(servername)}/search/artists?artist=${(selectedItem.name)}&instrument=${(this.state.selectedInstruments.name)}`
+        var responseSongsList = await fetch(url, 
+            {
+                headers : { 
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+            }})
+            .then( (responseSongsList) => songsList =  responseSongsList.json() )
+            .then (json => {
+                songsList = json
+                console.log(json) 
+                console.log("\\\\\\")
+                console.log(songsList.artists)
+                var tempList = []
+                songsList.artists.forEach(item => {
+                    tempList.push(item)                        
+                })
+                this.setState({
+                    songs:tempList
+                })
+            }
+            )
+
+
     }
 
     onRemoveArtist(selectedList, removedItem) {
@@ -72,10 +103,40 @@ export default class Scratch1Comp extends Component{
         })
     }
 
-    onSelectInstrument(selectedList, selectedItem) {
+    async onSelectInstrument(selectedList, selectedItem) {
         this.setState({
-            selectedInstruments: selectedList
+            selectedInstruments: selectedItem
         })
+        var styleList;
+        var servername = await this.getServername()
+        //var myList = await this.getList()
+        //console.log("+++");
+        //console.log(myList);
+        const url = `${(servername)}/search/instruments?instrument=${(selectedItem.name)}`
+        var responseStyleList = await fetch(url, 
+            {
+                headers : { 
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+            }})
+            .then( (responseStyleList) => styleList =  responseStyleList.json() )
+            .then (json => {
+                styleList = json
+                console.log(json) 
+                console.log("//////")
+                console.log(styleList.genre)
+                var tempList = []
+                var index = 1
+                styleList.genre.forEach(item => {
+                    tempList.push({name: item , id:index})
+                        index = index +1                        
+                })
+                this.setState({
+                    styleOptions:tempList
+                })
+            }
+            )            
+        
     }
 
     onRemoveInstrument(selectedList, removedItem) {
@@ -84,10 +145,43 @@ export default class Scratch1Comp extends Component{
         })
     }
 
-    onSelectStyle(selectedList, selectedItem) {
+    async onSelectStyle(selectedList, selectedItem) {
         this.setState({
-            selectedStyles: selectedList
+            selectedStyles: selectedItem
         })
+        var artistList;
+        var servername = await this.getServername()
+        //var myList = await this.getList()
+        //console.log("+++");
+        //console.log(myList);
+        console.log(this.state.selectedInstruments)
+        console.log(this.state.selectedInstruments.name)
+        const url = `${(servername)}/search/genres?genre=${(selectedItem.name)}&instrument=${(this.state.selectedInstruments.name)}`
+        var responseArtistList = await fetch(url, 
+            {
+                headers : { 
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+            }})
+            .then( (responseArtistList) => artistList =  responseArtistList.json() )
+            .then (json => {
+                artistList = json
+                console.log(json) 
+                console.log("//////")
+                console.log(artistList.artists)
+                var tempList = []
+                var index = 1
+                artistList.artists.forEach(item => {
+                    tempList.push({name: item , id:index})
+                        index = index +1                        
+                })
+                this.setState({
+                    artistOptions:tempList
+                })
+            }
+            )
+
+
     }
 
     onRemoveStyle(selectedList, removedItem) {
@@ -105,14 +199,52 @@ export default class Scratch1Comp extends Component{
         });
     }
 
-    generateFile() {
+    async getServername(){
+        var servername;
+        var styleList;
+        const responseServerName = await superagent.get('http://127.0.0.1:5000/')
+        servername = JSON.parse(responseServerName.text).idd
+        return servername
+    }
+
+    async getList(adress){
+        var servername;
+        var styleList;
+        const responseServerName = await superagent.get(`${adress}`)
+        servername = JSON.parse(responseServerName.text())
+        return servername
+    }
+
+
+    async generateFile() {
         //call code to generate file and get download link
         //wait until complete
         //when complete
-        this.setState({
+        console.log("startofGeneration");
+        var mySongs = {midi:this.state.selectedSongs}
+        console.log(JSON.stringify(mySongs))
+
+        var servername = await this.getServername()
+        //var myList = await this.getList()
+        //console.log("+++");
+        //console.log(myList);
+        console.log("9999999999999999")
+        //console.log(data)
+        const url = `${(servername)}/api/v1/compose/monophonic/lstm/firebase/v0?length=${(this.state.length)}`
+        var responseSongsList = await fetch(url, 
+            {
+                method: 'POST',
+                body: JSON.stringify(mySongs),
+            }).then(response => response.blob())
+            .then(
+                blob => {saveAs(blob, 'musici.mid')
+                console.log(blob)})
+            .then(success => {
+            this.setState({
             isLoading: true,
             buttonState: 'loading',
-        });
+        })})
+
         //this.generateRandomMusicRequest()
     }
 
@@ -169,7 +301,7 @@ export default class Scratch1Comp extends Component{
                             style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
                         />
                         <h6>Maximum Length</h6>
-                        <input type="number" name="name" onChange={value=>{this.setState({length: value})}} defaultValue={50} />
+                        <input type="number" name="name" onChange={event=>{this.setState({length: event.target.value}); console.log(this.state.length)}} defaultValue={50} />
                     </div>
                     <h6>Choose songs</h6>
                     <div className="files">

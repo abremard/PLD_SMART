@@ -29,7 +29,7 @@ export default function Home() {
             50 - (_mouseY - _h) * 0.06
         }%`;
         let x = `${_depth3}, ${_depth2}, ${_depth1}`;
-        console.log(x);
+        //console.log(x);
         if (elem!= null) {
             elem.style.backgroundPosition = x;
         }

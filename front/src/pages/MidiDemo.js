@@ -5,9 +5,6 @@ import ProgressButton from "react-progress-button";
 import { useParams } from "react-router";
 import {Link} from 'react-router-dom';
 
-
-const superagent = require('superagent');
-
 // jazz.mid
 
 // add navbar etc here but for the moment player overlaps everything
