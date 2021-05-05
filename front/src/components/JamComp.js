@@ -9,11 +9,12 @@ import ReactAutocomplete from "react-autocomplete";
 
 import ResultTile from "./ResultTile";
 import FileTile from "./FileTile";
-
+import { saveAs } from 'file-saver';
 import 'react-image-picker/dist/index.css'
 import '../button.css'
 import '../slider.css';
 
+const superagent = require('superagent');
 export default class JamComp extends Component{
     constructor(props) {
         super(props)
@@ -28,7 +29,7 @@ export default class JamComp extends Component{
             fileName: 'New Creation',
             length: 16,
             temperature: 1,
-            value: ''
+            value: '',
         }
         this.onDrop1 = this.onDrop1.bind(this);
         this.generateFile = this.generateFile.bind(this);
@@ -50,28 +51,57 @@ export default class JamComp extends Component{
         })
     }
 
-    generateFile() {
-        //get files
-        this.state.files.forEach((file) => {
-            const reader = new FileReader();
-            reader.onabort = () => toast.error("file reading was aborted");
-            reader.onerror = () => toast.error('file reading has failed')
-            reader.onload = () => {
-                // Do whatever you want with the file contents
-                //more on https://developer.mozilla.org/en-US/docs/Web/API/FileReader
-                const binaryStr = reader.result
-                console.log(binaryStr)
-            }
-            reader.readAsArrayBuffer(file)
-        })
-        //call code to generate file and get download link
-        //wait until complete
-        //when complete
-        this.setState({
-            isLoading: true,
-            buttonState: 'loading',
-        });
+    async getServername(){
+        var servername;
+        var styleList;
+        const responseServerName = await superagent.get('http://127.0.0.1:5000/')
+        servername = JSON.parse(responseServerName.text).idd
+        return servername
+    }
 
+    async generateFile() {
+        //get files
+        console.log("66666")
+        var formData = new FormData();
+        formData.append('file0', this.state.file1[0]);
+        var servername = await this.getServername()
+        var chords = this.state.selectedChords[0].toString()
+        var firstChord = true
+        this.state.selectedChords.forEach(item =>{
+            if(firstChord==true){
+                firstChord=false
+            }
+            else{
+                chords = chords.concat(" ")
+                chords = chords.concat(item.toString())
+            }
+        })
+        console.log("7777777")
+        console.log(chords)
+        chords = chords.replace("#","d")
+        console.log(chords)
+        var url = `${(servername)}/api/v1/compose/monophonic/improv_rnn/v0?length=${(this.state.length)}&temperature=${(this.state.temperature)}&primer_midi_track=2&backing_chords=${chords}`
+        console.log(encodeURI(url))
+        fetch(encodeURI(url), {
+            // content-type header should not be specified!
+            method: 'POST',
+            body: formData
+          })
+            .then(response => response.blob())
+            .then( blob => saveAs(blob, 'music.mid'))
+            .then(success => {this.setState({
+                isLoading: false,
+                buttonState: 'success',
+                hasResult: true,
+                downloadLink: '' //insert download link...,
+            })}).catch((error) => {
+                    toast.error("Something went wrong. Please try again later");
+                    this.setState({
+                        //isLoading: false,
+                        buttonState: 'error',
+                        hasResult: false,
+                    });
+                })
     }
 
 
@@ -159,6 +189,7 @@ export default class JamComp extends Component{
                                 var listTemp = this.state.selectedChords;
                                 listTemp.push(e);
                                 this.setState({value: '', selectedChords: listTemp});
+                                //console.log(this.state.selectedChords)
                             }}
                         />
                         {this.state.selectedChords.map(item => (
