@@ -3,7 +3,6 @@ import Navbar from '../components/navbar'
 import ProgressButton from "react-progress-button";
 
 
-import '@magenta/music';
 import 'focus-visible';
 
 // add navbar etc here but for the moment player overlaps everything
