@@ -36,6 +36,7 @@ export default class MatchComp extends Component{
             hasResult:false,
             downloadLink: '',
             fileName: 'New Creation',
+            midiUrl:'test'
         }
         this.onDrop = this.onDrop.bind(this);
         this.generateFile = this.generateFile.bind(this);
@@ -69,14 +70,19 @@ export default class MatchComp extends Component{
             method: 'POST',
             body: formData,
           })
-            .then(response => response.blob())
-            .then( blob => saveAs(blob, 'music.mid'))
+            .then(response => {
+                console.log("URL " + response.headers.get('url'));
+                this.setState({midiUrl:response.headers.get('url').replaceAll('/','_') })
+                console.log("MIDI URL " + this.state.midiUrl)
+                return response.blob() })
+            .then( blob => saveAs(blob, 'music.mid') )
             .then(success => {this.setState({
                 isLoading: false,
                 buttonState: 'success',
                 hasResult: true,
                 downloadLink: '' //insert download link...,
-            })}).catch((error) => {
+            })})
+            .catch((error) => {
                     toast.error("Something went wrong. Please try again later");
                     this.setState({
                         //isLoading: false,
@@ -176,6 +182,9 @@ export default class MatchComp extends Component{
                         Generate
                     </ProgressButton>
                     <h5> </h5>
+                    <ProgressButton >
+                        <Link to={`/demo/${(this.state.midiUrl)}/`}>Sequencer</Link>
+                    </ProgressButton>
                 </div>
             </>
         )

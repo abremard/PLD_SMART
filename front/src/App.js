@@ -22,7 +22,7 @@ function App() {
         <Route exact path="/match" component={Match}/>
         <Route exact path="/together" component={Together}/>
         <Route exact path="/jam" component={Jam}/>
-        <Route exact path="/demo" component={MidiDemo}/>
+        <Route exact path="/demo/:url" component={MidiDemo}/>
       </Switch>
     </>
   );

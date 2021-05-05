@@ -2,6 +2,7 @@ import React,{ Component } from 'react'
 import 'html-midi-player'
 import InnerHTML from 'dangerously-set-html-content'
 import { ThreeDots } from '@agney/react-loading';
+import {Link} from 'react-router-dom';
 
 class Player extends Component{
 
@@ -14,7 +15,7 @@ class Player extends Component{
         var vis = this.visRef.current
         vis.config = {
             noteHeight: 4,
-            pixelsPerTimeStep: 60,
+            pixelsPerTimeStep: 90,
             minPitch: 30,
             showOnlyOctavesUsed: true,
           };
