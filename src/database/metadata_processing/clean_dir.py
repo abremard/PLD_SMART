@@ -1,3 +1,7 @@
+"""
+Small script to remove empty folders in a given location
+"""
+
 import os
 import sys
 

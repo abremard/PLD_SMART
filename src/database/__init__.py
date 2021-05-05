@@ -1,6 +1,7 @@
 """
-Scripts for editing the Firebase database
+Main script for uploading MIDI files to Firebase
 """
+
 import os
 import sys
 from database.metadata_processing import *
@@ -59,21 +60,37 @@ def rename_files_in_dir(directory_path: str, verbose=False):
 
 
 def get_track_instrument(filename: str) -> str:
-
     instruments = ("guitar", "drums", "piano", "bass", "strings")
     for instrument in instruments:
         if len(re.findall(instrument, filename)) > 0:
             return instrument
 
 
-# main method linking all the important processing stuff
+# -------- main function linking all the important processing stuff
 def process_files_from_dir(directory_path: str, input_genre: str = None):
-    init_firebase_connexion()       # todo uncomment
+    """
+    Processes and uploads MIDI files in the given directory_path
+    (Main function used here)
+
+    Args:
+        directory_path: The path to the root folder for MIDI files (see the
+                        repo's README.md for more info about the directory's
+                        structure)
+        input_genre: The genre to apply to all MIDI files in the directory. If
+                     not provided, the genre will be retrieved using Spotify's
+                     API for each artist folder (warning: it will usually not
+                     retrieve the main genre for a given artist)
+
+    Returns: void
+
+    """
+
+    init_firebase_connexion()
 
     if input_genre is None:
-        init_spotify_connexion()        # todo uncomment
+        init_spotify_connexion()
 
-    # reset_database()  # todo comment when updating
+    # reset_database()  # comment when updating
 
     directory = os.path.abspath(os.path.dirname(directory_path))
 
@@ -102,17 +119,16 @@ def process_files_from_dir(directory_path: str, input_genre: str = None):
             file_path = os.path.join(dirpath, filename)
             firebase_path_from_midi_dir = f"{formatted_artist}/{filename}"
             # print(f"Uploading file from {file_path} to {firebase_path_from_midi_dir}")
-            upload_midi_file(local_file_path=file_path, firebase_file_path_from_midi_dir=firebase_path_from_midi_dir)   # todo uncomment when ok
+            upload_midi_file(local_file_path=file_path, firebase_file_path_from_midi_dir=firebase_path_from_midi_dir)
 
             # -- update database
             add_entry(firebase_path_from_midi_dir, genre, artist, instrument)
 
 
 def main():
-
     if len(sys.argv) > 1:
         input_path = sys.argv[1]
-        if input_path[-1] != "/":   # maybe no longer needed?
+        if input_path[-1] != "/":  # maybe no longer needed?
             input_path += "/"
 
         dirname = os.path.dirname(__file__)

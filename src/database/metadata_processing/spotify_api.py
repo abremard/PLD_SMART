@@ -9,6 +9,16 @@ sp = None
 
 
 def init_spotify_connexion(verbose=True):
+    """
+    Call this function once before calling functions that use Spotify's API
+
+    Args:
+        verbose: Set to True for mor prints
+
+    Returns: void
+
+    """
+
     dirname = os.path.dirname(__file__)
     spotify_credentials_path = os.path.join(dirname, './spotify_credentials.txt')
 
@@ -26,7 +36,6 @@ def init_spotify_connexion(verbose=True):
 
 
 def get_artist_genre(input_artist: str, verbose=False) -> str:
-
     global sp
     """
     TODO replace _ with spaces ?
@@ -39,7 +48,8 @@ def get_artist_genre(input_artist: str, verbose=False) -> str:
     """
 
     if sp is None:
-        raise Exception("Spotify connexion not initialized. Please use init_spotify_connexion before caling this function.")
+        raise Exception(
+            "Spotify connexion not initialized. Please use init_spotify_connexion before caling this function.")
 
     results = sp.search(q='artist:' + input_artist, type='artist')
     artists = results['artists']['items']
@@ -61,7 +71,7 @@ def get_artist_genre(input_artist: str, verbose=False) -> str:
 
         genres = artists[best_index]['genres']
         if len(genres) > 0:
-            return genres[0]        # arbitrary choice
+            return genres[0]  # arbitrary choice
 
     # if there was an error somewhere
     return "unknown"
@@ -72,7 +82,7 @@ def _best_match_index(reference: str, matches) -> int:
     best_index = -1
 
     for i, match in enumerate(matches):
-        dist = len(match) - len(reference)    # TODO use Levenshtein distance here
+        dist = len(match) - len(reference)  # TODO use Levenshtein distance here
         if dist < min_dist:
             best_index = i
             min_dist = dist
