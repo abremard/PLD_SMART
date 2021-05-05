@@ -145,6 +145,8 @@ export default class TogetherComp extends Component{
                     <p>Bring your favorite two musical pieces together. Upload two midi files and our
                         algorithm will interpolate and create two original mash-ups of your uploaded music. Choose
                         the length and the balance of your mashup for the perfect result.</p>
+                    <p>For optimal results, please make sure that both of your files have at most two bars. Otherwise,
+                        only the first two bars of your files will be taken into account.</p>
                     <div className="files">
                         <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={"File 1 into File 2"} hasResult={this.state.hasResult}></ResultTile>
                     </div>
@@ -184,7 +186,7 @@ export default class TogetherComp extends Component{
                     <h5>Options</h5>
                     <div className="maxislider">
                         <h6>Length</h6>
-                        <Slider min={0} max={500} defaultValue={50} handle={handle} step={10} onChange={value => {this.setState({length: value})}}/>
+                        <Slider min={0} max={100} defaultValue={30} handle={handle} step={10} onChange={value => {this.setState({length: value})}}/>
                     </div>
                     <div className="maxislider">
                         <h6>Balance of Mix</h6>

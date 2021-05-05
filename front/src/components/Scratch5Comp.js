@@ -172,6 +172,7 @@ export default class Scratch5Comp extends Component{
                     <ProgressButton onClick={this.generateFile} state={this.state.buttonState}>
                         Generate
                     </ProgressButton>
+                    <br/><br/>
                 </div>
             </>
         )

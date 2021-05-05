@@ -447,6 +447,7 @@ h3 {
 .chip{
   display: flex;
   margin-right: 10px;
+  margin-bottom: 10px;
   padding: 5px 10px;
   background-color: #6EC3F4;
   color: white;
