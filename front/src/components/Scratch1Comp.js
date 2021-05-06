@@ -35,7 +35,7 @@ export default class Scratch1Comp extends Component{
         super(props)
         this.state = {
             image: null,
-            artistOptions: [{name: 'Loading...', id: 1},{name: 'Make sure you have selected a style', id: 2},],
+            artistOptions: [{name: 'Loading...', formattedName: 'placeholder1', id: 1},{name: 'Make sure you have selected a style', formattedName:'placeholder1', id: 2},],
             selectedArtists: null,
             instrumentOptions: [{name: 'guitar', id: 1},{name: 'piano', id: 2},{name: 'drums', id: 3},{name: 'bass', id: 4}, {name: 'strings', id: 4}],
             selectedInstruments: null,
@@ -243,12 +243,15 @@ export default class Scratch1Comp extends Component{
                 console.log(json) 
                 console.log("//////")
                 console.log(artistList.artists)
+                console.log("lllllll")
+                console.log(artistList.artist_names)
                 var tempList = []
                 var index = 1
                 artistList.artists.forEach(item => {
-                    tempList.push({name: item , id:index})
+                    tempList.push({name: item , formattedName:artistList.artist_names[index-1], id:index})
                         index = index +1                        
                 })
+                console.log(tempList)
                 this.setState({
                     artistOptions:tempList
                 })
@@ -408,7 +411,7 @@ export default class Scratch1Comp extends Component{
                             options={this.state.artistOptions} // Options to display in the dropdown
                             onSelect={this.onSelectArtist} // Function will trigger on select event
                             onRemove={this.onRemoveArtist} // Function will trigger on remove event
-                            displayValue="name" // Property name to display in the dropdown op
+                            displayValue="formattedName" // Property name to display in the dropdown op
                             closeIcon = "circle" // tions
                             id="css_custom"
                             style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
