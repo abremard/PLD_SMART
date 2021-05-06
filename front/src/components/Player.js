@@ -42,7 +42,7 @@ class Player extends Component{
         + "<midi-player "
         + "ref={this.playRef} "
         +"src='"+ url +"'"
-        +" sound-font='https://drive.google.com/drive/folders/1gnbAgMs5KQE8Yt-ickAzF1p-hv7xt_cs' visualizer='#myPianoRollVisualizer'>"
+        +" sound-font visualizer='#myPianoRollVisualizer'>"
         +"</midi-player>"
         +"</div>";
 

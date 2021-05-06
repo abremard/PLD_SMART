@@ -243,19 +243,37 @@ export default class Scratch1Comp extends Component{
                         console.log(blob)})
                 .then(success => {
                     this.setState({
-                        isLoading: true,
-                        buttonState: 'loading',
-                    })})
+                        isLoading: false,
+                        buttonState: 'success',
+                        hasResult: true,
+                    })}).catch(() => {
+                        toast.error("Something went wrong. Please try again later");
+                        this.setState({
+                            isLoading: false,
+                            buttonState: 'error',
+                            hasResult: false,
+                        });
+                    }
+                )
     }
 
     startGeneration() {
+        this.setState({
+            isLoading: true,
+            buttonState: 'loading',
+        })
         if (this.state.selectedSongs == null || this.state.selectedArtists == null || this.state.selectedInstruments == null || this.state.selectedStyles == null ){
             toast.error("Please fill the necessary fields")
             this.setState({
-                buttonState:'error'
+                buttonState:'error',
+                isLoading: false,
             })
         } else if (this.state.selectedSongs.isEmpty || this.state.selectedArtists.isEmpty || this.state.selectedInstruments.isEmpty || this.state.selectedStyles.isEmpty ){
             toast.error("Please fill the necessary fields")
+            this.setState({
+                buttonState:'error',
+                isLoading: false,
+            })
         } else {
             this.generateFile();
         }
@@ -293,7 +311,7 @@ export default class Scratch1Comp extends Component{
                         to make every unique piece your own. Uses the MuseGAN and LSTM algorithms.</p>
                     <Link to="/scratch5">5 instruments</Link><a style={selectedStyle}>1 instrument</a>
                     <p><br/></p>
-                    <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
+                    <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.midiUrl} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <h5>Options</h5>
                     <div className="scratch1">
                         <h6>Maximum Length</h6>
@@ -382,9 +400,7 @@ export default class Scratch1Comp extends Component{
                         Generate
                     </ProgressButton>
                     <h5> </h5>
-                    <ProgressButton >
-                        <Link to={`/demo/${(this.state.midiUrl)}/`}>Sequencer</Link>
-                    </ProgressButton>
+                    <br/>
                 </div>
             </>
         )

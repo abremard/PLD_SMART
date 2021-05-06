@@ -118,7 +118,7 @@ export default class Scratch5Comp extends Component{
                         to make every unique piece your own. Uses the MuseGAN and LSTM algorithms.</p>
                     <a style={selectedStyle}>5 instruments</a><Link to="/scratch1">1 instrument</Link>
                     <p><br/></p>
-                    <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
+                    <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.midiUrl} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <h5>Options</h5>
                     <div className="maxislider">
                         <h6>Chords</h6>
@@ -179,9 +179,6 @@ export default class Scratch5Comp extends Component{
                         Generate
                     </ProgressButton>
                     <h5> </h5>
-                    <ProgressButton >
-                        <Link to={`/demo/${(this.state.midiUrl)}/`}>Sequencer</Link>
-                    </ProgressButton>
                     <br/><br/>
                 </div>
             </>
