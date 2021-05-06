@@ -85,7 +85,7 @@ export default class MatchComp extends Component{
             .catch((error) => {
                     toast.error("Something went wrong. Please try again later");
                     this.setState({
-                        //isLoading: false,
+                        isLoading: false,
                         buttonState: 'error',
                         hasResult: false,
                     });
@@ -118,24 +118,7 @@ export default class MatchComp extends Component{
 
         this.getaservernameandpost( fileindex, formData);
     }
-        
-        
-    
-        //todo catch error
-       
-       
-        
 
-
-        
-
-        //call code to generate file and get download link
-        //wait until complete
-        //when complete
-        
-        //this.generateRandomMusicRequest()
-
-        //if impossible to use download links download file immediately, will remove download button from result tile...
 
 
     render() {
@@ -157,7 +140,7 @@ export default class MatchComp extends Component{
                     <p>Create a completely new musical piece using your own favorite sounds as the inspiration.
                         Upload up to 10 midi files of your choosing - any style, any artist, any instrument. Ilolio
                         will create a brand new midi file inspired by your uploads. Uses the LSTM algorithm.</p>
-                    <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
+                    <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.midiUrl} fileName={this.state.fileName} hasResult={this.state.hasResult}></ResultTile>
                     <h5>Upload your files</h5>
                     <div className="files">
                         {this.state.files.map(item => (
@@ -182,9 +165,6 @@ export default class MatchComp extends Component{
                         Generate
                     </ProgressButton>
                     <h5> </h5>
-                    <ProgressButton >
-                        <Link to={`/demo/${(this.state.midiUrl)}/`}>Sequencer</Link>
-                    </ProgressButton>
                 </div>
             </>
         )

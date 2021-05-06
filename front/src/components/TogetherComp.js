@@ -60,7 +60,7 @@ export default class TogetherComp extends Component{
             })}).catch((error) => {
                     toast.error("Something went wrong. Please try again later");
                     this.setState({
-                        //isLoading: false,
+                        isLoading: false,
                         buttonState: 'error',
                         hasResult: false,
                     });
@@ -103,18 +103,13 @@ export default class TogetherComp extends Component{
         formData.append('file0', this.state.file1[0]);
         console.log(this.state.file1)
         formData.append('file1', this.state.file2[0]);
-        
 
-        //call code to generate file and get download link
-        //wait until complete
-        //when complete
         this.setState({
             isLoading: true,
             buttonState: 'loading',
         });
 
         this.getaservernameandpost(formData);
-
     }
 
     render() {
@@ -153,7 +148,7 @@ export default class TogetherComp extends Component{
                     <p>For optimal results, please make sure that both of your files have at most two bars. Otherwise,
                         only the first two bars of your files will be taken into account.</p>
                     <div className="files">
-                        <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.downloadLink} fileName={"File 1 into File 2"} hasResult={this.state.hasResult}></ResultTile>
+                        <ResultTile isLoading={this.state.isLoading} downloadLink={this.state.midiUrl} fileName={"File 1 into File 2"} hasResult={this.state.hasResult}></ResultTile>
                     </div>
                     <h5>Upload your files in order</h5>
                     <div className="files">
@@ -202,9 +197,7 @@ export default class TogetherComp extends Component{
                         Generate
                     </ProgressButton>
                     <h5> </h5>
-                    <ProgressButton >
-                        <Link to={`/demo/${(this.state.midiUrl)}/`}>Sequencer</Link>
-                    </ProgressButton>
+                    <br/><br/>
                 </div>
             </>
         )
