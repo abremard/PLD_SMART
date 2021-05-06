@@ -15,6 +15,7 @@ from music21 import note, stream, duration
 from tensorflow.keras.models import load_model
 
 import base64
+import mido
 
 def generate(
     run_id = "001",
@@ -167,5 +168,53 @@ def generate(
     # groove_score.show()
 
     output_file_path = RUN_FOLDER + '/samples/example.midi'
+
+    change_instruments(output_file_path)
     
     return output_file_path
+
+
+def change_instruments(file_path: str):
+
+    mid = mido.MidiFile(file_path)
+    # print(mid.type, mid.length, mid.ticks_per_beat)
+
+    # remove old program_change messages
+    for track in mid.tracks:
+        print(track.name)
+        for msg in track:
+            if msg.type == "program_change":
+                # print(f"Program change msg in original file: {msg}")
+                track.remove(msg)
+
+    """
+    bass 35
+    drums 118
+    guitar 24
+    strings 41
+    piano 0
+    """
+    instruments = (35, 118, 24, 41, 0)
+
+    # add new program_change messages
+    for i_track, track in enumerate(mid.tracks):
+        # print(f"track: {track}")
+
+        # track 0 will use channel 0 only, track 1 channel 1 only, ...
+        track.insert(0, mido.Message(type="program_change", channel=i_track, program=instruments[i_track]))
+
+        for msg in track:
+            if msg.type in ("note_on", "note_off"):
+                msg.channel = i_track
+
+    # check new program_change messages
+    # for i, track in enumerate(mid.tracks):
+    #     for msg in track:
+    #         # print(msg)
+    #         if msg.type == "program_change":
+    #             print(f"track no {i} : msg: {msg}")
+    #             # track.remove(msg)
+    #
+    # print()
+
+    mid.save(file_path)
