@@ -60,6 +60,10 @@ export default class JamComp extends Component{
     }
 
     async generateFile() {
+        this.setState({
+            isLoading: true,
+            buttonState: 'loading',
+        })
         //get files
         console.log("66666")
         var formData = new FormData();
@@ -97,7 +101,7 @@ export default class JamComp extends Component{
             })}).catch((error) => {
                     toast.error("Something went wrong. Please try again later");
                     this.setState({
-                        //isLoading: false,
+                        isLoading: false,
                         buttonState: 'error',
                         hasResult: false,
                     });

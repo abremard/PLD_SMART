@@ -28,7 +28,7 @@ import ReactAutocomplete from "react-autocomplete";
 import Slider, {Handle, SliderTooltip} from "rc-slider";
 import {toast, Toaster} from "react-hot-toast";
 const superagent = require('superagent');
-const styleList = [disco, electronic, hiphop, indie, jazz, rock, pop, hardrock, metal, flamenco, classical];
+
 
 export default class Scratch1Comp extends Component{
     constructor(props) {
@@ -49,6 +49,7 @@ export default class Scratch1Comp extends Component{
             selectedSongs: [],
             value: '',
             styleOptions: [{name: 'Loading...', id: 1},{name: 'Make sure you have selected an instrument', id: 2},],
+            styleImages: [],
             selectedStyles: null,
             midiUrl:'test',
         }
@@ -62,11 +63,38 @@ export default class Scratch1Comp extends Component{
         this.onRemoveStyle = this.onRemoveStyle.bind(this);
         this.handleClickChip = this.handleClickChip.bind(this);
         this.startGeneration = this.startGeneration.bind(this);
+        this.constructImageList = this.constructImageList.bind(this);
+
     }
 
 
     onPick(image) {
-        this.setState({image})
+        var selected = '';
+        if (  image.src === disco) {
+            selected = 'disco';
+        } else if (image.src == electronic) {
+            selected = 'electronic'
+        } else if (image.src == hiphop){
+            selected = "hip_hop"
+        } else if (image.src == jazz) {
+            selected = 'jazz'
+        } else if (image.src == rock) {
+            selected = 'rock'
+        } else if (image.src == pop) {
+            selected = 'pop'
+        } else if (image.src == metal) {
+            selected = 'metal'
+        } else if (image.src == hardrock) {
+            selected = 'hardrock'
+        } else if (image.src == flamenco) {
+            selected = 'flamenco'
+        } else if (image.src == classical) {
+            selected = 'classical'
+        }
+        console.log('SELECTED IS:');
+        console.log(selected);
+        console.log("CALL SELECT STYLE")
+        this.onSelectStyle([], selected)
     }
 
     async onSelectArtist(selectedList, selectedItem) {
@@ -139,13 +167,50 @@ export default class Scratch1Comp extends Component{
                 styleList.genre.forEach(item => {
                     tempList.push({name: item , id:index})
                         index = index +1                        
-                })
+                });
+                this.constructImageList(tempList);
                 this.setState({
                     styleOptions:tempList
-                })
+                });
             }
-            )            
-        
+            )
+
+        console.log(this.state.styleImages);
+    }
+
+    //const styleList = [disco, electronic, hiphop, indie, jazz, rock, pop, hardrock, metal, flamenco, classical];
+
+    constructImageList(list) {
+        var styleList = [];
+        console.log('********');
+        console.log(list);
+        list.forEach(item => {
+            if (item.name == 'disco') {
+                styleList.push(disco)
+            } else if (item.name == 'electronic') {
+                styleList.push(electronic)
+            } else if (item.name == 'hip_hop'){
+                styleList.push(hiphop)
+            } else if (item.name == 'jazz') {
+                styleList.push(jazz)
+            } else if (item.name == 'rock') {
+                styleList.push(rock)
+            } else if (item.name == 'pop') {
+                styleList.push(pop)
+            } else if (item.name == 'metal') {
+                styleList.push(metal)
+            } else if (item.name == 'hard_rock') {
+                styleList.push(hardrock)
+            } else if (item.name == 'flamenco') {
+                styleList.push(flamenco)
+            } else if (item.name == 'classical') {
+                styleList.push(classical)
+            }
+        });
+        this.setState({
+            styleImages: styleList
+        });
+        console.log(this.state.styleImages);
     }
 
     onRemoveInstrument(selectedList, removedItem) {
@@ -165,7 +230,7 @@ export default class Scratch1Comp extends Component{
         //console.log(myList);
         console.log(this.state.selectedInstruments)
         console.log(this.state.selectedInstruments.name)
-        const url = `${(servername)}/search/genres?genre=${(selectedItem.name)}&instrument=${(this.state.selectedInstruments.name)}`
+        const url = `${(servername)}/search/genres?genre=${(selectedItem)}&instrument=${(this.state.selectedInstruments.name)}`
         var responseArtistList = await fetch(url, 
             {
                 headers : { 
@@ -331,15 +396,13 @@ export default class Scratch1Comp extends Component{
                     </div>
                     <div className="scratch1">
                         <h6>Choose your style</h6>
-                        <Multiselect
-                            options={this.state.styleOptions} // Options to display in the dropdown
-                            onSelect={this.onSelectStyle} // Function will trigger on select event
-                            onRemove={this.onRemoveStyle} // Function will trigger on remove event
-                            displayValue="name" // Property name to display in the dropdown op
-                            singleSelect
-                            id="css_custom"
-                            style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
-                        />
+                        {this.state.styleImages.length == 0 ?
+                        <p>Please select an instrument first</p>
+                            : <ImagePicker
+                                images ={this.state.styleImages.map((image, i) => ({src: image, value: i}))}
+                                onPick ={this.onPick}
+                            />
+                        }
                         <h6>Choose an artist of inspiration</h6>
                         <Multiselect
                             options={this.state.artistOptions} // Options to display in the dropdown
@@ -407,8 +470,12 @@ export default class Scratch1Comp extends Component{
     }
 }
 
-//FOR LATER
-//<ImagePicker
-//    images ={styleList.map((image, i) => ({src: image, value: i}))}
-//    onPick ={this.onPick}
-///>
+// <Multiselect
+//     options={this.state.styleOptions} // Options to display in the dropdown
+//     onSelect={this.onSelectStyle} // Function will trigger on select event
+//     onRemove={this.onRemoveStyle} // Function will trigger on remove event
+//     displayValue="name" // Property name to display in the dropdown op
+//     singleSelect
+//     id="css_custom"
+//     style={ {multiselectContainer: {width: '600px'}, searchBox:{color: 'black', border: 'solid white 2px', borderRadius:'0px'}, optionContainer: {backgroundColor: 'black', fontFamily: 'Arial', border: 'solid white 1px', borderRadius: '0px'}, chips: {backgroundColor: '#6EC3F4', fontFamily: 'Arial'}, } }
+// />
