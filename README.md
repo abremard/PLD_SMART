@@ -2,6 +2,13 @@
 
 ## Description
 
+A web application to generate music, with 5 different functionnalities :
+- From Scratch (5 instruments) lets you generate a multi-track song from scratch.
+- From Scratch (1 instrument) lets you generate a single-track song by picking reference songs sorted by genre and artist.
+- Perfect Match lets you generate a single-track song by training a neural network from the ground-up with 1 to 5 Midi files given as input.
+- Bring Together lets you interpolate between two Midi files given as input.
+- Jam Session lets you generate a single-track song from a list of chords, and the option to continue a Midi file given as input.
+
 ## Requirements
 
 ### Frontend
@@ -50,7 +57,11 @@ There are two scripts to automatize running the app :
 
 ## Frontend
 
+todo
+
 ## Backend
+
+The project uses a flask server on a notebook as back-end, which has API routes set-up, each answering to requests to generate music and other utilities. The back-end also communicates with the database, to display the list of songs for the From Scratch (1 instrument) option and to write/read generated files.
 
 ## Database
 
@@ -111,3 +122,11 @@ upload_from_here/
 
 
 ## Algo
+
+This project implements interfaces for 4 different neural networks :
+- MuseGAN for the From Scratch (5 instruments) option : Hao-Wen Dong, et al. "MuseGAN: Multi-track Sequential Generative Adversarial Networks for Symbolic Music Generation and 
+Accompaniment." (2017)
+- LSTM with attention mechanism for the  From Scratch (1 instrument) and Perfect Match options : [https://github.com/davidADSP/GDL_code], [https://github.com/davidADSP/GDL_code/blob/master/models/RNNAttention.py]
+- MusicVAE by Google Magenta for the Bring Together option : https://github.com/magenta/magenta/tree/master/magenta/models/music_vae
+- ImprovRNN by Google Magenta for the Jam Session option : https://github.com/magenta/magenta/tree/master/magenta/models/improv_rnn
+
