@@ -57,7 +57,7 @@ There are two scripts to automatize running the app :
 
 ## Frontend
 
-todo
+The Frontend uses NodeJs and React. For this prototype version, the backend's flask server address changes after 30 minutes. We store the last address in a Firebase database with every new run of the flask server. Thus, we also need to dynamically retrieve this address before every request to the notebook back-end. To this aim, we run a light flask server on the client side that can communicate with the firebase database to retrieve the backend's flask server current adress before every request. Note that the need for this server will be gone once the project is permanently deployed on a fixed address: the API requests will simply begin with said fixed address.
 
 ## Backend
 
